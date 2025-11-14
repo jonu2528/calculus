@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="บทที่ 1.3 ความต่อเนื่อง (Continuity) - เรียนรู้นิยามความต่อเนื่อง ประเภทของความไม่ต่อเนื่อง และทฤษฎีบทค่ากลาง">
+    <meta name="theme-color" content="#2c3e50">
+    <title>1.3 ความต่อเนื่อง (Continuity) - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น Mean Value Theorem, ลิมิต...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <div class="chapter-list">
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="1">
+                            <span class="chapter-number">บทที่ 1</span>
+                            <h3>ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter1-topics">
+                            <li><a href="/chapters/chapter1/functions.html" data-topic="1.1">1.1 ฟังก์ชัน (Functions)</a></li>
+                            <li><a href="/chapters/chapter1/limits.html" data-topic="1.2">1.2 ลิมิต (Limits)</a></li>
+                            <li><a href="/chapters/chapter1/continuity.html" data-topic="1.3" class="active">1.3 ความต่อเนื่อง (Continuity)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="2">
+                            <span class="chapter-number">บทที่ 2</span>
+                            <h3>อนุพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter2-topics">
+                            <li><a href="/chapters/chapter2/derivative-intro.html" data-topic="2.1">2.1 ที่มาของอนุพันธ์</a></li>
+                            <li><a href="/chapters/chapter2/derivative-rules.html" data-topic="2.2">2.2 กฎพื้นฐานของอนุพันธ์</a></li>
+                            <li><a href="/chapters/chapter2/standard-derivatives.html" data-topic="2.3">2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                            <li><a href="/chapters/chapter2/advanced-derivatives.html" data-topic="2.4">2.4 อนุพันธ์ขั้นสูง</a></li>
+                            <li><a href="/chapters/chapter2/theorems.html" data-topic="2.5">2.5 ทฤษฎีบทสำคัญ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="3">
+                            <span class="chapter-number">บทที่ 3</span>
+                            <h3>การประยุกต์อนุพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter3-topics">
+                            <li><a href="/chapters/chapter3/geometry.html" data-topic="3.1">3.1 เรขาคณิตและกราฟ</a></li>
+                            <li><a href="/chapters/chapter3/physics.html" data-topic="3.2">3.2 ฟิสิกส์และการเคลื่อนที่</a></li>
+                            <li><a href="/chapters/chapter3/extrema.html" data-topic="3.3">3.3 ค่าสูงสุดและต่ำสุด</a></li>
+                            <li><a href="/chapters/chapter3/approximation.html" data-topic="3.4">3.4 การประมาณค่า</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="4">
+                            <span class="chapter-number">บทที่ 4</span>
+                            <h3>ปริพันธ์และปริพันธ์จำกัดเขต</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter4-topics">
+                            <li><a href="/chapters/chapter4/integral-intro.html" data-topic="4.1">4.1 ที่มาของปริพันธ์</a></li>
+                            <li><a href="/chapters/chapter4/indefinite-integrals.html" data-topic="4.2">4.2 ปริพันธ์ไม่จำกัดเขต</a></li>
+                            <li><a href="/chapters/chapter4/definite-integrals.html" data-topic="4.3">4.3 ปริพันธ์จำกัดเขต</a></li>
+                            <li><a href="/chapters/chapter4/standard-integrals.html" data-topic="4.4">4.4 ปริพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                            <li><a href="/chapters/chapter4/u-substitution.html" data-topic="4.5">4.5 การแทนค่าตัวแปร</a></li>
+                            <li><a href="/chapters/chapter4/applications.html" data-topic="4.6">4.6 การประยุกต์ปริพันธ์</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="5">
+                            <span class="chapter-number">บทที่ 5</span>
+                            <h3>เทคนิคการหาปริพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter5-topics">
+                            <li><a href="/chapters/chapter5/integration-by-parts.html" data-topic="5.1">5.1 Integration by Parts</a></li>
+                            <li><a href="/chapters/chapter5/partial-fractions.html" data-topic="5.2">5.2 การแยกเศษส่วนย่อย</a></li>
+                            <li><a href="/chapters/chapter5/trig-integrals.html" data-topic="5.3">5.3 ปริพันธ์ตรีโกณมิติ</a></li>
+                            <li><a href="/chapters/chapter5/trig-substitution.html" data-topic="5.4">5.4 การแทนค่าตรีโกณมิติ</a></li>
+                            <li><a href="/chapters/chapter5/general-substitution.html" data-topic="5.5">5.5 การแทนค่าตัวแปรใหม่</a></li>
+                            <li><a href="/chapters/chapter5/improper-integrals.html" data-topic="5.6">5.6 ปริพันธ์ไม่เหมาะสม</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 1: ฟังก์ชัน ลิมิต และความต่อเนื่อง</a>
+                    <span>1.3 ความต่อเนื่อง (Continuity)</span>
+                </nav>
+
+                <article>
+                    <h1>1.3 ความต่อเนื่อง (Continuity)</h1>
+
+                    <!-- ========== ส่วนทฤษฎี ========== -->
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>1. นิยามฟังก์ชันต่อเนื่อง (Definition of Continuity)</h3>
+
+                            <p><strong>ฟังก์ชัน $f$ ต่อเนื่องที่จุด $a$</strong> (continuous at $a$) ก็ต่อเมื่อ:</p>
+                            <div class="math-display">
+                                $$\lim_{x \to a} f(x) = f(a)$$
+                            </div>
+
+                            <p>หรือกล่าวอีกนัยหนึ่ง ฟังก์ชัน $f$ ต่อเนื่องที่ $a$ ต้องเป็นไปตาม <strong>เงื่อนไข 3 ประการ</strong>:</p>
+                            <ol>
+                                <li>$f(a)$ มีนิยาม (defined)</li>
+                                <li>$\lim_{x \to a} f(x)$ มีค่า (exists)</li>
+                                <li>$\lim_{x \to a} f(x) = f(a)$</li>
+                            </ol>
+
+                            <div class="note">
+                                <div class="note-title">ความหมายเชิง Intuitive</div>
+                                <p>ฟังก์ชันต่อเนื่องหมายถึง เราสามารถวาดกราฟได้โดยไม่ต้องยกปากกา
+                                ไม่มีการ "กระโดด" หรือ "ขาด" ของกราฟ</p>
+                            </div>
+
+                            <p><strong>ฟังก์ชันต่อเนื่องบนช่วง</strong> (continuous on an interval):</p>
+                            <ul>
+                                <li>$f$ ต่อเนื่องบนช่วงเปิด $(a, b)$ ก็ต่อเมื่อ $f$ ต่อเนื่องที่ทุกจุดใน $(a, b)$</li>
+                                <li>$f$ ต่อเนื่องบนช่วงปิด $[a, b]$ ก็ต่อเมื่อ:
+                                    <ul>
+                                        <li>$f$ ต่อเนื่องที่ทุกจุดใน $(a, b)$</li>
+                                        <li>$\lim_{x \to a^+} f(x) = f(a)$ (ต่อเนื่องทางขวาที่ $a$)</li>
+                                        <li>$\lim_{x \to b^-} f(x) = f(b)$ (ต่อเนื่องทางซ้ายที่ $b$)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <h3>2. ประเภทของความไม่ต่อเนื่อง (Types of Discontinuity)</h3>
+
+                            <p>มี 3 ประเภทหลัก:</p>
+
+                            <p><strong>2.1 Removable Discontinuity (ความไม่ต่อเนื่องที่แก้ไขได้)</strong></p>
+                            <p>เกิดเมื่อ $\lim_{x \to a} f(x)$ มีค่า แต่:</p>
+                            <ul>
+                                <li>$f(a)$ ไม่มีนิยาม หรือ</li>
+                                <li>$f(a)$ มีค่า แต่ $f(a) \neq \lim_{x \to a} f(x)$</li>
+                            </ul>
+                            <p>สามารถ "แก้ไข" ได้โดยกำหนดหรือเปลี่ยนค่า $f(a)$ ให้เท่ากับลิมิต</p>
+                            <p><strong>ตัวอย่าง:</strong> $f(x) = \frac{x^2 - 1}{x - 1}$ มี removable discontinuity ที่ $x = 1$</p>
+
+                            <p><strong>2.2 Jump Discontinuity (ความไม่ต่อเนื่องแบบกระโดด)</strong></p>
+                            <p>เกิดเมื่อ $\lim_{x \to a^-} f(x) \neq \lim_{x \to a^+} f(x)$</p>
+                            <p>กราฟมีการ "กระโดด" ที่จุด $a$</p>
+                            <p><strong>ตัวอย่าง:</strong> ฟังก์ชันพื้น $\lfloor x \rfloor$, ฟังก์ชันค่าสัมบูรณ์หารด้วยตัวเอง $\frac{|x|}{x}$</p>
+
+                            <p><strong>2.3 Infinite Discontinuity (ความไม่ต่อเนื่องแบบอนันต์)</strong></p>
+                            <p>เกิดเมื่อ $\lim_{x \to a^-} f(x) = \pm\infty$ หรือ $\lim_{x \to a^+} f(x) = \pm\infty$</p>
+                            <p>กราฟมี asymptote แนวตั้ง (vertical asymptote) ที่ $x = a$</p>
+                            <p><strong>ตัวอย่าง:</strong> $f(x) = \frac{1}{x}$ ที่ $x = 0$, $f(x) = \tan x$ ที่ $x = \frac{\pi}{2}$</p>
+
+                            <div class="tip">
+                                <div class="tip-title">สรุปการตรวจสอบความต่อเนื่อง</div>
+                                <ol>
+                                    <li>ตรวจสอบว่า $f(a)$ มีนิยามหรือไม่</li>
+                                    <li>หา $\lim_{x \to a} f(x)$ (อาจต้องหาทั้งซ้ายและขวา)</li>
+                                    <li>เปรียบเทียบว่า $\lim_{x \to a} f(x) = f(a)$ หรือไม่</li>
+                                </ol>
+                            </div>
+
+                            <h3>3. สมบัติของฟังก์ชันต่อเนื่อง</h3>
+
+                            <p>ถ้า $f$ และ $g$ ต่อเนื่องที่ $a$ แล้ว:</p>
+                            <ul>
+                                <li>$f + g$ ต่อเนื่องที่ $a$</li>
+                                <li>$f - g$ ต่อเนื่องที่ $a$</li>
+                                <li>$cf$ ต่อเนื่องที่ $a$ (โดยที่ $c$ เป็นค่าคงที่)</li>
+                                <li>$f \cdot g$ ต่อเนื่องที่ $a$</li>
+                                <li>$\frac{f}{g}$ ต่อเนื่องที่ $a$ (ถ้า $g(a) \neq 0$)</li>
+                                <li>$(f \circ g)(x) = f(g(x))$ ต่อเนื่องที่ $a$ (ถ้า $g$ ต่อเนื่องที่ $a$ และ $f$ ต่อเนื่องที่ $g(a)$)</li>
+                            </ul>
+
+                            <p><strong>ฟังก์ชันที่ต่อเนื่องทุกจุดในโดเมน:</strong></p>
+                            <ul>
+                                <li>ฟังก์ชันพหุนาม</li>
+                                <li>ฟังก์ชันตรีโกณมิติ ($\sin x, \cos x, \tan x, \ldots$)</li>
+                                <li>ฟังก์ชันเลขชี้กำลัง ($e^x, a^x$)</li>
+                                <li>ฟังก์ชันลอการิทึม ($\ln x, \log_a x$)</li>
+                            </ul>
+
+                            <h3>4. ทฤษฎีบทค่ากลาง (Intermediate Value Theorem - IVT)</h3>
+
+                            <p><strong>ทฤษฎีบท:</strong> ถ้า $f$ ต่อเนื่องบนช่วง $[a, b]$ และ $N$ เป็นจำนวนใดๆ ที่อยู่ระหว่าง $f(a)$ และ $f(b)$<br>
+                            (กล่าวคือ $f(a) < N < f(b)$ หรือ $f(b) < N < f(a)$)</p>
+                            <p>แล้วจะมี $c \in (a, b)$ อย่างน้อยหนึ่งค่าที่ทำให้:</p>
+                            <div class="math-display">
+                                $$f(c) = N$$
+                            </div>
+
+                            <div class="note">
+                                <div class="note-title">ความหมาย</div>
+                                <p>ฟังก์ชันต่อเนื่องจะต้อง "ผ่าน" ทุกค่าระหว่าง $f(a)$ และ $f(b)$
+                                ไม่สามารถ "ข้าม" หรือ "หลบ" ค่าใดๆ ได้</p>
+                            </div>
+
+                            <p><strong>การประยุกต์สำคัญ:</strong> พิสูจน์การมีอยู่ของราก (root) ของสมการ</p>
+                            <p>ถ้าต้องการพิสูจน์ว่าสมการ $f(x) = 0$ มีรากในช่วง $(a, b)$:</p>
+                            <ol>
+                                <li>แสดงว่า $f$ ต่อเนื่องบน $[a, b]$</li>
+                                <li>แสดงว่า $f(a)$ และ $f(b)$ มีเครื่องหมายต่างกัน<br>
+                                (กล่าวคือ $f(a) \cdot f(b) < 0$ หรือ $f(a) < 0 < f(b)$ หรือ $f(b) < 0 < f(a)$)</li>
+                                <li>สรุปโดย IVT ว่ามี $c \in (a, b)$ ที่ $f(c) = 0$</li>
+                            </ol>
+
+                            <div class="tip">
+                                <div class="tip-title">เทคนิคการใช้ IVT</div>
+                                <ul>
+                                    <li>เลือกช่วง $[a, b]$ ที่เหมาะสม โดยคำนวณ $f(a)$ และ $f(b)$ ให้มีเครื่องหมายตรงข้าม</li>
+                                    <li>ตรวจสอบให้แน่ใจว่าฟังก์ชันต่อเนื่องบนช่วงนั้น</li>
+                                    <li>IVT รับประกันว่ามีรากอย่างน้อย 1 รากในช่วง แต่อาจมีมากกว่า 1 ราก</li>
+                                </ul>
+                            </div>
+
+                            <h3>5. การหาค่าคงที่ให้ฟังก์ชันต่อเนื่อง</h3>
+
+                            <p>สำหรับฟังก์ชันแบบชิ้นๆ (piecewise function) ที่มีค่าคงที่ $a, b, c, \ldots$<br>
+                            เพื่อให้ฟังก์ชันต่อเนื่องที่จุดต่อ ต้อง:</p>
+                            <ol>
+                                <li>หาลิมิตซ้ายและลิมิตขวาที่จุดต่อ</li>
+                                <li>ให้ทั้งสองลิมิตเท่ากับค่าฟังก์ชันที่จุดนั้น</li>
+                                <li>แก้สมการหาค่าคงที่</li>
+                            </ol>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <ul>
+                                    <li>ความต่อเนื่องเป็นคุณสมบัติเฉพาะที่ (local property) - ต้องตรวจที่แต่ละจุด</li>
+                                    <li>ถ้าฟังก์ชันไม่มีนิยามที่จุด $a$ จะไม่ต่อเนื่องที่ $a$ โดยอัตโนมัติ</li>
+                                    <li>การมีลิมิตที่จุด $a$ ไม่ได้รับประกันว่าจะต่อเนื่องที่ $a$</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========== ตัวอย่าง ========== -->
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <!-- Example 1 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>พิจารณาฟังก์ชัน $f(x) = x^2 + 3x - 2$</p>
+                                <p>ฟังก์ชันนี้ต่อเนื่องที่ $x = 1$ หรือไม่? อธิบาย</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบเงื่อนไข 3 ประการ</div>
+                                    <p><strong>เงื่อนไขที่ 1:</strong> $f(1)$ มีนิยามหรือไม่?</p>
+                                    <div class="math-display">
+                                        $$f(1) = (1)^2 + 3(1) - 2 = 1 + 3 - 2 = 2$$
+                                    </div>
+                                    <p>มีนิยาม ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาลิมิต</div>
+                                    <p><strong>เงื่อนไขที่ 2:</strong> $\lim_{x \to 1} f(x)$ มีค่าหรือไม่?</p>
+                                    <p>เนื่องจากเป็นฟังก์ชันพหุนาม แทนค่าได้โดยตรง:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 1} f(x) = \lim_{x \to 1} (x^2 + 3x - 2) = 2$$
+                                    </div>
+                                    <p>มีค่า ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: เปรียบเทียบ</div>
+                                    <p><strong>เงื่อนไขที่ 3:</strong> $\lim_{x \to 1} f(x) = f(1)$ หรือไม่?</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 1} f(x) = 2 = f(1)$$
+                                    </div>
+                                    <p>เท่ากัน ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">สรุป:</div>
+                                    <p>เงื่อนไขทั้ง 3 ประการเป็นจริง ดังนั้น <strong>$f$ ต่อเนื่องที่ $x = 1$</strong></p>
+                                </div>
+
+                                <div class="note">
+                                    <div class="note-title">หมายเหตุ</div>
+                                    <p>ฟังก์ชันพหุนามต่อเนื่องทุกจุดในจำนวนจริง ไม่ต้องตรวจสอบทีละจุด</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 2 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>พิจารณาฟังก์ชัน:</p>
+                                <div class="math-display">
+                                    $$f(x) = \begin{cases}
+                                    x^2 + 1 & \text{if } x < 2 \\
+                                    3x - 1 & \text{if } x \geq 2
+                                    \end{cases}$$
+                                </div>
+                                <p>ฟังก์ชันนี้ต่อเนื่องที่ $x = 2$ หรือไม่?</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หาค่าฟังก์ชันที่ $x = 2$</div>
+                                    <p>เนื่องจาก $x = 2$ อยู่ในกรณี $x \geq 2$:</p>
+                                    <div class="math-display">
+                                        $$f(2) = 3(2) - 1 = 5$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาลิมิตด้านซ้าย</div>
+                                    <p>เมื่อ $x \to 2^-$ (จากซ้าย, $x < 2$) ใช้สูตร $f(x) = x^2 + 1$:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-} (x^2 + 1) = 4 + 1 = 5$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หาลิมิตด้านขวา</div>
+                                    <p>เมื่อ $x \to 2^+$ (จากขวา, $x > 2$) ใช้สูตร $f(x) = 3x - 1$:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^+} f(x) = \lim_{x \to 2^+} (3x - 1) = 6 - 1 = 5$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: ตรวจสอบความต่อเนื่อง</div>
+                                    <p>เนื่องจาก:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^-} f(x) = 5 = \lim_{x \to 2^+} f(x) = f(2)$$
+                                    </div>
+                                    <p>ดังนั้น $\lim_{x \to 2} f(x) = f(2) = 5$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">สรุป:</div>
+                                    <p><strong>$f$ ต่อเนื่องที่ $x = 2$</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 3 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาค่า $a$ ที่ทำให้ฟังก์ชันต่อเนื่องที่ $x = 1$:</p>
+                                <div class="math-display">
+                                    $$f(x) = \begin{cases}
+                                    x^2 + a & \text{if } x \leq 1 \\
+                                    3x + 2 & \text{if } x > 1
+                                    \end{cases}$$
+                                </div>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หาลิมิตด้านซ้าย</div>
+                                    <p>เมื่อ $x \to 1^-$ ใช้ $f(x) = x^2 + a$:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 1^-} f(x) = 1^2 + a = 1 + a$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาลิมิตด้านขวา</div>
+                                    <p>เมื่อ $x \to 1^+$ ใช้ $f(x) = 3x + 2$:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 1^+} f(x) = 3(1) + 2 = 5$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หาค่าฟังก์ชันที่ $x = 1$</div>
+                                    <p>เนื่องจาก $x = 1$ อยู่ในกรณี $x \leq 1$:</p>
+                                    <div class="math-display">
+                                        $$f(1) = 1^2 + a = 1 + a$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: ใช้เงื่อนไขความต่อเนื่อง</div>
+                                    <p>เพื่อให้ $f$ ต่อเนื่องที่ $x = 1$ ต้องมี:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 1^-} f(x) &= \lim_{x \to 1^+} f(x) = f(1) \\
+                                        1 + a &= 5 = 1 + a
+                                        \end{align*}
+                                    </div>
+                                    <p>จาก $1 + a = 5$:</p>
+                                    <div class="math-display">
+                                        $$a = 4$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$a = 4$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 4 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 4</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ระบุประเภทของความไม่ต่อเนื่อง (ถ้ามี) ของฟังก์ชันต่อไปนี้:</p>
+                                <p>(a) $f(x) = \frac{x^2 - 4}{x - 2}$ ที่ $x = 2$</p>
+                                <p>(b) $g(x) = \frac{|x|}{x}$ ที่ $x = 0$</p>
+                                <p>(c) $h(x) = \frac{1}{x - 3}$ ที่ $x = 3$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (a): $f(x) = \frac{x^2 - 4}{x - 2}$ ที่ $x = 2$</div>
+                                    <p>$f(2)$ ไม่มีนิยาม (หารด้วย 0)</p>
+                                    <p>แต่ลิมิตมีค่า:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 2} f(x) &= \lim_{x \to 2} \frac{(x-2)(x+2)}{x - 2} \\
+                                        &= \lim_{x \to 2} (x + 2) = 4
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> Removable discontinuity (แก้ไขได้โดยกำหนด $f(2) = 4$)</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (b): $g(x) = \frac{|x|}{x}$ ที่ $x = 0$</div>
+                                    <p>$g(0)$ ไม่มีนิยาม</p>
+                                    <p>หาลิมิตด้านซ้ายและขวา:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 0^-} \frac{|x|}{x} &= \lim_{x \to 0^-} \frac{-x}{x} = -1 \\
+                                        \lim_{x \to 0^+} \frac{|x|}{x} &= \lim_{x \to 0^+} \frac{x}{x} = 1
+                                        \end{align*}
+                                    </div>
+                                    <p>ลิมิตซ้าย $\neq$ ลิมิตขวา</p>
+                                    <p><strong>คำตอบ:</strong> Jump discontinuity (กระโดด)</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (c): $h(x) = \frac{1}{x - 3}$ ที่ $x = 3$</div>
+                                    <p>$h(3)$ ไม่มีนิยาม</p>
+                                    <p>หาลิมิต:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 3^-} \frac{1}{x - 3} &= -\infty \\
+                                        \lim_{x \to 3^+} \frac{1}{x - 3} &= +\infty
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> Infinite discontinuity (มี vertical asymptote)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 5 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 5</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ใช้ Intermediate Value Theorem พิสูจน์ว่าสมการ $x^3 - 2x - 5 = 0$ มีรากอย่างน้อยหนึ่งรากในช่วง $(2, 3)$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: กำหนดฟังก์ชัน</div>
+                                    <p>ให้ $f(x) = x^3 - 2x - 5$</p>
+                                    <p>ต้องการพิสูจน์ว่ามี $c \in (2, 3)$ ที่ $f(c) = 0$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ตรวจสอบความต่อเนื่อง</div>
+                                    <p>$f(x) = x^3 - 2x - 5$ เป็นฟังก์ชันพหุนาม</p>
+                                    <p>ดังนั้น $f$ ต่อเนื่องบน $[2, 3]$ ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: คำนวณค่าที่ปลายช่วง</div>
+                                    <p>คำนวณ $f(2)$ และ $f(3)$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        f(2) &= 2^3 - 2(2) - 5 = 8 - 4 - 5 = -1 \\
+                                        f(3) &= 3^3 - 2(3) - 5 = 27 - 6 - 5 = 16
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: ตรวจสอบเครื่องหมาย</div>
+                                    <p>สังเกตว่า:</p>
+                                    <ul>
+                                        <li>$f(2) = -1 < 0$</li>
+                                        <li>$f(3) = 16 > 0$</li>
+                                    </ul>
+                                    <p>ดังนั้น $f(2)$ และ $f(3)$ มีเครื่องหมายตรงข้ามกัน</p>
+                                    <p>กล่าวคือ $f(2) < 0 < f(3)$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 5: ใช้ IVT</div>
+                                    <p>เนื่องจาก:</p>
+                                    <ul>
+                                        <li>$f$ ต่อเนื่องบน $[2, 3]$</li>
+                                        <li>$0$ อยู่ระหว่าง $f(2) = -1$ และ $f(3) = 16$</li>
+                                    </ul>
+                                    <p>โดย Intermediate Value Theorem จะมี $c \in (2, 3)$ ที่ทำให้:</p>
+                                    <div class="math-display">
+                                        $$f(c) = 0$$
+                                    </div>
+                                    <p>นั่นคือ สมการ $x^3 - 2x - 5 = 0$ มีรากในช่วง $(2, 3)$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">สรุป:</div>
+                                    <p>สมการ $x^3 - 2x - 5 = 0$ มีรากอย่างน้อยหนึ่งรากในช่วง $(2, 3)$ (พิสูจน์แล้ว)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 6 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 6</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาทุกค่า $a$ และ $b$ ที่ทำให้ฟังก์ชันต่อเนื่องทุกจุด:</p>
+                                <div class="math-display">
+                                    $$f(x) = \begin{cases}
+                                    ax^2 + 3 & \text{if } x < 1 \\
+                                    x + b & \text{if } 1 \leq x < 2 \\
+                                    3x - 1 & \text{if } x \geq 2
+                                    \end{cases}$$
+                                </div>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบจุดต่อที่ $x = 1$</div>
+                                    <p>หาลิมิตซ้าย:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (ax^2 + 3) = a(1)^2 + 3 = a + 3$$
+                                    </div>
+                                    <p>หาค่าฟังก์ชันและลิมิตขวา (ใช้กรณีเดียวกัน $1 \leq x < 2$):</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        f(1) &= 1 + b \\
+                                        \lim_{x \to 1^+} f(x) &= \lim_{x \to 1^+} (x + b) = 1 + b
+                                        \end{align*}
+                                    </div>
+                                    <p>เพื่อให้ต่อเนื่องที่ $x = 1$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        a + 3 &= 1 + b \\
+                                        a - b &= -2 \quad \cdots (1)
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ตรวจสอบจุดต่อที่ $x = 2$</div>
+                                    <p>หาลิมิตซ้าย:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-} (x + b) = 2 + b$$
+                                    </div>
+                                    <p>หาค่าฟังก์ชันและลิมิตขวา (ใช้กรณีเดียวกัน $x \geq 2$):</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        f(2) &= 3(2) - 1 = 5 \\
+                                        \lim_{x \to 2^+} f(x) &= \lim_{x \to 2^+} (3x - 1) = 5
+                                        \end{align*}
+                                    </div>
+                                    <p>เพื่อให้ต่อเนื่องที่ $x = 2$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        2 + b &= 5 \\
+                                        b &= 3 \quad \cdots (2)
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: แก้ระบบสมการ</div>
+                                    <p>จาก $(2)$: $b = 3$</p>
+                                    <p>แทนใน $(1)$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        a - 3 &= -2 \\
+                                        a &= 1
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$a = 1$ และ $b = 3$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">การตรวจสอบ:</div>
+                                    <p>เมื่อ $a = 1, b = 3$:</p>
+                                    <ul>
+                                        <li>ที่ $x = 1$: $\lim_{x \to 1^-} = 1 + 3 = 4$ และ $f(1) = 1 + 3 = 4$ ✓</li>
+                                        <li>ที่ $x = 2$: $\lim_{x \to 2^-} = 2 + 3 = 5$ และ $f(2) = 5$ ✓</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 7 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 7</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย - โจทย์ข้อความ</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>อุณหภูมิของอากาศในช่วงเวลาหนึ่งเปลี่ยนแปลงอย่างต่อเนื่อง โดยที่เวลา 6:00 น. มีอุณหภูมิ 15°C และที่เวลา 14:00 น. มีอุณหภูมิ 28°C</p>
+                                <p>พิสูจน์ว่าจะมีช่วงเวลาหนึ่งที่อุณหภูมิเป็น 20°C พอดี</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: กำหนดฟังก์ชัน</div>
+                                    <p>ให้ $T(t)$ แทนอุณหภูมิ (°C) ณ เวลา $t$ ชั่วโมงหลัง 6:00 น.</p>
+                                    <p>โดยที่:</p>
+                                    <ul>
+                                        <li>$t = 0$ คือ 6:00 น. → $T(0) = 15$</li>
+                                        <li>$t = 8$ คือ 14:00 น. → $T(8) = 28$</li>
+                                    </ul>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ระบุสมมติฐาน</div>
+                                    <p>โจทย์บอกว่าอุณหภูมิเปลี่ยนแปลงอย่าง<strong>ต่อเนื่อง</strong></p>
+                                    <p>ดังนั้น $T(t)$ เป็นฟังก์ชันต่อเนื่องบนช่วง $[0, 8]$ ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: ระบุค่าที่ต้องการ</div>
+                                    <p>ต้องการพิสูจน์ว่ามี $c \in (0, 8)$ ที่ $T(c) = 20$</p>
+                                    <p>สังเกตว่า $20$ อยู่ระหว่าง $T(0) = 15$ และ $T(8) = 28$:</p>
+                                    <div class="math-display">
+                                        $$15 < 20 < 28$$
+                                    </div>
+                                    <p>หรือ $T(0) < 20 < T(8)$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: ใช้ Intermediate Value Theorem</div>
+                                    <p>เนื่องจาก:</p>
+                                    <ol>
+                                        <li>$T(t)$ ต่อเนื่องบน $[0, 8]$</li>
+                                        <li>$20$ อยู่ระหว่าง $T(0)$ และ $T(8)$</li>
+                                    </ol>
+                                    <p>โดย Intermediate Value Theorem จะมี $c \in (0, 8)$ ที่:</p>
+                                    <div class="math-display">
+                                        $$T(c) = 20$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">สรุป:</div>
+                                    <p>จะมีช่วงเวลาหนึ่งระหว่าง 6:00 น. ถึง 14:00 น. ที่อุณหภูมิเป็น 20°C พอดี (พิสูจน์แล้ว)</p>
+                                </div>
+
+                                <div class="note">
+                                    <div class="note-title">การตีความ</div>
+                                    <p>IVT บอกว่ามี<strong>อย่างน้อยหนึ่งช่วงเวลา</strong>ที่อุณหภูมิเป็น 20°C
+                                    อาจมีมากกว่าหนึ่งครั้ง (เช่น อุณหภูมิอาจขึ้นแล้วลง) แต่รับประกันว่ามีอย่างน้อยหนึ่งครั้ง</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ========== แบบฝึกหัด ========== -->
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <!-- Exercise 1 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>พิจารณาฟังก์ชัน $f(x) = \frac{x + 1}{x - 2}$</p>
+                                <p>ฟังก์ชันนี้ต่อเนื่องที่ $x = 2$ หรือไม่? อธิบาย</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ตรวจสอบ $f(2)$:</p>
+                                    <div class="math-display">
+                                        $$f(2) = \frac{2 + 1}{2 - 2} = \frac{3}{0}$$
+                                    </div>
+                                    <p>$f(2)$ <strong>ไม่มีนิยาม</strong> (หารด้วยศูนย์)</p>
+                                    <p>เนื่องจากเงื่อนไขแรกของความต่อเนื่องไม่เป็นจริง ($f(a)$ ต้องมีนิยาม)</p>
+                                    <p><strong>คำตอบ:</strong> $f$ <strong>ไม่ต่อเนื่อง</strong>ที่ $x = 2$</p>
+                                    <p>นอกจากนี้ $\lim_{x \to 2} f(x) = \pm\infty$ ดังนั้นเป็น <strong>infinite discontinuity</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 2 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>หาค่า $a$ ที่ทำให้ฟังก์ชันต่อเนื่องที่ $x = 2$:</p>
+                                <div class="math-display">
+                                    $$f(x) = \begin{cases}
+                                    ax + 3 & \text{if } x \leq 2 \\
+                                    x^2 - 1 & \text{if } x > 2
+                                    \end{cases}$$
+                                </div>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หาลิมิตซ้ายและค่าฟังก์ชัน:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 2^-} f(x) &= \lim_{x \to 2^-} (ax + 3) = 2a + 3 \\
+                                        f(2) &= 2a + 3
+                                        \end{align*}
+                                    </div>
+                                    <p>หาลิมิตขวา:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^+} f(x) = \lim_{x \to 2^+} (x^2 - 1) = 4 - 1 = 3$$
+                                    </div>
+                                    <p>เพื่อให้ต่อเนื่อง:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        2a + 3 &= 3 \\
+                                        2a &= 0 \\
+                                        a &= 0
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $a = 0$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 3 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>ระบุจุดไม่ต่อเนื่องและประเภทของความไม่ต่อเนื่องของฟังก์ชัน:</p>
+                                <p>$f(x) = \frac{x^2 - 9}{x + 3}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>$f(x)$ ไม่มีนิยามเมื่อ $x + 3 = 0$ คือ $x = -3$</p>
+                                    <p>ตรวจสอบลิมิตที่ $x = -3$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to -3} f(x) &= \lim_{x \to -3} \frac{(x-3)(x+3)}{x + 3} \\
+                                        &= \lim_{x \to -3} (x - 3) \\
+                                        &= -3 - 3 = -6
+                                        \end{align*}
+                                    </div>
+                                    <p>ลิมิตมีค่า แต่ $f(-3)$ ไม่มีนิยาม</p>
+                                    <p><strong>คำตอบ:</strong> จุดไม่ต่อเนื่อง: $x = -3$</p>
+                                    <p>ประเภท: <strong>Removable discontinuity</strong> (แก้ไขได้โดยกำหนด $f(-3) = -6$)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 4 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 4:</h4>
+                                <p>ใช้ IVT พิสูจน์ว่าสมการ $x^3 = 1 - x$ มีรากอย่างน้อยหนึ่งรากในช่วง $(0, 1)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>เขียนสมการในรูป $x^3 + x - 1 = 0$</p>
+                                    <p>ให้ $f(x) = x^3 + x - 1$</p>
+                                    <p>$f$ เป็นพหุนาม ดังนั้นต่อเนื่องบน $[0, 1]$ ✓</p>
+                                    <p>คำนวณ:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        f(0) &= 0 + 0 - 1 = -1 < 0 \\
+                                        f(1) &= 1 + 1 - 1 = 1 > 0
+                                        \end{align*}
+                                    </div>
+                                    <p>เนื่องจาก $f(0) < 0 < f(1)$ และ $f$ ต่อเนื่องบน $[0, 1]$</p>
+                                    <p>โดย IVT มี $c \in (0, 1)$ ที่ $f(c) = 0$</p>
+                                    <p><strong>สรุป:</strong> สมการมีรากในช่วง $(0, 1)$ (พิสูจน์แล้ว)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <!-- Exercise 5 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 5:</h4>
+                                <p>หาทุกค่า $a$ และ $b$ ที่ทำให้ฟังก์ชันต่อเนื่องทุกจุด:</p>
+                                <div class="math-display">
+                                    $$f(x) = \begin{cases}
+                                    \frac{x^2 - 4}{x - 2} + a & \text{if } x < 2 \\
+                                    b & \text{if } x = 2 \\
+                                    2x + 1 & \text{if } x > 2
+                                    \end{cases}$$
+                                </div>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หาลิมิตซ้าย:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 2^-} f(x) &= \lim_{x \to 2^-} \left[\frac{(x-2)(x+2)}{x - 2} + a\right] \\
+                                        &= \lim_{x \to 2^-} (x + 2 + a) \\
+                                        &= 4 + a
+                                        \end{align*}
+                                    </div>
+                                    <p>หาค่าฟังก์ชันที่ $x = 2$:</p>
+                                    <div class="math-display">
+                                        $$f(2) = b$$
+                                    </div>
+                                    <p>หาลิมิตขวา:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^+} f(x) = \lim_{x \to 2^+} (2x + 1) = 5$$
+                                    </div>
+                                    <p>เพื่อให้ต่อเนื่องที่ $x = 2$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        4 + a &= b = 5 \\
+                                        \Rightarrow a &= 1, \quad b = 5
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $a = 1$ และ $b = 5$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 6 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 6:</h4>
+                                <p>ถ้า $f$ ต่อเนื่องบน $[0, 1]$ โดยที่ $f(0) = f(1)$</p>
+                                <p>พิสูจน์ว่ามี $c \in [0, \frac{1}{2}]$ ที่ $f(c) = f(c + \frac{1}{2})$</p>
+                                <p><em>คำแนะนำ: พิจารณา $g(x) = f(x) - f(x + \frac{1}{2})$</em></p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>กำหนด $g(x) = f(x) - f(x + \frac{1}{2})$ สำหรับ $x \in [0, \frac{1}{2}]$</p>
+                                    <p>เนื่องจาก $f$ ต่อเนื่อง ดังนั้น $g$ ต่อเนื่องบน $[0, \frac{1}{2}]$ ✓</p>
+                                    <p>คำนวณค่าที่ปลายช่วง:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        g(0) &= f(0) - f(\frac{1}{2}) \\
+                                        g(\frac{1}{2}) &= f(\frac{1}{2}) - f(1)
+                                        \end{align*}
+                                    </div>
+                                    <p>เนื่องจาก $f(0) = f(1)$ (โจทย์กำหนด):</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        g(0) + g(\frac{1}{2}) &= [f(0) - f(\frac{1}{2})] + [f(\frac{1}{2}) - f(1)] \\
+                                        &= f(0) - f(1) = 0
+                                        \end{align*}
+                                    </div>
+                                    <p>ดังนั้น $g(\frac{1}{2}) = -g(0)$</p>
+                                    <p><strong>กรณีที่ 1:</strong> ถ้า $g(0) = 0$ แล้ว $f(0) = f(\frac{1}{2})$ เลือก $c = 0$ ✓</p>
+                                    <p><strong>กรณีที่ 2:</strong> ถ้า $g(0) \neq 0$ แล้ว $g(0)$ และ $g(\frac{1}{2})$ มีเครื่องหมายตรงข้าม</p>
+                                    <p>โดย IVT มี $c \in (0, \frac{1}{2})$ ที่ $g(c) = 0$</p>
+                                    <p>นั่นคือ $f(c) - f(c + \frac{1}{2}) = 0$ หรือ $f(c) = f(c + \frac{1}{2})$ ✓</p>
+                                    <p><strong>สรุป:</strong> มี $c \in [0, \frac{1}{2}]$ ที่ $f(c) = f(c + \frac{1}{2})$ (พิสูจน์แล้ว)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

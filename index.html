@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="เว็บสอน Calculus 1 ออนไลน์แบบครบถ้วน - เรียนฟรี มีตัวอย่างและแบบฝึกหัดมากมาย">
+    <meta name="theme-color" content="#2c3e50">
+    <title>Calculus 1 Online - เรียนแคลคูลัส 1 ออนไลน์</title>
+
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/icon-192.png">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น Mean Value Theorem, ลิมิต...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <div class="chapter-list">
+                    <!-- Chapter 1 -->
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="1">
+                            <span class="chapter-number">บทที่ 1</span>
+                            <h3>ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter1-topics">
+                            <li><a href="/chapters/chapter1/functions.html" data-topic="1.1">1.1 ฟังก์ชัน (Functions)</a></li>
+                            <li><a href="/chapters/chapter1/limits.html" data-topic="1.2">1.2 ลิมิต (Limits)</a></li>
+                            <li><a href="/chapters/chapter1/continuity.html" data-topic="1.3">1.3 ความต่อเนื่อง (Continuity)</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Chapter 2 -->
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="2">
+                            <span class="chapter-number">บทที่ 2</span>
+                            <h3>อนุพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter2-topics">
+                            <li><a href="/chapters/chapter2/derivative-intro.html" data-topic="2.1">2.1 ที่มาของอนุพันธ์</a></li>
+                            <li><a href="/chapters/chapter2/derivative-rules.html" data-topic="2.2">2.2 กฎพื้นฐานของอนุพันธ์</a></li>
+                            <li><a href="/chapters/chapter2/standard-derivatives.html" data-topic="2.3">2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                            <li><a href="/chapters/chapter2/advanced-derivatives.html" data-topic="2.4">2.4 อนุพันธ์ขั้นสูง</a></li>
+                            <li><a href="/chapters/chapter2/theorems.html" data-topic="2.5">2.5 ทฤษฎีบทสำคัญ</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Chapter 3 -->
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="3">
+                            <span class="chapter-number">บทที่ 3</span>
+                            <h3>การประยุกต์อนุพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter3-topics">
+                            <li><a href="/chapters/chapter3/geometry.html" data-topic="3.1">3.1 เรขาคณิตและกราฟ</a></li>
+                            <li><a href="/chapters/chapter3/physics.html" data-topic="3.2">3.2 ฟิสิกส์และการเคลื่อนที่</a></li>
+                            <li><a href="/chapters/chapter3/extrema.html" data-topic="3.3">3.3 ค่าสูงสุดและต่ำสุด</a></li>
+                            <li><a href="/chapters/chapter3/approximation.html" data-topic="3.4">3.4 การประมาณค่า</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Chapter 4 -->
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="4">
+                            <span class="chapter-number">บทที่ 4</span>
+                            <h3>ปริพันธ์และปริพันธ์จำกัดเขต</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter4-topics">
+                            <li><a href="/chapters/chapter4/integral-intro.html" data-topic="4.1">4.1 ที่มาของปริพันธ์</a></li>
+                            <li><a href="/chapters/chapter4/indefinite-integrals.html" data-topic="4.2">4.2 ปริพันธ์ไม่จำกัดเขต</a></li>
+                            <li><a href="/chapters/chapter4/definite-integrals.html" data-topic="4.3">4.3 ปริพันธ์จำกัดเขต</a></li>
+                            <li><a href="/chapters/chapter4/standard-integrals.html" data-topic="4.4">4.4 ปริพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                            <li><a href="/chapters/chapter4/u-substitution.html" data-topic="4.5">4.5 การแทนค่าตัวแปร (u-substitution)</a></li>
+                            <li><a href="/chapters/chapter4/applications.html" data-topic="4.6">4.6 การประยุกต์ปริพันธ์</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Chapter 5 -->
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="5">
+                            <span class="chapter-number">บทที่ 5</span>
+                            <h3>เทคนิคการหาปริพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter5-topics">
+                            <li><a href="/chapters/chapter5/integration-by-parts.html" data-topic="5.1">5.1 Integration by Parts</a></li>
+                            <li><a href="/chapters/chapter5/partial-fractions.html" data-topic="5.2">5.2 การแยกเศษส่วนย่อย</a></li>
+                            <li><a href="/chapters/chapter5/trig-integrals.html" data-topic="5.3">5.3 ปริพันธ์ตรีโกณมิติ</a></li>
+                            <li><a href="/chapters/chapter5/trig-substitution.html" data-topic="5.4">5.4 การแทนค่าตรีโกณมิติ</a></li>
+                            <li><a href="/chapters/chapter5/general-substitution.html" data-topic="5.5">5.5 การแทนค่าตัวแปรใหม่</a></li>
+                            <li><a href="/chapters/chapter5/improper-integrals.html" data-topic="5.6">5.6 ปริพันธ์ไม่เหมาะสม</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                </nav>
+
+                <!-- Welcome Section -->
+                <section class="welcome-section">
+                    <h1>ยินดีต้อนรับสู่ Calculus 1 Online</h1>
+                    <p class="lead">เว็บไซต์สอนวิชาแคลคูลัส 1 แบบครบถ้วน ด้วยเนื้อหาที่เข้าใจง่าย มีตัวอย่างและแบบฝึกหัดมากมาย</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <h3>เนื้อหาครบถ้วน</h3>
+                            <p>ครอบคลุมทุกหัวข้อใน Calculus 1 แบ่งเป็น 5 บทหลัก</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">✏️</div>
+                            <h3>ตัวอย่างมากมาย</h3>
+                            <p>แต่ละหัวข้อมีตัวอย่างละเอียด 5-7 ข้อ พร้อมวิธีทำทีละขั้นตอน</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>แบบฝึกหัด</h3>
+                            <p>แบบฝึกหัดพร้อมเฉลยละเอียด ฝึกได้ทันทีหลังเรียน</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📱</div>
+                            <h3>ใช้งานได้ทุกอุปกรณ์</h3>
+                            <p>รองรับคอมพิวเตอร์ แท็บเล็ต และมือถือ สามารถเรียนได้ทุกที่ทุกเวลา</p>
+                        </div>
+                    </div>
+
+                    <div class="chapters-overview">
+                        <h2>เนื้อหาทั้งหมด 5 บท</h2>
+                        <div class="chapter-cards">
+                            <a href="/chapters/chapter1/functions.html" class="chapter-card">
+                                <div class="chapter-card-number">1</div>
+                                <h3>ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                                <p>เริ่มต้นด้วยพื้นฐานของฟังก์ชัน การหาลิมิต และการตรวจสอบความต่อเนื่อง</p>
+                            </a>
+                            <a href="/chapters/chapter2/derivative-intro.html" class="chapter-card">
+                                <div class="chapter-card-number">2</div>
+                                <h3>อนุพันธ์ (Derivatives)</h3>
+                                <p>ศึกษาแนวคิดอนุพันธ์ กฎการหาอนุพันธ์ และทฤษฎีบทสำคัญ</p>
+                            </a>
+                            <a href="/chapters/chapter3/geometry.html" class="chapter-card">
+                                <div class="chapter-card-number">3</div>
+                                <h3>การประยุกต์อนุพันธ์</h3>
+                                <p>ประยุกต์อนุพันธ์ในการวิเคราะห์กราฟ ฟิสิกส์ และปัญหาสูงสุด-ต่ำสุด</p>
+                            </a>
+                            <a href="/chapters/chapter4/integral-intro.html" class="chapter-card">
+                                <div class="chapter-card-number">4</div>
+                                <h3>ปริพันธ์และปริพันธ์จำกัดเขต</h3>
+                                <p>พื้นฐานปริพันธ์ ทฤษฎีบทมูลฐาน และการประยุกต์</p>
+                            </a>
+                            <a href="/chapters/chapter5/integration-by-parts.html" class="chapter-card">
+                                <div class="chapter-card-number">5</div>
+                                <h3>เทคนิคการหาปริพันธ์</h3>
+                                <p>เทคนิคขั้นสูงในการหาปริพันธ์ เช่น Integration by Parts, Partial Fractions</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="getting-started">
+                        <h2>เริ่มต้นเรียน</h2>
+                        <p>เลือกบทเรียนจากเมนูด้านซ้าย หรือคลิกที่การ์ดด้านบนเพื่อเริ่มเรียนทันที</p>
+                        <a href="/chapters/chapter1/functions.html" class="btn btn-primary btn-large">เริ่มเรียนบทที่ 1</a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+            <p>ใช้ MathJax สำหรับแสดงสมการทางคณิตศาสตร์</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+</body>
+</html>

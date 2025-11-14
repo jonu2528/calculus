@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="บทที่ 1.1 ฟังก์ชัน (Functions) - เรียนรู้เกี่ยวกับความหมายของฟังก์ชัน โดเมน พิสัย และฟังก์ชันประกอบ">
+    <meta name="theme-color" content="#2c3e50">
+    <title>1.1 ฟังก์ชัน (Functions) - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น Mean Value Theorem, ลิมิต...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <div class="chapter-list">
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="1">
+                            <span class="chapter-number">บทที่ 1</span>
+                            <h3>ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter1-topics">
+                            <li><a href="/chapters/chapter1/functions.html" data-topic="1.1" class="active">1.1 ฟังก์ชัน (Functions)</a></li>
+                            <li><a href="/chapters/chapter1/limits.html" data-topic="1.2">1.2 ลิมิต (Limits)</a></li>
+                            <li><a href="/chapters/chapter1/continuity.html" data-topic="1.3">1.3 ความต่อเนื่อง (Continuity)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="2">
+                            <span class="chapter-number">บทที่ 2</span>
+                            <h3>อนุพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter2-topics">
+                            <li><a href="/chapters/chapter2/derivative-intro.html" data-topic="2.1">2.1 ที่มาของอนุพันธ์</a></li>
+                            <li><a href="/chapters/chapter2/derivative-rules.html" data-topic="2.2">2.2 กฎพื้นฐานของอนุพันธ์</a></li>
+                            <li><a href="/chapters/chapter2/standard-derivatives.html" data-topic="2.3">2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                            <li><a href="/chapters/chapter2/advanced-derivatives.html" data-topic="2.4">2.4 อนุพันธ์ขั้นสูง</a></li>
+                            <li><a href="/chapters/chapter2/theorems.html" data-topic="2.5">2.5 ทฤษฎีบทสำคัญ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="3">
+                            <span class="chapter-number">บทที่ 3</span>
+                            <h3>การประยุกต์อนุพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter3-topics">
+                            <li><a href="/chapters/chapter3/geometry.html" data-topic="3.1">3.1 เรขาคณิตและกราฟ</a></li>
+                            <li><a href="/chapters/chapter3/physics.html" data-topic="3.2">3.2 ฟิสิกส์และการเคลื่อนที่</a></li>
+                            <li><a href="/chapters/chapter3/extrema.html" data-topic="3.3">3.3 ค่าสูงสุดและต่ำสุด</a></li>
+                            <li><a href="/chapters/chapter3/approximation.html" data-topic="3.4">3.4 การประมาณค่า</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="4">
+                            <span class="chapter-number">บทที่ 4</span>
+                            <h3>ปริพันธ์และปริพันธ์จำกัดเขต</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter4-topics">
+                            <li><a href="/chapters/chapter4/integral-intro.html" data-topic="4.1">4.1 ที่มาของปริพันธ์</a></li>
+                            <li><a href="/chapters/chapter4/indefinite-integrals.html" data-topic="4.2">4.2 ปริพันธ์ไม่จำกัดเขต</a></li>
+                            <li><a href="/chapters/chapter4/definite-integrals.html" data-topic="4.3">4.3 ปริพันธ์จำกัดเขต</a></li>
+                            <li><a href="/chapters/chapter4/standard-integrals.html" data-topic="4.4">4.4 ปริพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                            <li><a href="/chapters/chapter4/u-substitution.html" data-topic="4.5">4.5 การแทนค่าตัวแปร</a></li>
+                            <li><a href="/chapters/chapter4/applications.html" data-topic="4.6">4.6 การประยุกต์ปริพันธ์</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="5">
+                            <span class="chapter-number">บทที่ 5</span>
+                            <h3>เทคนิคการหาปริพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter5-topics">
+                            <li><a href="/chapters/chapter5/integration-by-parts.html" data-topic="5.1">5.1 Integration by Parts</a></li>
+                            <li><a href="/chapters/chapter5/partial-fractions.html" data-topic="5.2">5.2 การแยกเศษส่วนย่อย</a></li>
+                            <li><a href="/chapters/chapter5/trig-integrals.html" data-topic="5.3">5.3 ปริพันธ์ตรีโกณมิติ</a></li>
+                            <li><a href="/chapters/chapter5/trig-substitution.html" data-topic="5.4">5.4 การแทนค่าตรีโกณมิติ</a></li>
+                            <li><a href="/chapters/chapter5/general-substitution.html" data-topic="5.5">5.5 การแทนค่าตัวแปรใหม่</a></li>
+                            <li><a href="/chapters/chapter5/improper-integrals.html" data-topic="5.6">5.6 ปริพันธ์ไม่เหมาะสม</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 1: ฟังก์ชัน ลิมิต และความต่อเนื่อง</a>
+                    <span>1.1 ฟังก์ชัน (Functions)</span>
+                </nav>
+
+                <article>
+                    <h1>1.1 ฟังก์ชัน (Functions)</h1>
+
+                    <!-- ========== ส่วนทฤษฎี ========== -->
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>ความหมายของฟังก์ชัน (Function Definition)</h3>
+                            <p>
+                                <strong>ฟังก์ชัน (Function)</strong> คือ ความสัมพันธ์ระหว่างสองเซต ที่ทำให้สมาชิกแต่ละตัวในเซตแรก (เรียกว่า <strong>โดเมน</strong> หรือ <strong>domain</strong>)
+                                สอดคล้องกับสมาชิกเพียงตัวเดียวในเซตที่สอง (เรียกว่า <strong>พิสัย</strong> หรือ <strong>range</strong>)
+                            </p>
+
+                            <p>เราเขียนแทนฟังก์ชันด้วยสัญลักษณ์:</p>
+                            <div class="math-display">
+                                $$f: X \rightarrow Y$$
+                            </div>
+                            <p>หรือ</p>
+                            <div class="math-display">
+                                $$y = f(x)$$
+                            </div>
+
+                            <p>โดยที่:</p>
+                            <ul>
+                                <li>$x$ คือ <strong>ตัวแปรอิสระ (independent variable)</strong> ซึ่งอยู่ในโดเมน</li>
+                                <li>$y$ คือ <strong>ตัวแปรตาม (dependent variable)</strong> ซึ่งอยู่ในพิสัย</li>
+                                <li>$f(x)$ อ่านว่า "เอฟของเอ็กซ์" หมายถึง ค่าของฟังก์ชัน $f$ เมื่อ $x$ เป็นอินพุต</li>
+                            </ul>
+
+                            <div class="note">
+                                <div class="note-title">หมายเหตุสำคัญ</div>
+                                <p>สิ่งสำคัญของฟังก์ชันคือ: สำหรับค่า $x$ หนึ่งค่าใดๆ ในโดเมน จะได้ค่า $y$ เพียงค่าเดียวเท่านั้น</p>
+                            </div>
+
+                            <h3>โดเมน (Domain) และพิสัย (Range)</h3>
+                            <p>
+                                <strong>โดเมน (Domain)</strong> คือ เซตของค่า $x$ ทั้งหมดที่สามารถนำมาแทนในฟังก์ชันได้<br>
+                                <strong>พิสัย (Range)</strong> คือ เซตของค่า $y$ ทั้งหมดที่ได้จากการแทนค่า $x$ ในโดเมน
+                            </p>
+
+                            <div class="tip">
+                                <div class="tip-title">เทคนิคการหาโดเมน</div>
+                                <ul>
+                                    <li>ฟังก์ชันพหุนาม: โดเมนคือจำนวนจริงทั้งหมด $(-\infty, \infty)$</li>
+                                    <li>ฟังก์ชันเศษส่วน: ตัวส่วนต้องไม่เป็นศูนย์</li>
+                                    <li>ฟังก์ชันรากที่สอง: ค่าในรากต้องไม่เป็นลบ (ถ้าเป็นจำนวนจริง)</li>
+                                    <li>ฟังก์ชันลอการิทึม: อาร์กิวเมนต์ต้องเป็นบวก</li>
+                                </ul>
+                            </div>
+
+                            <h3>ฟังก์ชันประกอบ (Composition of Functions)</h3>
+                            <p>
+                                การ<strong>ประกอบฟังก์ชัน (composition)</strong> คือ การนำผลลัพธ์ของฟังก์ชันหนึ่งไปเป็นอินพุตของอีกฟังก์ชันหนึ่ง
+                            </p>
+                            <p>ถ้ามีฟังก์ชัน $f$ และ $g$ การประกอบฟังก์ชัน เขียนแทนด้วย:</p>
+                            <div class="math-display">
+                                $$(f \circ g)(x) = f(g(x))$$
+                            </div>
+                            <p>อ่านว่า "เอฟประกอบจีของเอ็กซ์" หมายถึง นำ $g(x)$ ไปแทนในฟังก์ชัน $f$</p>
+
+                            <h3>ฟังก์ชันผกผัน (Inverse Function)</h3>
+                            <p>
+                                <strong>ฟังก์ชันผกผัน</strong> ของ $f$ เขียนแทนด้วย $f^{-1}$ คือ ฟังก์ชันที่ทำให้:
+                            </p>
+                            <div class="math-display">
+                                $$f^{-1}(f(x)) = x \quad \text{และ} \quad f(f^{-1}(x)) = x$$
+                            </div>
+                            <p>หมายความว่า ฟังก์ชันผกผันจะ "กลับ" การทำงานของฟังก์ชันเดิม</p>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <p>ไม่ใช่ฟังก์ชันทุกตัวจะมีฟังก์ชันผกผัน! ฟังก์ชันจะมีผกผันได้ต่อเมื่อฟังก์ชันนั้นเป็น <strong>one-to-one function</strong> (หนึ่งต่อหนึ่ง)</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========== ตัวอย่าง ========== -->
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <!-- Example 1 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>กำหนดฟังก์ชัน $f(x) = 2x + 3$ จงหาค่าของ:</p>
+                                <p>(a) $f(0)$ &nbsp;&nbsp; (b) $f(2)$ &nbsp;&nbsp; (c) $f(-1)$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หา $f(0)$</div>
+                                    <p>แทน $x = 0$ ในฟังก์ชัน:</p>
+                                    <div class="math-display">
+                                        $$f(0) = 2(0) + 3 = 0 + 3 = 3$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หา $f(2)$</div>
+                                    <p>แทน $x = 2$ ในฟังก์ชัน:</p>
+                                    <div class="math-display">
+                                        $$f(2) = 2(2) + 3 = 4 + 3 = 7$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หา $f(-1)$</div>
+                                    <p>แทน $x = -1$ ในฟังก์ชัน:</p>
+                                    <div class="math-display">
+                                        $$f(-1) = 2(-1) + 3 = -2 + 3 = 1$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>(a) $f(0) = 3$ &nbsp;&nbsp; (b) $f(2) = 7$ &nbsp;&nbsp; (c) $f(-1) = 1$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 2 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>จงหาโดเมนของฟังก์ชันต่อไปนี้:</p>
+                                <p>(a) $f(x) = \frac{1}{x - 2}$</p>
+                                <p>(b) $g(x) = \sqrt{x + 3}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (a): หาโดเมนของ $f(x) = \frac{1}{x - 2}$</div>
+                                    <p>เนื่องจากเป็นฟังก์ชันเศษส่วน ตัวส่วนต้องไม่เป็นศูนย์</p>
+                                    <div class="math-display">
+                                        $$x - 2 \neq 0$$
+                                        $$x \neq 2$$
+                                    </div>
+                                    <p><strong>โดเมน:</strong> $\{x \in \mathbb{R} : x \neq 2\}$ หรือเขียนในรูปช่วงได้ว่า $(-\infty, 2) \cup (2, \infty)$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (b): หาโดเมนของ $g(x) = \sqrt{x + 3}$</div>
+                                    <p>เนื่องจากเป็นฟังก์ชันรากที่สอง ค่าในรากต้องไม่เป็นลบ (ถ้าพิจารณาในจำนวนจริง)</p>
+                                    <div class="math-display">
+                                        $$x + 3 \geq 0$$
+                                        $$x \geq -3$$
+                                    </div>
+                                    <p><strong>โดเมน:</strong> $\{x \in \mathbb{R} : x \geq -3\}$ หรือเขียนในรูปช่วงได้ว่า $[-3, \infty)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 3 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>จงหาโดเมนของฟังก์ชัน $h(x) = \frac{1}{\sqrt{4 - x^2}}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: วิเคราะห์เงื่อนไข</div>
+                                    <p>ฟังก์ชันนี้มีทั้งรากที่สอง (ในตัวส่วน) และเศษส่วน ดังนั้นต้องพิจารณา 2 เงื่อนไข:</p>
+                                    <ul>
+                                        <li>ค่าในรากต้องไม่เป็นลบ: $4 - x^2 \geq 0$</li>
+                                        <li>ตัวส่วนต้องไม่เป็นศูนย์: $\sqrt{4 - x^2} \neq 0$</li>
+                                    </ul>
+                                    <p>รวมกันได้ว่า: $4 - x^2 > 0$ (ต้องเป็นบวกอย่างเคร่งครัด)</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: แก้อสมการ</div>
+                                    <div class="math-display">
+                                        $$4 - x^2 > 0$$
+                                        $$4 > x^2$$
+                                        $$x^2 < 4$$
+                                        $$-2 < x < 2$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p><strong>โดเมน:</strong> $(-2, 2)$ (ช่วงเปิด ไม่รวม $-2$ และ $2$)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 4 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 4</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>กำหนด $f(x) = x^2 + 1$ และ $g(x) = 2x - 3$ จงหา:</p>
+                                <p>(a) $(f \circ g)(x)$ &nbsp;&nbsp; (b) $(g \circ f)(x)$ &nbsp;&nbsp; (c) $(f \circ g)(2)$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (a): หา $(f \circ g)(x) = f(g(x))$</div>
+                                    <p>นำ $g(x)$ ไปแทนที่ $x$ ในฟังก์ชัน $f$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        (f \circ g)(x) &= f(g(x)) \\
+                                        &= f(2x - 3) \\
+                                        &= (2x - 3)^2 + 1 \\
+                                        &= 4x^2 - 12x + 9 + 1 \\
+                                        &= 4x^2 - 12x + 10
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (b): หา $(g \circ f)(x) = g(f(x))$</div>
+                                    <p>นำ $f(x)$ ไปแทนที่ $x$ ในฟังก์ชัน $g$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        (g \circ f)(x) &= g(f(x)) \\
+                                        &= g(x^2 + 1) \\
+                                        &= 2(x^2 + 1) - 3 \\
+                                        &= 2x^2 + 2 - 3 \\
+                                        &= 2x^2 - 1
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (c): หา $(f \circ g)(2)$</div>
+                                    <p>วิธีที่ 1: ใช้ผลลัพธ์จากข้อ (a)</p>
+                                    <div class="math-display">
+                                        $$(f \circ g)(2) = 4(2)^2 - 12(2) + 10 = 16 - 24 + 10 = 2$$
+                                    </div>
+                                    <p>วิธีที่ 2: คำนวณทีละขั้น</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        g(2) &= 2(2) - 3 = 1 \\
+                                        f(g(2)) &= f(1) = 1^2 + 1 = 2
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>(a) $(f \circ g)(x) = 4x^2 - 12x + 10$</p>
+                                    <p>(b) $(g \circ f)(x) = 2x^2 - 1$</p>
+                                    <p>(c) $(f \circ g)(2) = 2$</p>
+                                </div>
+
+                                <div class="note">
+                                    <div class="note-title">สังเกต</div>
+                                    <p>โดยทั่วไป $(f \circ g)(x) \neq (g \circ f)(x)$ ลำดับในการประกอบฟังก์ชันมีความสำคัญ!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 5 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 5</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>จงหาฟังก์ชันผกผันของ $f(x) = \frac{2x + 1}{x - 3}$ โดยที่ $x \neq 3$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตั้ง $y = f(x)$</div>
+                                    <div class="math-display">
+                                        $$y = \frac{2x + 1}{x - 3}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: สลับตัวแปร $x$ และ $y$</div>
+                                    <div class="math-display">
+                                        $$x = \frac{2y + 1}{y - 3}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: แก้หา $y$ จากสมการ</div>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        x &= \frac{2y + 1}{y - 3} \\
+                                        x(y - 3) &= 2y + 1 \\
+                                        xy - 3x &= 2y + 1 \\
+                                        xy - 2y &= 3x + 1 \\
+                                        y(x - 2) &= 3x + 1 \\
+                                        y &= \frac{3x + 1}{x - 2}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>ฟังก์ชันผกผันคือ:</p>
+                                    <div class="math-display">
+                                        $$f^{-1}(x) = \frac{3x + 1}{x - 2}, \quad x \neq 2$$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 6 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 6</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>กำหนดฟังก์ชัน $f(x) = x^2 - 4x + 3$ โดยที่ $x \geq 2$</p>
+                                <p>(a) อธิบายว่าทำไมต้องกำหนดโดเมนเป็น $x \geq 2$</p>
+                                <p>(b) จงหาฟังก์ชันผกผันของ $f$</p>
+                                <p>(c) จงหาโดเมนและพิสัยของ $f^{-1}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (a): อธิบายการกำหนดโดเมน</div>
+                                    <p>ฟังก์ชันกำลังสอง $f(x) = x^2 - 4x + 3$ เป็นพาราโบลา เขียนในรูปจตุรัสสมบูรณ์ได้:</p>
+                                    <div class="math-display">
+                                        $$f(x) = (x - 2)^2 - 1$$
+                                    </div>
+                                    <p>พาราโบลานี้มีจุดต่ำสุดที่ $(2, -1)$ และเปิดขึ้น</p>
+                                    <p>ถ้าไม่จำกัดโดเมน ฟังก์ชันนี้จะไม่ผ่าน <strong>Horizontal Line Test</strong> (มีค่า $y$ หนึ่งค่าที่สอดคล้องกับ $x$ สองค่า) จึงไม่มีฟังก์ชันผกผัน</p>
+                                    <p>การกำหนด $x \geq 2$ ทำให้ฟังก์ชันเป็น one-to-one (เพิ่มขึ้นเสมอ) จึงมีฟังก์ชันผกผัน</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (b): หาฟังก์ชันผกผัน</div>
+                                    <p>ตั้ง $y = f(x)$:</p>
+                                    <div class="math-display">
+                                        $$y = x^2 - 4x + 3$$
+                                    </div>
+                                    <p>สลับ $x$ และ $y$:</p>
+                                    <div class="math-display">
+                                        $$x = y^2 - 4y + 3$$
+                                    </div>
+                                    <p>แก้หา $y$ โดยใช้จตุรัสสมบูรณ์:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        x &= y^2 - 4y + 3 \\
+                                        x &= (y - 2)^2 - 4 + 3 \\
+                                        x &= (y - 2)^2 - 1 \\
+                                        x + 1 &= (y - 2)^2 \\
+                                        \pm\sqrt{x + 1} &= y - 2
+                                        \end{align*}
+                                    </div>
+                                    <p>เนื่องจากโดเมนเดิมคือ $x \geq 2$ จึง $y \geq 2$ เลือกเครื่องหมายบวก:</p>
+                                    <div class="math-display">
+                                        $$y = 2 + \sqrt{x + 1}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (c): หาโดเมนและพิสัยของ $f^{-1}$</div>
+                                    <p><strong>โดเมนของ $f^{-1}$</strong> = พิสัยของ $f$</p>
+                                    <p>เนื่องจาก $f(x) = (x - 2)^2 - 1$ โดยที่ $x \geq 2$, ค่าต่ำสุดของ $f$ คือ $-1$ และเพิ่มขึ้นไปเรื่อยๆ</p>
+                                    <p>ดังนั้น โดเมนของ $f^{-1}$ คือ $[-1, \infty)$</p>
+                                    <p><strong>พิสัยของ $f^{-1}$</strong> = โดเมนของ $f$ = $[2, \infty)$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>(a) ต้องกำหนดโดเมนเพื่อให้ฟังก์ชันเป็น one-to-one จึงจะมีฟังก์ชันผกผัน</p>
+                                    <p>(b) $f^{-1}(x) = 2 + \sqrt{x + 1}$</p>
+                                    <p>(c) โดเมนของ $f^{-1}$: $[-1, \infty)$, พิสัยของ $f^{-1}$: $[2, \infty)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 7 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 7</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์ (โจทย์ข้อความ):</h4>
+                                <p>บริษัทผลิตสินค้าชิ้นหนึ่งมีต้นทุนการผลิต (Cost) เป็นฟังก์ชันของจำนวนสินค้าที่ผลิต $x$ (หน่วย) โดย:</p>
+                                <div class="math-display">
+                                    $$C(x) = 5000 + 50x + 0.1x^2 \text{ บาท}$$
+                                </div>
+                                <p>และราคาขายต่อหน่วยคือ 200 บาท</p>
+                                <p>(a) เขียนฟังก์ชันรายได้ (Revenue) $R(x)$</p>
+                                <p>(b) เขียนฟังก์ชันกำไร (Profit) $P(x)$</p>
+                                <p>(c) บริษัทต้องผลิตสินค้ากี่หน่วยจึงจะคุ้มทุน (break-even)?</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (a): หาฟังก์ชันรายได้</div>
+                                    <p>รายได้ = ราคาขายต่อหน่วย × จำนวนที่ขาย</p>
+                                    <div class="math-display">
+                                        $$R(x) = 200x \text{ บาท}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (b): หาฟังก์ชันกำไร</div>
+                                    <p>กำไร = รายได้ - ต้นทุน</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        P(x) &= R(x) - C(x) \\
+                                        &= 200x - (5000 + 50x + 0.1x^2) \\
+                                        &= 200x - 5000 - 50x - 0.1x^2 \\
+                                        &= -0.1x^2 + 150x - 5000 \text{ บาท}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (c): หาจุดคุ้มทุน</div>
+                                    <p>จุดคุ้มทุนคือเมื่อ กำไร = 0 หรือ รายได้ = ต้นทุน</p>
+                                    <p>วิธีที่ 1: ใช้ $P(x) = 0$</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        -0.1x^2 + 150x - 5000 &= 0 \\
+                                        -0.1(x^2 - 1500x + 50000) &= 0 \\
+                                        x^2 - 1500x + 50000 &= 0
+                                        \end{align*}
+                                    </div>
+                                    <p>ใช้สูตรหาคำตอบสมการกำลังสอง:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        x &= \frac{1500 \pm \sqrt{1500^2 - 4(1)(50000)}}{2} \\
+                                        &= \frac{1500 \pm \sqrt{2250000 - 200000}}{2} \\
+                                        &= \frac{1500 \pm \sqrt{2050000}}{2} \\
+                                        &= \frac{1500 \pm 1431.78}{2}
+                                        \end{align*}
+                                    </div>
+                                    <p>ดังนั้น:</p>
+                                    <div class="math-display">
+                                        $$x_1 = \frac{1500 + 1431.78}{2} \approx 1466 \text{ หน่วย}$$
+                                        $$x_2 = \frac{1500 - 1431.78}{2} \approx 34 \text{ หน่วย}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>(a) $R(x) = 200x$ บาท</p>
+                                    <p>(b) $P(x) = -0.1x^2 + 150x - 5000$ บาท</p>
+                                    <p>(c) บริษัทจะคุ้มทุนเมื่อผลิตประมาณ 34 หน่วย หรือ 1466 หน่วย<br>
+                                    (ผลิตน้อยกว่า 34 หน่วยหรือมากกว่า 1466 หน่วยจะขาดทุน ผลิตระหว่าง 34-1466 หน่วยจะได้กำไร)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ========== แบบฝึกหัด ========== -->
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <!-- Exercise 1 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>กำหนด $f(x) = 3x - 5$ จงหา $f(4)$ และ $f(-2)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หา $f(4)$:</p>
+                                    <div class="math-display">
+                                        $$f(4) = 3(4) - 5 = 12 - 5 = 7$$
+                                    </div>
+                                    <p>หา $f(-2)$:</p>
+                                    <div class="math-display">
+                                        $$f(-2) = 3(-2) - 5 = -6 - 5 = -11$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $f(4) = 7$ และ $f(-2) = -11$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 2 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>จงหาโดเมนของฟังก์ชัน $g(x) = \frac{x + 1}{x^2 - 9}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ตัวส่วนต้องไม่เป็นศูนย์:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        x^2 - 9 &\neq 0 \\
+                                        (x - 3)(x + 3) &\neq 0 \\
+                                        x &\neq 3 \text{ และ } x \neq -3
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> โดเมนคือ $\{x \in \mathbb{R} : x \neq -3, 3\}$ หรือ $(-\infty, -3) \cup (-3, 3) \cup (3, \infty)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 3 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>จงหาโดเมนของฟังก์ชัน $h(x) = \sqrt{9 - x^2}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ค่าในรากต้องไม่เป็นลบ:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        9 - x^2 &\geq 0 \\
+                                        9 &\geq x^2 \\
+                                        x^2 &\leq 9 \\
+                                        -3 \leq x &\leq 3
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> โดเมนคือ $[-3, 3]$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 4 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 4:</h4>
+                                <p>กำหนด $f(x) = x^2$ และ $g(x) = x + 2$ จงหา $(f \circ g)(x)$ และ $(g \circ f)(x)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หา $(f \circ g)(x)$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        (f \circ g)(x) &= f(g(x)) \\
+                                        &= f(x + 2) \\
+                                        &= (x + 2)^2 \\
+                                        &= x^2 + 4x + 4
+                                        \end{align*}
+                                    </div>
+                                    <p>หา $(g \circ f)(x)$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        (g \circ f)(x) &= g(f(x)) \\
+                                        &= g(x^2) \\
+                                        &= x^2 + 2
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $(f \circ g)(x) = x^2 + 4x + 4$ และ $(g \circ f)(x) = x^2 + 2$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <!-- Exercise 5 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 5:</h4>
+                                <p>จงหาฟังก์ชันผกผันของ $f(x) = \frac{3x - 2}{x + 1}$ โดยที่ $x \neq -1$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ตั้ง $y = \frac{3x - 2}{x + 1}$ และสลับ $x$ กับ $y$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        x &= \frac{3y - 2}{y + 1} \\
+                                        x(y + 1) &= 3y - 2 \\
+                                        xy + x &= 3y - 2 \\
+                                        xy - 3y &= -x - 2 \\
+                                        y(x - 3) &= -x - 2 \\
+                                        y &= \frac{-x - 2}{x - 3} = \frac{-(x + 2)}{x - 3}
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $f^{-1}(x) = \frac{-x - 2}{x - 3}$ หรือ $\frac{-(x + 2)}{x - 3}$ โดยที่ $x \neq 3$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 6 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 6:</h4>
+                                <p>กำหนด $f(x) = \sqrt{x}$ และ $g(x) = 4 - x^2$ จงหาโดเมนของ $(f \circ g)(x)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หา $(f \circ g)(x)$ ก่อน:</p>
+                                    <div class="math-display">
+                                        $$(f \circ g)(x) = f(g(x)) = f(4 - x^2) = \sqrt{4 - x^2}$$
+                                    </div>
+                                    <p>เพื่อให้ฟังก์ชันนี้มีนิยาม ค่าในรากต้องไม่เป็นลบ:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        4 - x^2 &\geq 0 \\
+                                        4 &\geq x^2 \\
+                                        x^2 &\leq 4 \\
+                                        -2 \leq x &\leq 2
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> โดเมนของ $(f \circ g)(x)$ คือ $[-2, 2]$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

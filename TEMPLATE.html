@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[DESCRIPTION]">
+    <meta name="theme-color" content="#2c3e50">
+    <title>[TITLE] - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น Mean Value Theorem, ลิมิต...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <!-- Copy from index.html or another complete page -->
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <!-- Add chapter list here -->
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">[CHAPTER_NAME]</a>
+                    <span>[TOPIC_NAME]</span>
+                </nav>
+
+                <article>
+                    <h1>[FULL_TOPIC_NAME]</h1>
+
+                    <!-- ========== ส่วนทฤษฎี ========== -->
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>[SUBTOPIC_1]</h3>
+                            <p>[EXPLANATION]</p>
+
+                            <div class="math-display">
+                                $$[FORMULA]$$
+                            </div>
+
+                            <div class="note">
+                                <div class="note-title">หมายเหตุ</div>
+                                <p>[NOTE_CONTENT]</p>
+                            </div>
+
+                            <div class="tip">
+                                <div class="tip-title">เทคนิค</div>
+                                <p>[TIP_CONTENT]</p>
+                            </div>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <p>[WARNING_CONTENT]</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========== ตัวอย่าง ========== -->
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <!-- Example Template -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                                <!-- Use: difficulty-easy, difficulty-medium, difficulty-hard -->
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>[PROBLEM_STATEMENT]</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: [STEP_DESCRIPTION]</div>
+                                    <p>[EXPLANATION]</p>
+                                    <div class="math-display">
+                                        $$[CALCULATION]$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>[FINAL_ANSWER]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add 5-7 examples total -->
+
+                    </section>
+
+                    <!-- ========== แบบฝึกหัด ========== -->
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <!-- Exercise Template -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>[EXERCISE_PROBLEM]</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>[SOLUTION_EXPLANATION]</p>
+                                    <div class="math-display">
+                                        $$[SOLUTION_STEPS]$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> [FINAL_ANSWER]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add more exercises -->
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <!-- Add challenging exercises -->
+
+                    </section>
+
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

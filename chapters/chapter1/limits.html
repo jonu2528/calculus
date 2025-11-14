@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="บทที่ 1.2 ลิมิต (Limits) - เรียนรู้ลิมิตด้านซ้ายและขวา กฎของลิมิต และลิมิตรูปไม่กำหนด">
+    <meta name="theme-color" content="#2c3e50">
+    <title>1.2 ลิมิต (Limits) - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น Mean Value Theorem, ลิมิต...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <div class="chapter-list">
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="1">
+                            <span class="chapter-number">บทที่ 1</span>
+                            <h3>ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter1-topics">
+                            <li><a href="/chapters/chapter1/functions.html" data-topic="1.1">1.1 ฟังก์ชัน (Functions)</a></li>
+                            <li><a href="/chapters/chapter1/limits.html" data-topic="1.2" class="active">1.2 ลิมิต (Limits)</a></li>
+                            <li><a href="/chapters/chapter1/continuity.html" data-topic="1.3">1.3 ความต่อเนื่อง (Continuity)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="2">
+                            <span class="chapter-number">บทที่ 2</span>
+                            <h3>อนุพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter2-topics">
+                            <li><a href="/chapters/chapter2/derivative-intro.html" data-topic="2.1">2.1 ที่มาของอนุพันธ์</a></li>
+                            <li><a href="/chapters/chapter2/derivative-rules.html" data-topic="2.2">2.2 กฎพื้นฐานของอนุพันธ์</a></li>
+                            <li><a href="/chapters/chapter2/standard-derivatives.html" data-topic="2.3">2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                            <li><a href="/chapters/chapter2/advanced-derivatives.html" data-topic="2.4">2.4 อนุพันธ์ขั้นสูง</a></li>
+                            <li><a href="/chapters/chapter2/theorems.html" data-topic="2.5">2.5 ทฤษฎีบทสำคัญ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="3">
+                            <span class="chapter-number">บทที่ 3</span>
+                            <h3>การประยุกต์อนุพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter3-topics">
+                            <li><a href="/chapters/chapter3/geometry.html" data-topic="3.1">3.1 เรขาคณิตและกราฟ</a></li>
+                            <li><a href="/chapters/chapter3/physics.html" data-topic="3.2">3.2 ฟิสิกส์และการเคลื่อนที่</a></li>
+                            <li><a href="/chapters/chapter3/extrema.html" data-topic="3.3">3.3 ค่าสูงสุดและต่ำสุด</a></li>
+                            <li><a href="/chapters/chapter3/approximation.html" data-topic="3.4">3.4 การประมาณค่า</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="4">
+                            <span class="chapter-number">บทที่ 4</span>
+                            <h3>ปริพันธ์และปริพันธ์จำกัดเขต</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter4-topics">
+                            <li><a href="/chapters/chapter4/integral-intro.html" data-topic="4.1">4.1 ที่มาของปริพันธ์</a></li>
+                            <li><a href="/chapters/chapter4/indefinite-integrals.html" data-topic="4.2">4.2 ปริพันธ์ไม่จำกัดเขต</a></li>
+                            <li><a href="/chapters/chapter4/definite-integrals.html" data-topic="4.3">4.3 ปริพันธ์จำกัดเขต</a></li>
+                            <li><a href="/chapters/chapter4/standard-integrals.html" data-topic="4.4">4.4 ปริพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                            <li><a href="/chapters/chapter4/u-substitution.html" data-topic="4.5">4.5 การแทนค่าตัวแปร</a></li>
+                            <li><a href="/chapters/chapter4/applications.html" data-topic="4.6">4.6 การประยุกต์ปริพันธ์</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-item">
+                        <div class="chapter-header" data-chapter="5">
+                            <span class="chapter-number">บทที่ 5</span>
+                            <h3>เทคนิคการหาปริพันธ์</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <ul class="topic-list" id="chapter5-topics">
+                            <li><a href="/chapters/chapter5/integration-by-parts.html" data-topic="5.1">5.1 Integration by Parts</a></li>
+                            <li><a href="/chapters/chapter5/partial-fractions.html" data-topic="5.2">5.2 การแยกเศษส่วนย่อย</a></li>
+                            <li><a href="/chapters/chapter5/trig-integrals.html" data-topic="5.3">5.3 ปริพันธ์ตรีโกณมิติ</a></li>
+                            <li><a href="/chapters/chapter5/trig-substitution.html" data-topic="5.4">5.4 การแทนค่าตรีโกณมิติ</a></li>
+                            <li><a href="/chapters/chapter5/general-substitution.html" data-topic="5.5">5.5 การแทนค่าตัวแปรใหม่</a></li>
+                            <li><a href="/chapters/chapter5/improper-integrals.html" data-topic="5.6">5.6 ปริพันธ์ไม่เหมาะสม</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 1: ฟังก์ชัน ลิมิต และความต่อเนื่อง</a>
+                    <span>1.2 ลิมิต (Limits)</span>
+                </nav>
+
+                <article>
+                    <h1>1.2 ลิมิต (Limits)</h1>
+
+                    <!-- ========== ส่วนทฤษฎี ========== -->
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>1. ความหมายเชิง Intuitive ของลิมิต</h3>
+                            <p>
+                                <strong>ลิมิต (Limit)</strong> เป็นแนวคิดพื้นฐานที่สำคัญที่สุดในแคลคูลัส
+                                ลิมิตบอกเราว่าฟังก์ชัน $f(x)$ จะเข้าใกล้ค่าใดเมื่อ $x$ เข้าใกล้จุดหนึ่ง
+                            </p>
+
+                            <p>เราเขียนแทนด้วย:</p>
+                            <div class="math-display">
+                                $$\lim_{x \to a} f(x) = L$$
+                            </div>
+                            <p>อ่านว่า "ลิมิตของ $f(x)$ เมื่อ $x$ เข้าใกล้ $a$ เท่ากับ $L$"</p>
+
+                            <p><strong>ความหมาย:</strong> เมื่อ $x$ เข้าใกล้ $a$ (แต่ไม่เท่ากับ $a$), ค่า $f(x)$ จะเข้าใกล้ $L$</p>
+
+                            <div class="note">
+                                <div class="note-title">สังเกต</div>
+                                <ul>
+                                    <li>ลิมิตไม่สนใจว่า $f(a)$ มีค่าเท่าไร หรือมีนิยามหรือไม่</li>
+                                    <li>ลิมิตสนใจเฉพาะพฤติกรรมของ $f(x)$ เมื่อ $x$ เข้าใกล้ $a$</li>
+                                    <li>$x$ จะไม่เท่ากับ $a$ แต่จะเข้าใกล้ $a$ ได้มากเท่าที่ต้องการ</li>
+                                </ul>
+                            </div>
+
+                            <h3>2. ลิมิตด้านซ้ายและด้านขวา (One-sided Limits)</h3>
+                            <p>บางครั้งเราต้องการพิจารณาว่า $x$ เข้าใกล้ $a$ จากทิศทางใดโดยเฉพาะ:</p>
+
+                            <p><strong>ลิมิตด้านขวา (Right-hand limit):</strong></p>
+                            <div class="math-display">
+                                $$\lim_{x \to a^+} f(x) = L$$
+                            </div>
+                            <p>หมายถึง ลิมิตของ $f(x)$ เมื่อ $x$ เข้าใกล้ $a$ จากทางขวา (ค่า $x > a$)</p>
+
+                            <p><strong>ลิมิตด้านซ้าย (Left-hand limit):</strong></p>
+                            <div class="math-display">
+                                $$\lim_{x \to a^-} f(x) = L$$
+                            </div>
+                            <p>หมายถึง ลิมิตของ $f(x)$ เมื่อ $x$ เข้าใกล้ $a$ จากทางซ้าย (ค่า $x < a$)</p>
+
+                            <div class="tip">
+                                <div class="tip-title">ทฤษฎีบทสำคัญ</div>
+                                <p>$\lim_{x \to a} f(x) = L$ ก็ต่อเมื่อ:</p>
+                                <div class="math-display">
+                                    $$\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L$$
+                                </div>
+                                <p>กล่าวคือ ลิมิตจะมีค่าก็ต่อเมื่อ ลิมิตซ้ายและลิมิตขวาเท่ากัน</p>
+                            </div>
+
+                            <h3>3. กฎของลิมิต (Limit Laws)</h3>
+                            <p>ถ้า $\lim_{x \to a} f(x) = L$ และ $\lim_{x \to a} g(x) = M$ แล้ว:</p>
+
+                            <div class="math-display">
+                                \begin{align*}
+                                \text{1. กฎผลบวก:} \quad & \lim_{x \to a} [f(x) + g(x)] = L + M \\
+                                \text{2. กฎผลลบ:} \quad & \lim_{x \to a} [f(x) - g(x)] = L - M \\
+                                \text{3. กฎคูณด้วยค่าคงที่:} \quad & \lim_{x \to a} [c \cdot f(x)] = c \cdot L \\
+                                \text{4. กฎผลคูณ:} \quad & \lim_{x \to a} [f(x) \cdot g(x)] = L \cdot M \\
+                                \text{5. กฎผลหาร:} \quad & \lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M} \quad (M \neq 0) \\
+                                \text{6. กฎยกกำลัง:} \quad & \lim_{x \to a} [f(x)]^n = L^n \\
+                                \text{7. กฎราก:} \quad & \lim_{x \to a} \sqrt[n]{f(x)} = \sqrt[n]{L}
+                                \end{align*}
+                            </div>
+
+                            <h3>4. ลิมิตรูปไม่กำหนด (Indeterminate Forms)</h3>
+                            <p>บางครั้งการแทนค่าตรงๆ จะได้รูปแบบที่ไม่สามารถสรุปได้ทันที เช่น:</p>
+
+                            <p><strong>รูปแบบ $\frac{0}{0}$:</strong></p>
+                            <p>เทคนิคการแก้:</p>
+                            <ul>
+                                <li><strong>การแยกตัวประกอบ</strong> - แยกตัวประกอบแล้วตัดตัวที่ทำให้เป็น 0</li>
+                                <li><strong>Rationalization</strong> - คูณด้วย conjugate</li>
+                                <li><strong>กฎของลอปิทาล</strong> (จะเรียนในบทที่ 2)</li>
+                            </ul>
+
+                            <p><strong>รูปแบบ $\frac{\infty}{\infty}$:</strong></p>
+                            <p>เทคนิคการแก้:</p>
+                            <ul>
+                                <li><strong>หารด้วยพจน์กำลังสูงสุด</strong> ทั้งตัวเศษและตัวส่วน</li>
+                            </ul>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <p>รูปแบบอื่นที่ไม่ใช่รูปไม่กำหนด เช่น $\frac{c}{0}$ (โดยที่ $c \neq 0$)
+                                จะทำให้ลิมิตไม่มีค่า (หรือเป็น $\pm\infty$)</p>
+                            </div>
+
+                            <h3>5. ลิมิตที่อนันต์ (Limits at Infinity)</h3>
+                            <p>เราสามารถหาลิมิตเมื่อ $x$ เข้าใกล้อนันต์ได้:</p>
+                            <div class="math-display">
+                                $$\lim_{x \to \infty} f(x) \quad \text{และ} \quad \lim_{x \to -\infty} f(x)$$
+                            </div>
+
+                            <p><strong>กฎสำหรับฟังก์ชันเศษส่วนของพหุนาม:</strong></p>
+                            <div class="math-display">
+                                $$\lim_{x \to \infty} \frac{a_n x^n + \ldots + a_0}{b_m x^m + \ldots + b_0}$$
+                            </div>
+                            <ul>
+                                <li>ถ้า $n < m$ : ลิมิต = 0</li>
+                                <li>ถ้า $n = m$ : ลิมิต = $\frac{a_n}{b_m}$</li>
+                                <li>ถ้า $n > m$ : ลิมิต = $\pm\infty$</li>
+                            </ul>
+
+                            <h3>6. ทฤษฎีบทบีบ (Squeeze Theorem)</h3>
+                            <p>ถ้า $g(x) \leq f(x) \leq h(x)$ สำหรับทุก $x$ ใกล้ $a$ (ยกเว้นอาจไม่รวม $a$)<br>
+                            และ $\lim_{x \to a} g(x) = \lim_{x \to a} h(x) = L$</p>
+                            <p>แล้ว:</p>
+                            <div class="math-display">
+                                $$\lim_{x \to a} f(x) = L$$
+                            </div>
+
+                            <div class="tip">
+                                <div class="tip-title">การใช้งาน Squeeze Theorem</div>
+                                <p>ใช้สำหรับฟังก์ชันที่หาลิมิตโดยตรงยาก โดยหาฟังก์ชัน $g(x)$ และ $h(x)$
+                                ที่ "บีบ" $f(x)$ และมีลิมิตเท่ากันที่จุดนั้น</p>
+                                <p><strong>ตัวอย่าง:</strong> $\lim_{x \to 0} x^2 \sin\left(\frac{1}{x}\right) = 0$
+                                (ใช้ $-x^2 \leq x^2 \sin\left(\frac{1}{x}\right) \leq x^2$)</p>
+                            </div>
+
+                            <h3>7. ลิมิตตรีโกณมิติพิเศษ</h3>
+                            <p>ลิมิตสองอันนี้สำคัญมากในการหาอนุพันธ์ของฟังก์ชันตรีโกณมิติ:</p>
+                            <div class="math-display">
+                                $$\lim_{x \to 0} \frac{\sin x}{x} = 1$$
+                            </div>
+                            <div class="math-display">
+                                $$\lim_{x \to 0} \frac{1 - \cos x}{x} = 0$$
+                            </div>
+                            <div class="math-display">
+                                $$\lim_{x \to 0} \frac{1 - \cos x}{x^2} = \frac{1}{2}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========== ตัวอย่าง ========== -->
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <!-- Example 1 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาค่าลิมิตต่อไปนี้:</p>
+                                <p>(a) $\lim_{x \to 3} (2x^2 - 5x + 1)$</p>
+                                <p>(b) $\lim_{x \to -1} \frac{x^2 + 3x - 4}{x + 2}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (a): หา $\lim_{x \to 3} (2x^2 - 5x + 1)$</div>
+                                    <p>เนื่องจากเป็นฟังก์ชันพหุนาม สามารถแทนค่าตรงๆ ได้:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 3} (2x^2 - 5x + 1) &= 2(3)^2 - 5(3) + 1 \\
+                                        &= 2(9) - 15 + 1 \\
+                                        &= 18 - 15 + 1 \\
+                                        &= 4
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ส่วน (b): หา $\lim_{x \to -1} \frac{x^2 + 3x - 4}{x + 2}$</div>
+                                    <p>ลองแทนค่า $x = -1$:</p>
+                                    <div class="math-display">
+                                        \frac{(-1)^2 + 3(-1) - 4}{(-1) + 2} = \frac{1 - 3 - 4}{1} = \frac{-6}{1} = -6
+                                    </div>
+                                    <p>ไม่เป็นรูปไม่กำหนด แทนค่าได้เลย</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>(a) $\lim_{x \to 3} (2x^2 - 5x + 1) = 4$</p>
+                                    <p>(b) $\lim_{x \to -1} \frac{x^2 + 3x - 4}{x + 2} = -6$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 2 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>กำหนดฟังก์ชัน:</p>
+                                <div class="math-display">
+                                    $$f(x) = \begin{cases}
+                                    x + 1 & \text{if } x < 2 \\
+                                    3 & \text{if } x = 2 \\
+                                    2x - 1 & \text{if } x > 2
+                                    \end{cases}$$
+                                </div>
+                                <p>จงหา $\lim_{x \to 2^-} f(x)$, $\lim_{x \to 2^+} f(x)$ และ $\lim_{x \to 2} f(x)$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หาลิมิตด้านซ้าย $\lim_{x \to 2^-} f(x)$</div>
+                                    <p>เมื่อ $x$ เข้าใกล้ 2 จากทางซ้าย ($x < 2$), ใช้สูตร $f(x) = x + 1$:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-} (x + 1) = 2 + 1 = 3$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาลิมิตด้านขวา $\lim_{x \to 2^+} f(x)$</div>
+                                    <p>เมื่อ $x$ เข้าใกล้ 2 จากทางขวา ($x > 2$), ใช้สูตร $f(x) = 2x - 1$:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^+} f(x) = \lim_{x \to 2^+} (2x - 1) = 2(2) - 1 = 3$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หาลิมิต $\lim_{x \to 2} f(x)$</div>
+                                    <p>เนื่องจาก $\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = 3$</p>
+                                    <p>ดังนั้น $\lim_{x \to 2} f(x) = 3$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to 2^-} f(x) = 3$, $\lim_{x \to 2^+} f(x) = 3$, $\lim_{x \to 2} f(x) = 3$</p>
+                                </div>
+
+                                <div class="note">
+                                    <div class="note-title">สังเกต</div>
+                                    <p>แม้ว่า $f(2) = 3$ และ $\lim_{x \to 2} f(x) = 3$ จะเท่ากัน
+                                    แต่ลิมิตไม่ได้ขึ้นอยู่กับค่า $f(2)$ ขึ้นอยู่กับพฤติกรรมเมื่อเข้าใกล้ 2 เท่านั้น</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 3 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to 2} \frac{x^2 - 4}{x - 2}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบรูปแบบ</div>
+                                    <p>แทนค่า $x = 2$ โดยตรง:</p>
+                                    <div class="math-display">
+                                        $$\frac{2^2 - 4}{2 - 2} = \frac{0}{0}$$
+                                    </div>
+                                    <p>ได้รูปไม่กำหนด $\frac{0}{0}$ ต้องใช้เทคนิคอื่น</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: แยกตัวประกอบ</div>
+                                    <p>แยกตัวประกอบตัวเศษ:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 2} \frac{x^2 - 4}{x - 2} &= \lim_{x \to 2} \frac{(x - 2)(x + 2)}{x - 2}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: ตัดตัวประกอบที่เหมือนกัน</div>
+                                    <p>เนื่องจาก $x \to 2$ แต่ $x \neq 2$ จึงสามารถตัดได้:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \lim_{x \to 2} (x + 2) \\
+                                        &= 2 + 2 \\
+                                        &= 4
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to 2} \frac{x^2 - 4}{x - 2} = 4$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 4 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 4</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบรูปแบบ</div>
+                                    <p>แทนค่า $x = 0$:</p>
+                                    <div class="math-display">
+                                        $$\frac{\sqrt{0 + 4} - 2}{0} = \frac{2 - 2}{0} = \frac{0}{0}$$
+                                    </div>
+                                    <p>เป็นรูปไม่กำหนด ใช้เทคนิค rationalization</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: คูณด้วย conjugate</div>
+                                    <p>คูณทั้งตัวเศษและตัวส่วนด้วย $\sqrt{x + 4} + 2$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x} \cdot \frac{\sqrt{x + 4} + 2}{\sqrt{x + 4} + 2} \\
+                                        &= \lim_{x \to 0} \frac{(\sqrt{x + 4})^2 - 2^2}{x(\sqrt{x + 4} + 2)} \\
+                                        &= \lim_{x \to 0} \frac{x + 4 - 4}{x(\sqrt{x + 4} + 2)} \\
+                                        &= \lim_{x \to 0} \frac{x}{x(\sqrt{x + 4} + 2)}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: ตัดและแทนค่า</div>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \lim_{x \to 0} \frac{1}{\sqrt{x + 4} + 2} \\
+                                        &= \frac{1}{\sqrt{0 + 4} + 2} \\
+                                        &= \frac{1}{2 + 2} \\
+                                        &= \frac{1}{4}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x} = \frac{1}{4}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 5 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 5</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to \infty} \frac{3x^2 - 2x + 1}{2x^2 + 5x - 3}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ระบุรูปแบบ</div>
+                                    <p>เมื่อ $x \to \infty$ ทั้งตัวเศษและตัวส่วนเข้าใกล้อนันต์ (รูป $\frac{\infty}{\infty}$)</p>
+                                    <p>ใช้เทคนิค: หารทั้งตัวเศษและตัวส่วนด้วย $x^n$ โดยที่ $n$ คือเลขยกกำลังสูงสุด</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หารด้วย $x^2$</div>
+                                    <p>หารทั้งตัวเศษและตัวส่วนด้วย $x^2$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \lim_{x \to \infty} \frac{\frac{3x^2 - 2x + 1}{x^2}}{\frac{2x^2 + 5x - 3}{x^2}} \\
+                                        &= \lim_{x \to \infty} \frac{3 - \frac{2}{x} + \frac{1}{x^2}}{2 + \frac{5}{x} - \frac{3}{x^2}}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: แทนค่า $x \to \infty$</div>
+                                    <p>เมื่อ $x \to \infty$: $\frac{1}{x} \to 0$, $\frac{1}{x^2} \to 0$</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \frac{3 - 0 + 0}{2 + 0 - 0} \\
+                                        &= \frac{3}{2}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to \infty} \frac{3x^2 - 2x + 1}{2x^2 + 5x - 3} = \frac{3}{2}$</p>
+                                </div>
+
+                                <div class="tip">
+                                    <div class="tip-title">สังเกต</div>
+                                    <p>เมื่อกำลังสูงสุดของตัวเศษและตัวส่วนเท่ากัน ลิมิตจะเท่ากับอัตราส่วนของสัมประสิทธิ์ตัวหน้า: $\frac{3}{2}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 6 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 6</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to 0} \frac{\sin 3x}{2x}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ใช้ลิมิตมาตรฐาน</div>
+                                    <p>เรารู้ว่า $\lim_{u \to 0} \frac{\sin u}{u} = 1$</p>
+                                    <p>ต้องการปรับให้อยู่ในรูปนี้โดยให้ $u = 3x$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ปรับรูป</div>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 0} \frac{\sin 3x}{2x} &= \lim_{x \to 0} \frac{\sin 3x}{3x} \cdot \frac{3x}{2x} \\
+                                        &= \lim_{x \to 0} \frac{\sin 3x}{3x} \cdot \frac{3}{2}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: แทนค่า</div>
+                                    <p>เมื่อ $x \to 0$ แล้ว $3x \to 0$ ด้วย ดังนั้น:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \lim_{3x \to 0} \frac{\sin 3x}{3x} \cdot \frac{3}{2} \\
+                                        &= 1 \cdot \frac{3}{2} \\
+                                        &= \frac{3}{2}
+                                        \end{align*}
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to 0} \frac{\sin 3x}{2x} = \frac{3}{2}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 7 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 7</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ใช้ Squeeze Theorem พิสูจน์ว่า: $\lim_{x \to 0} x^2 \sin\left(\frac{1}{x}\right) = 0$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: วิเคราะห์ฟังก์ชัน</div>
+                                    <p>เรารู้ว่า $-1 \leq \sin\left(\frac{1}{x}\right) \leq 1$ สำหรับทุก $x \neq 0$</p>
+                                    <p>ฟังก์ชัน $\sin\left(\frac{1}{x}\right)$ แกว่งระหว่าง -1 และ 1 อย่างรวดเร็วเมื่อ $x \to 0$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: สร้างอสมการ</div>
+                                    <p>คูณทุกข้างด้วย $x^2$ (โดยที่ $x^2 \geq 0$):</p>
+                                    <div class="math-display">
+                                        $$-x^2 \leq x^2 \sin\left(\frac{1}{x}\right) \leq x^2$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หาลิมิตของขอบเขต</div>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 0} (-x^2) = 0 \quad \text{และ} \quad \lim_{x \to 0} x^2 = 0$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: ใช้ Squeeze Theorem</div>
+                                    <p>เนื่องจาก:</p>
+                                    <ul>
+                                        <li>$-x^2 \leq x^2 \sin\left(\frac{1}{x}\right) \leq x^2$ สำหรับทุก $x$ ใกล้ 0 (ยกเว้น $x = 0$)</li>
+                                        <li>$\lim_{x \to 0} (-x^2) = \lim_{x \to 0} x^2 = 0$</li>
+                                    </ul>
+                                    <p>โดย Squeeze Theorem:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 0} x^2 \sin\left(\frac{1}{x}\right) = 0$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">สรุป:</div>
+                                    <p>แม้ว่า $\sin\left(\frac{1}{x}\right)$ จะแกว่งอย่างรวดเร็วและไม่มีลิมิตเมื่อ $x \to 0$</p>
+                                    <p>แต่เมื่อคูณด้วย $x^2$ ซึ่งเข้าใกล้ 0 ก็ทำให้ผลคูณเข้าใกล้ 0 ด้วย</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ========== แบบฝึกหัด ========== -->
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <!-- Exercise 1 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to 1} (x^3 - 2x + 5)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>เนื่องจากเป็นฟังก์ชันพหุนาม แทนค่าได้โดยตรง:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 1} (x^3 - 2x + 5) &= (1)^3 - 2(1) + 5 \\
+                                        &= 1 - 2 + 5 \\
+                                        &= 4
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> 4</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 2 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>พิจารณาฟังก์ชัน $f(x) = \lfloor x \rfloor$ (ฟังก์ชันพื้น)</p>
+                                <p>จงหา $\lim_{x \to 2^-} f(x)$ และ $\lim_{x \to 2^+} f(x)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ฟังก์ชันพื้น $\lfloor x \rfloor$ คือจำนวนเต็มที่ใหญ่ที่สุดที่ไม่เกิน $x$</p>
+                                    <p><strong>ลิมิตด้านซ้าย:</strong> เมื่อ $x$ เข้าใกล้ 2 จากซ้าย ($x < 2$)<br>
+                                    เช่น $x = 1.9, 1.99, 1.999, \ldots$ มีค่า $\lfloor x \rfloor = 1$</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^-} \lfloor x \rfloor = 1$$
+                                    </div>
+                                    <p><strong>ลิมิตด้านขวา:</strong> เมื่อ $x$ เข้าใกล้ 2 จากขวา ($x > 2$)<br>
+                                    เช่น $x = 2.1, 2.01, 2.001, \ldots$ มีค่า $\lfloor x \rfloor = 2$</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 2^+} \lfloor x \rfloor = 2$$
+                                    </div>
+                                    <p><strong>สังเกต:</strong> ลิมิตซ้ายไม่เท่ากับลิมิตขวา ดังนั้น $\lim_{x \to 2} \lfloor x \rfloor$ ไม่มีค่า</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 3 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>แทนค่า $x = 3$: $\frac{9 - 9}{3 - 3} = \frac{0}{0}$ (รูปไม่กำหนด)</p>
+                                    <p>แยกตัวประกอบตัวเศษ:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 3} \frac{x^2 - 9}{x - 3} &= \lim_{x \to 3} \frac{(x-3)(x+3)}{x - 3} \\
+                                        &= \lim_{x \to 3} (x + 3) \\
+                                        &= 3 + 3 \\
+                                        &= 6
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> 6</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 4 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 4:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to \infty} \frac{5x + 3}{2x - 1}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หารทั้งตัวเศษและตัวส่วนด้วย $x$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to \infty} \frac{5x + 3}{2x - 1} &= \lim_{x \to \infty} \frac{5 + \frac{3}{x}}{2 - \frac{1}{x}} \\
+                                        &= \frac{5 + 0}{2 - 0} \\
+                                        &= \frac{5}{2}
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{5}{2}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <!-- Exercise 5 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 5:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to 0} \frac{\sqrt{1+x} - \sqrt{1-x}}{x}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>แทนค่า: $\frac{\sqrt{1} - \sqrt{1}}{0} = \frac{0}{0}$ ใช้ rationalization</p>
+                                    <p>คูณด้วย conjugate $\sqrt{1+x} + \sqrt{1-x}$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \lim_{x \to 0} \frac{\sqrt{1+x} - \sqrt{1-x}}{x} \cdot \frac{\sqrt{1+x} + \sqrt{1-x}}{\sqrt{1+x} + \sqrt{1-x}} \\
+                                        &= \lim_{x \to 0} \frac{(1+x) - (1-x)}{x(\sqrt{1+x} + \sqrt{1-x})} \\
+                                        &= \lim_{x \to 0} \frac{2x}{x(\sqrt{1+x} + \sqrt{1-x})} \\
+                                        &= \lim_{x \to 0} \frac{2}{\sqrt{1+x} + \sqrt{1-x}} \\
+                                        &= \frac{2}{\sqrt{1} + \sqrt{1}} \\
+                                        &= \frac{2}{2} = 1
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> 1</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 6 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 6:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to \infty} \frac{x^3 - 2x^2 + 1}{2x^3 + 3x - 5}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หารทั้งตัวเศษและตัวส่วนด้วย $x^3$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \lim_{x \to \infty} \frac{1 - \frac{2}{x} + \frac{1}{x^3}}{2 + \frac{3}{x^2} - \frac{5}{x^3}} \\
+                                        &= \frac{1 - 0 + 0}{2 + 0 - 0} \\
+                                        &= \frac{1}{2}
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{1}{2}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 7 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 7:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to 0} \frac{\sin 5x}{3x}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ใช้ลิมิตมาตรฐาน $\lim_{u \to 0} \frac{\sin u}{u} = 1$</p>
+                                    <p>ปรับรูปโดยคูณและหารด้วย 5:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 0} \frac{\sin 5x}{3x} &= \lim_{x \to 0} \frac{\sin 5x}{5x} \cdot \frac{5x}{3x} \\
+                                        &= \lim_{x \to 0} \frac{\sin 5x}{5x} \cdot \frac{5}{3} \\
+                                        &= 1 \cdot \frac{5}{3} \\
+                                        &= \frac{5}{3}
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{5}{3}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 8 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 8:</h4>
+                                <p>หาค่าลิมิต: $\lim_{x \to 0} \frac{\tan x - \sin x}{x^3}$</p>
+                                <p><em>คำแนะนำ: ใช้ $\tan x = \frac{\sin x}{\cos x}$</em></p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>แปลง $\tan x$ เป็น $\frac{\sin x}{\cos x}$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        \lim_{x \to 0} \frac{\tan x - \sin x}{x^3} &= \lim_{x \to 0} \frac{\frac{\sin x}{\cos x} - \sin x}{x^3} \\
+                                        &= \lim_{x \to 0} \frac{\sin x - \sin x \cos x}{x^3 \cos x} \\
+                                        &= \lim_{x \to 0} \frac{\sin x(1 - \cos x)}{x^3 \cos x}
+                                        \end{align*}
+                                    </div>
+                                    <p>ใช้ $\lim_{x \to 0} \frac{\sin x}{x} = 1$ และ $\lim_{x \to 0} \frac{1 - \cos x}{x^2} = \frac{1}{2}$:</p>
+                                    <div class="math-display">
+                                        \begin{align*}
+                                        &= \lim_{x \to 0} \frac{\sin x}{x} \cdot \frac{1 - \cos x}{x^2} \cdot \frac{1}{\cos x} \\
+                                        &= 1 \cdot \frac{1}{2} \cdot \frac{1}{1} \\
+                                        &= \frac{1}{2}
+                                        \end{align*}
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{1}{2}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="อนุพันธ์ของฟังก์ชันมาตรฐาน - exponential, logarithmic, trigonometric และ inverse trigonometric functions">
+    <meta name="theme-color" content="#2c3e50">
+    <title>2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น sin, cos, exponential...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <a href="/" class="nav-home">🏠 หน้าแรก</a>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 1: ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter1/functions.html" data-topic="functions">1.1 ฟังก์ชัน</a></li>
+                        <li><a href="/chapters/chapter1/limits.html" data-topic="limits">1.2 ลิมิต</a></li>
+                        <li><a href="/chapters/chapter1/continuity.html" data-topic="continuity">1.3 ความต่อเนื่อง</a></li>
+                    </ul>
+                </div>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 2: อนุพันธ์</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter2/derivative-intro.html" data-topic="derivative-intro">2.1 ที่มาของอนุพันธ์</a></li>
+                        <li><a href="/chapters/chapter2/derivative-rules.html" data-topic="derivative-rules">2.2 กฎพื้นฐานของอนุพันธ์</a></li>
+                        <li><a href="/chapters/chapter2/standard-derivatives.html" data-topic="standard-derivatives" class="active">2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                        <li><a href="/chapters/chapter2/advanced-derivatives.html" data-topic="advanced-derivatives">2.4 อนุพันธ์ขั้นสูง</a></li>
+                        <li><a href="/chapters/chapter2/derivative-theorems.html" data-topic="derivative-theorems">2.5 ทฤษฎีบทสำคัญของอนุพันธ์</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 2: อนุพันธ์</a>
+                    <span>2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</span>
+                </nav>
+
+                <article>
+                    <h1>2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน (Derivatives of Standard Functions)</h1>
+
+                    <!-- ========== ส่วนทฤษฎี ========== -->
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <p>นอกจากฟังก์ชันพหุนามแล้ว เรายังต้องรู้วิธีหาอนุพันธ์ของฟังก์ชันมาตรฐานอื่นๆ ที่สำคัญ</p>
+
+                            <h3>1. ฟังก์ชันเลขชี้กำลัง (Exponential Functions)</h3>
+
+                            <h4>อนุพันธ์ของ $e^x$</h4>
+                            <p>นี่คือคุณสมบัติพิเศษที่สำคัญมากของ $e$:</p>
+                            <div class="math-display">
+                                $$\frac{d}{dx}(e^x) = e^x$$
+                            </div>
+                            <p>ฟังก์ชัน $e^x$ เป็นฟังก์ชันเดียวที่อนุพันธ์เท่ากับตัวมันเอง!</p>
+
+                            <h4>อนุพันธ์ของ $a^x$ (ฐานอื่น)</h4>
+                            <div class="math-display">
+                                $$\frac{d}{dx}(a^x) = a^x \ln a$$
+                            </div>
+                            <p>โดยที่ $a > 0$ และ $a \neq 1$</p>
+
+                            <div class="note">
+                                <div class="note-title">ข้อสังเกต</div>
+                                <p>เมื่อ $a = e$ จะได้ $\frac{d}{dx}(e^x) = e^x \ln e = e^x \cdot 1 = e^x$ ซึ่งสอดคล้องกับสูตรข้างบน</p>
+                            </div>
+
+                            <h4>ร่วมกับ Chain Rule</h4>
+                            <p>ถ้า $u = g(x)$ แล้ว:</p>
+                            <div class="math-display">
+                                $$\frac{d}{dx}(e^u) = e^u \cdot \frac{du}{dx}$$
+                            </div>
+                            <p>ตัวอย่าง: $\frac{d}{dx}(e^{3x}) = e^{3x} \cdot 3 = 3e^{3x}$</p>
+
+                            <h3>2. ฟังก์ชันลอการิทึม (Logarithmic Functions)</h3>
+
+                            <h4>อนุพันธ์ของ $\ln x$</h4>
+                            <div class="math-display">
+                                $$\frac{d}{dx}(\ln x) = \frac{1}{x}, \quad x > 0$$
+                            </div>
+
+                            <h4>อนุพันธ์ของ $\log_a x$</h4>
+                            <div class="math-display">
+                                $$\frac{d}{dx}(\log_a x) = \frac{1}{x \ln a}, \quad x > 0$$
+                            </div>
+
+                            <h4>ร่วมกับ Chain Rule</h4>
+                            <p>ถ้า $u = g(x)$ แล้ว:</p>
+                            <div class="math-display">
+                                $$\frac{d}{dx}(\ln u) = \frac{1}{u} \cdot \frac{du}{dx} = \frac{u'}{u}$$
+                            </div>
+                            <p>ตัวอย่าง: $\frac{d}{dx}(\ln(x^2 + 1)) = \frac{1}{x^2 + 1} \cdot 2x = \frac{2x}{x^2 + 1}$</p>
+
+                            <div class="tip">
+                                <div class="tip-title">เทคนิค: Logarithmic Differentiation</div>
+                                <p>สำหรับฟังก์ชันที่ซับซ้อน เช่น $y = x^x$ หรือผลคูณหลายตัว สามารถใช้ ln ทั้งสองข้างก่อนหาอนุพันธ์</p>
+                            </div>
+
+                            <h3>3. ฟังก์ชันตรีโกณมิติ (Trigonometric Functions)</h3>
+
+                            <h4>อนุพันธ์พื้นฐาน</h4>
+                            <div class="math-display">
+                                $$\begin{align}
+                                \frac{d}{dx}(\sin x) &= \cos x\\
+                                \frac{d}{dx}(\cos x) &= -\sin x\\
+                                \frac{d}{dx}(\tan x) &= \sec^2 x\\
+                                \frac{d}{dx}(\cot x) &= -\csc^2 x\\
+                                \frac{d}{dx}(\sec x) &= \sec x \tan x\\
+                                \frac{d}{dx}(\csc x) &= -\csc x \cot x
+                                \end{align}$$
+                            </div>
+
+                            <div class="note">
+                                <div class="note-title">วิธีจำ</div>
+                                <ul>
+                                    <li>ฟังก์ชันที่มี "co-" ข้างหน้า (cos, cot, csc) จะมีเครื่องหมายลบ</li>
+                                    <li>$\sin$ และ $\cos$ สลับกัน: $\sin \to \cos$ และ $\cos \to -\sin$</li>
+                                    <li>$\tan$ และ $\sec$ อยู่ด้วยกัน: $\frac{d}{dx}(\tan x) = \sec^2 x$ และ $\frac{d}{dx}(\sec x) = \sec x \tan x$</li>
+                                </ul>
+                            </div>
+
+                            <h4>ร่วมกับ Chain Rule</h4>
+                            <p>ตัวอย่าง:</p>
+                            <ul>
+                                <li>$\frac{d}{dx}(\sin(3x)) = \cos(3x) \cdot 3 = 3\cos(3x)$</li>
+                                <li>$\frac{d}{dx}(\cos(x^2)) = -\sin(x^2) \cdot 2x = -2x\sin(x^2)$</li>
+                                <li>$\frac{d}{dx}(\tan(2x+1)) = \sec^2(2x+1) \cdot 2 = 2\sec^2(2x+1)$</li>
+                            </ul>
+
+                            <h3>4. ฟังก์ชันตรีโกณมิติผกผัน (Inverse Trigonometric Functions)</h3>
+
+                            <div class="math-display">
+                                $$\begin{align}
+                                \frac{d}{dx}(\arcsin x) &= \frac{1}{\sqrt{1-x^2}}, \quad -1 < x < 1\\
+                                \frac{d}{dx}(\arccos x) &= -\frac{1}{\sqrt{1-x^2}}, \quad -1 < x < 1\\
+                                \frac{d}{dx}(\arctan x) &= \frac{1}{1+x^2}\\
+                                \frac{d}{dx}(\text{arccot } x) &= -\frac{1}{1+x^2}\\
+                                \frac{d}{dx}(\text{arcsec } x) &= \frac{1}{|x|\sqrt{x^2-1}}, \quad |x| > 1\\
+                                \frac{d}{dx}(\text{arccsc } x) &= -\frac{1}{|x|\sqrt{x^2-1}}, \quad |x| > 1
+                                \end{align}$$
+                            </div>
+
+                            <div class="note">
+                                <div class="note-title">หมายเหตุ</div>
+                                <p>ฟังก์ชัน $\arcsin x$ เหมือนกับ $\sin^{-1} x$ (ไม่ใช่ $\frac{1}{\sin x}$)</p>
+                                <p>สังเกตว่าฟังก์ชันที่มี "arc-co" จะมีเครื่องหมายลบ</p>
+                            </div>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <p>อนุพันธ์ของฟังก์ชัน trig ต้องใช้มุมในหน่วยเรเดียน (radian) ไม่ใช่องศา!</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========== ตัวอย่าง ========== -->
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 1 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาอนุพันธ์ของฟังก์ชันต่อไปนี้:</p>
+                                <p>ก) $f(x) = 3e^x + 2^x$</p>
+                                <p>ข) $g(x) = \ln x + \log_{10} x$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ก) ใช้สูตรฟังก์ชันเลขชี้กำลัง</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f'(x) &= 3 \cdot \frac{d}{dx}(e^x) + \frac{d}{dx}(2^x)\\
+                                        &= 3e^x + 2^x \ln 2
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ข) ใช้สูตรฟังก์ชันลอการิทึม</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        g'(x) &= \frac{d}{dx}(\ln x) + \frac{d}{dx}(\log_{10} x)\\
+                                        &= \frac{1}{x} + \frac{1}{x \ln 10}\\
+                                        &= \frac{1}{x}\left(1 + \frac{1}{\ln 10}\right)
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>ก) $f'(x) = 3e^x + 2^x \ln 2$</p>
+                                    <p>ข) $g'(x) = \frac{1}{x} + \frac{1}{x\ln 10}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 2 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาอนุพันธ์ของ $h(x) = \sin x + \cos x - \tan x$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ใช้สูตรฟังก์ชันตรีโกณมิติ</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        h'(x) &= \frac{d}{dx}(\sin x) + \frac{d}{dx}(\cos x) - \frac{d}{dx}(\tan x)\\
+                                        &= \cos x + (-\sin x) - \sec^2 x\\
+                                        &= \cos x - \sin x - \sec^2 x
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$h'(x) = \cos x - \sin x - \sec^2 x$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 3 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาอนุพันธ์ของ $f(x) = e^{2x^2 + 3x}$ โดยใช้ Chain Rule</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ระบุฟังก์ชันนอกและใน</div>
+                                    <p>ฟังก์ชันนอก: $e^u$ มีอนุพันธ์ $e^u$</p>
+                                    <p>ฟังก์ชันใน: $u = 2x^2 + 3x$ มีอนุพันธ์ $4x + 3$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ใช้ Chain Rule</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f'(x) &= e^{2x^2 + 3x} \cdot \frac{d}{dx}(2x^2 + 3x)\\
+                                        &= e^{2x^2 + 3x} \cdot (4x + 3)\\
+                                        &= (4x + 3)e^{2x^2 + 3x}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$f'(x) = (4x + 3)e^{2x^2 + 3x}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 4 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 4</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาอนุพันธ์ของ $g(x) = \ln(x^3 - 2x + 5)$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ใช้ Chain Rule กับ ln</div>
+                                    <p>ให้ $u = x^3 - 2x + 5$ แล้ว $u' = 3x^2 - 2$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        g'(x) &= \frac{1}{x^3 - 2x + 5} \cdot (3x^2 - 2)\\
+                                        &= \frac{3x^2 - 2}{x^3 - 2x + 5}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$g'(x) = \frac{3x^2 - 2}{x^3 - 2x + 5}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 5 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 5</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาอนุพันธ์ของ $y = \sin(3x^2) \cos(5x)$ โดยใช้ Product Rule และ Chain Rule</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ใช้ Product Rule</div>
+                                    <p>ให้ $u = \sin(3x^2)$ และ $v = \cos(5x)$</p>
+                                    <p>ต้องหา $u'$ และ $v'$ ด้วย Chain Rule</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หา $u'$ ด้วย Chain Rule</div>
+                                    <div class="math-display">
+                                        $$u' = \cos(3x^2) \cdot 6x = 6x\cos(3x^2)$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หา $v'$ ด้วย Chain Rule</div>
+                                    <div class="math-display">
+                                        $$v' = -\sin(5x) \cdot 5 = -5\sin(5x)$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: ใช้ Product Rule</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \frac{dy}{dx} &= u'v + uv'\\
+                                        &= 6x\cos(3x^2) \cdot \cos(5x) + \sin(3x^2) \cdot (-5\sin(5x))\\
+                                        &= 6x\cos(3x^2)\cos(5x) - 5\sin(3x^2)\sin(5x)
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\frac{dy}{dx} = 6x\cos(3x^2)\cos(5x) - 5\sin(3x^2)\sin(5x)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 6 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 6</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาอนุพันธ์ของ $f(x) = \frac{e^x \sin x}{x^2 + 1}$ (ใช้ทั้ง Product Rule และ Quotient Rule)</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">วิธีที่ 1: Quotient Rule โดยตรง</div>
+                                    <p>ให้ $u = e^x \sin x$ และ $v = x^2 + 1$</p>
+                                    <p>หา $u'$ ด้วย Product Rule: $u' = e^x \sin x + e^x \cos x = e^x(\sin x + \cos x)$</p>
+                                    <p>หา $v'$: $v' = 2x$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f'(x) &= \frac{u'v - uv'}{v^2}\\
+                                        &= \frac{e^x(\sin x + \cos x)(x^2 + 1) - e^x \sin x \cdot 2x}{(x^2 + 1)^2}\\
+                                        &= \frac{e^x[(x^2 + 1)(\sin x + \cos x) - 2x\sin x]}{(x^2 + 1)^2}\\
+                                        &= \frac{e^x[x^2\sin x + \sin x + x^2\cos x + \cos x - 2x\sin x]}{(x^2 + 1)^2}\\
+                                        &= \frac{e^x[(x^2 - 2x + 1)\sin x + (x^2 + 1)\cos x]}{(x^2 + 1)^2}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$f'(x) = \frac{e^x[(x^2 - 2x + 1)\sin x + (x^2 + 1)\cos x]}{(x^2 + 1)^2}$</p>
+                                    <p>หรือ $f'(x) = \frac{e^x[(x-1)^2\sin x + (x^2 + 1)\cos x]}{(x^2 + 1)^2}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 7 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 7</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ใช้ Logarithmic Differentiation หาอนุพันธ์ของ $y = x^x$ โดยที่ $x > 0$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ใช้ ln ทั้งสองข้าง</div>
+                                    <div class="math-display">
+                                        $$\ln y = \ln(x^x) = x \ln x$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาอนุพันธ์ทั้งสองข้างเทียบกับ $x$</div>
+                                    <p>ใช้ Chain Rule ที่ข้างซ้าย และ Product Rule ที่ข้างขวา:</p>
+                                    <div class="math-display">
+                                        $$\frac{1}{y} \cdot \frac{dy}{dx} = \frac{d}{dx}(x \ln x) = 1 \cdot \ln x + x \cdot \frac{1}{x} = \ln x + 1$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: แก้หา $\frac{dy}{dx}$</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \frac{dy}{dx} &= y(\ln x + 1)\\
+                                        &= x^x(\ln x + 1)\\
+                                        &= x^x(1 + \ln x)
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\frac{dy}{dx} = x^x(1 + \ln x)$</p>
+                                    <p>หมายเหตุ: ไม่สามารถใช้ Power Rule ได้เพราะทั้งฐานและเลขชี้กำลังเป็นตัวแปร!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ========== แบบฝึกหัด ========== -->
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <!-- ข้อ 1 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>หาอนุพันธ์ของ $f(x) = 5e^x - 3^x + \ln x$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f'(x) &= 5e^x - 3^x \ln 3 + \frac{1}{x}
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $f'(x) = 5e^x - 3^x \ln 3 + \frac{1}{x}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 2 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>หาอนุพันธ์ของ $g(x) = 2\sin x - 3\cos x + 4\tan x$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        g'(x) &= 2\cos x - 3(-\sin x) + 4\sec^2 x\\
+                                        &= 2\cos x + 3\sin x + 4\sec^2 x
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $g'(x) = 2\cos x + 3\sin x + 4\sec^2 x$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 3 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>หาอนุพันธ์ของ $h(x) = e^{5x}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ใช้ Chain Rule:</p>
+                                    <div class="math-display">
+                                        $$h'(x) = e^{5x} \cdot 5 = 5e^{5x}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $h'(x) = 5e^{5x}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 4 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 4:</h4>
+                                <p>หาอนุพันธ์ของ $y = \ln(x^2 + 3x)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ใช้ Chain Rule กับ ln:</p>
+                                    <div class="math-display">
+                                        $$\frac{dy}{dx} = \frac{1}{x^2 + 3x} \cdot (2x + 3) = \frac{2x + 3}{x^2 + 3x}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{dy}{dx} = \frac{2x + 3}{x^2 + 3x}$ หรือ $\frac{2x+3}{x(x+3)}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 5 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 5:</h4>
+                                <p>หาอนุพันธ์ของ $f(x) = \sin(4x - 1)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ใช้ Chain Rule:</p>
+                                    <div class="math-display">
+                                        $$f'(x) = \cos(4x - 1) \cdot 4 = 4\cos(4x - 1)$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $f'(x) = 4\cos(4x - 1)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <!-- ข้อ 6 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 6:</h4>
+                                <p>หาอนุพันธ์ของ $g(x) = e^{x^2} \ln x$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ใช้ Product Rule: $u = e^{x^2}$, $v = \ln x$</p>
+                                    <p>$u' = e^{x^2} \cdot 2x = 2xe^{x^2}$ (Chain Rule)</p>
+                                    <p>$v' = \frac{1}{x}$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        g'(x) &= u'v + uv'\\
+                                        &= 2xe^{x^2} \cdot \ln x + e^{x^2} \cdot \frac{1}{x}\\
+                                        &= 2xe^{x^2}\ln x + \frac{e^{x^2}}{x}\\
+                                        &= e^{x^2}\left(2x\ln x + \frac{1}{x}\right)
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $g'(x) = e^{x^2}\left(2x\ln x + \frac{1}{x}\right)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 7 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 7:</h4>
+                                <p>หาอนุพันธ์ของ $y = \frac{\ln x}{e^x}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ใช้ Quotient Rule: $u = \ln x$, $v = e^x$</p>
+                                    <p>$u' = \frac{1}{x}$, $v' = e^x$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \frac{dy}{dx} &= \frac{u'v - uv'}{v^2}\\
+                                        &= \frac{\frac{1}{x} \cdot e^x - \ln x \cdot e^x}{(e^x)^2}\\
+                                        &= \frac{e^x\left(\frac{1}{x} - \ln x\right)}{e^{2x}}\\
+                                        &= \frac{1 - x\ln x}{xe^x}
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{dy}{dx} = \frac{1 - x\ln x}{xe^x}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 8 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 8:</h4>
+                                <p>หาอนุพันธ์ของ $h(x) = \sin^3(2x)$ (ซึ่งหมายถึง $[\sin(2x)]^3$)</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ใช้ Chain Rule ซ้อนกัน:</p>
+                                    <p>ฟังก์ชันนอกสุด: $u^3$ มีอนุพันธ์ $3u^2$</p>
+                                    <p>ฟังก์ชันกลาง: $u = \sin(2x)$ มีอนุพันธ์ $\cos(2x) \cdot 2 = 2\cos(2x)$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        h'(x) &= 3[\sin(2x)]^2 \cdot \frac{d}{dx}[\sin(2x)]\\
+                                        &= 3\sin^2(2x) \cdot 2\cos(2x)\\
+                                        &= 6\sin^2(2x)\cos(2x)
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $h'(x) = 6\sin^2(2x)\cos(2x)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

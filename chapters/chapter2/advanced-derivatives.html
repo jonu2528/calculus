@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="อนุพันธ์ขั้นสูง - Higher-order derivatives และ Implicit Differentiation">
+    <meta name="theme-color" content="#2c3e50">
+    <title>2.4 อนุพันธ์ขั้นสูง - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น implicit, higher-order...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <a href="/" class="nav-home">🏠 หน้าแรก</a>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 1: ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter1/functions.html" data-topic="functions">1.1 ฟังก์ชัน</a></li>
+                        <li><a href="/chapters/chapter1/limits.html" data-topic="limits">1.2 ลิมิต</a></li>
+                        <li><a href="/chapters/chapter1/continuity.html" data-topic="continuity">1.3 ความต่อเนื่อง</a></li>
+                    </ul>
+                </div>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 2: อนุพันธ์</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter2/derivative-intro.html" data-topic="derivative-intro">2.1 ที่มาของอนุพันธ์</a></li>
+                        <li><a href="/chapters/chapter2/derivative-rules.html" data-topic="derivative-rules">2.2 กฎพื้นฐานของอนุพันธ์</a></li>
+                        <li><a href="/chapters/chapter2/standard-derivatives.html" data-topic="standard-derivatives">2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                        <li><a href="/chapters/chapter2/advanced-derivatives.html" data-topic="advanced-derivatives" class="active">2.4 อนุพันธ์ขั้นสูง</a></li>
+                        <li><a href="/chapters/chapter2/derivative-theorems.html" data-topic="derivative-theorems">2.5 ทฤษฎีบทสำคัญของอนุพันธ์</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 2: อนุพันธ์</a>
+                    <span>2.4 อนุพันธ์ขั้นสูง</span>
+                </nav>
+
+                <article>
+                    <h1>2.4 อนุพันธ์ขั้นสูง (Advanced Derivatives)</h1>
+
+                    <!-- ========== ส่วนทฤษฎี ========== -->
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>1. อนุพันธ์อันดับสูง (Higher-Order Derivatives)</h3>
+
+                            <p>อนุพันธ์ของฟังก์ชันก็ยังเป็นฟังก์ชัน ดังนั้นเราสามารถหาอนุพันธ์ของมันได้อีก</p>
+
+                            <h4>สัญลักษณ์</h4>
+                            <p><strong>อนุพันธ์อันดับแรก (First derivative):</strong></p>
+                            <div class="math-display">
+                                $$f'(x), \quad \frac{dy}{dx}, \quad \frac{df}{dx}, \quad Df(x)$$
+                            </div>
+
+                            <p><strong>อนุพันธ์อันดับสอง (Second derivative):</strong></p>
+                            <div class="math-display">
+                                $$f''(x), \quad \frac{d^2y}{dx^2}, \quad \frac{d^2f}{dx^2}, \quad D^2f(x)$$
+                            </div>
+
+                            <p><strong>อนุพันธ์อันดับสาม (Third derivative):</strong></p>
+                            <div class="math-display">
+                                $$f'''(x), \quad \frac{d^3y}{dx^3}, \quad \frac{d^3f}{dx^3}, \quad D^3f(x)$$
+                            </div>
+
+                            <p><strong>อนุพันธ์อันดับ $n$ (nth derivative):</strong></p>
+                            <div class="math-display">
+                                $$f^{(n)}(x), \quad \frac{d^ny}{dx^n}, \quad \frac{d^nf}{dx^n}, \quad D^nf(x)$$
+                            </div>
+
+                            <div class="note">
+                                <div class="note-title">ความหมายทางฟิสิกส์</div>
+                                <p>ถ้า $s(t)$ คือตำแหน่ง:</p>
+                                <ul>
+                                    <li>$s'(t) = v(t)$ = ความเร็ว (velocity)</li>
+                                    <li>$s''(t) = v'(t) = a(t)$ = ความเร่ง (acceleration)</li>
+                                    <li>$s'''(t) = a'(t) = j(t)$ = jerk (อัตราการเปลี่ยนแปลงของความเร่ง)</li>
+                                </ul>
+                            </div>
+
+                            <p><strong>ตัวอย่าง:</strong> ถ้า $f(x) = x^4 - 3x^3 + 2x^2 - 5x + 7$</p>
+                            <div class="math-display">
+                                $$\begin{align}
+                                f'(x) &= 4x^3 - 9x^2 + 4x - 5\\
+                                f''(x) &= 12x^2 - 18x + 4\\
+                                f'''(x) &= 24x - 18\\
+                                f^{(4)}(x) &= 24\\
+                                f^{(5)}(x) &= 0
+                                \end{align}$$
+                            </div>
+
+                            <h3>2. อนุพันธ์แบบปริยาย (Implicit Differentiation)</h3>
+
+                            <p>บางครั้งสมการกำหนดความสัมพันธ์ระหว่าง $x$ และ $y$ โดยไม่สามารถแยก $y$ ออกมาได้อย่างชัดเจน เช่น:</p>
+                            <div class="math-display">
+                                $$x^2 + y^2 = 25$$
+                            </div>
+
+                            <p>ในกรณีนี้ เราใช้ <strong>Implicit Differentiation</strong> โดยหาอนุพันธ์ทั้งสองข้างเทียบกับ $x$ โดยถือว่า $y$ เป็นฟังก์ชันของ $x$</p>
+
+                            <h4>ขั้นตอน:</h4>
+                            <ol>
+                                <li>หาอนุพันธ์ทั้งสองข้างของสมการเทียบกับ $x$</li>
+                                <li>เมื่อหาอนุพันธ์ของพจน์ที่มี $y$ ให้ใช้ Chain Rule และคูณด้วย $\frac{dy}{dx}$</li>
+                                <li>แก้สมการหา $\frac{dy}{dx}$</li>
+                            </ol>
+
+                            <div class="tip">
+                                <div class="tip-title">กฎสำคัญ</div>
+                                <p>เมื่อหาอนุพันธ์เทียบกับ $x$:</p>
+                                <ul>
+                                    <li>$\frac{d}{dx}(x^n) = nx^{n-1}$ (ปกติ)</li>
+                                    <li>$\frac{d}{dx}(y^n) = ny^{n-1} \cdot \frac{dy}{dx}$ (ต้องคูณ $\frac{dy}{dx}$ เพิ่ม!)</li>
+                                    <li>$\frac{d}{dx}(xy) = x\frac{dy}{dx} + y$ (Product Rule)</li>
+                                </ul>
+                            </div>
+
+                            <p><strong>ตัวอย่าง:</strong> หา $\frac{dy}{dx}$ จาก $x^2 + y^2 = 25$</p>
+                            <div class="math-display">
+                                $$\begin{align}
+                                \frac{d}{dx}(x^2 + y^2) &= \frac{d}{dx}(25)\\
+                                2x + 2y\frac{dy}{dx} &= 0\\
+                                2y\frac{dy}{dx} &= -2x\\
+                                \frac{dy}{dx} &= -\frac{x}{y}
+                                \end{align}$$
+                            </div>
+
+                            <h3>3. อนุพันธ์อันดับสองจาก Implicit Differentiation</h3>
+
+                            <p>หลังจากได้ $\frac{dy}{dx}$ แล้ว สามารถหาอนุพันธ์อันดับสอง $\frac{d^2y}{dx^2}$ ได้โดยหาอนุพันธ์ของ $\frac{dy}{dx}$ อีกครั้ง</p>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <p>ถ้า $\frac{dy}{dx}$ มีทั้ง $x$ และ $y$ ต้องใช้ Quotient Rule และ Chain Rule ด้วย และอย่าลืมว่า $\frac{dy}{dx}$ ก็เป็นฟังก์ชันของ $x$ ด้วย!</p>
+                            </div>
+
+                            <h3>4. การหาอนุพันธ์ของฟังก์ชันผกผัน</h3>
+
+                            <p>ถ้า $y = f(x)$ มีฟังก์ชันผกผัน $x = f^{-1}(y)$ แล้ว:</p>
+                            <div class="math-display">
+                                $$\frac{dx}{dy} = \frac{1}{\frac{dy}{dx}}$$
+                            </div>
+
+                            <p>หรือ:</p>
+                            <div class="math-display">
+                                $$(f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========== ตัวอย่าง ========== -->
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 1 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>กำหนด $f(x) = \sin x$ หาอนุพันธ์อันดับแรก อันดับสอง อันดับสาม และอันดับสี่</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">หาอนุพันธ์ทีละอันดับ</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(x) &= \sin x\\
+                                        f'(x) &= \cos x\\
+                                        f''(x) &= -\sin x\\
+                                        f'''(x) &= -\cos x\\
+                                        f^{(4)}(x) &= \sin x
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>สังเกตว่าอนุพันธ์อันดับที่ 4 กลับมาเป็น $\sin x$ เหมือนเดิม!</p>
+                                    <p>รูปแบบซ้ำรอบทุก 4 อันดับ: $\sin x \to \cos x \to -\sin x \to -\cos x \to \sin x$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 2 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หา $\frac{dy}{dx}$ จากสมการ $x^3 + y^3 = 6xy$ โดยใช้ Implicit Differentiation</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หาอนุพันธ์ทั้งสองข้างเทียบกับ $x$</div>
+                                    <div class="math-display">
+                                        $$\frac{d}{dx}(x^3 + y^3) = \frac{d}{dx}(6xy)$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาอนุพันธ์แต่ละพจน์</div>
+                                    <p>ข้างซ้าย:</p>
+                                    <div class="math-display">
+                                        $$3x^2 + 3y^2\frac{dy}{dx}$$
+                                    </div>
+                                    <p>ข้างขวา (ใช้ Product Rule):</p>
+                                    <div class="math-display">
+                                        $$6\left(x\frac{dy}{dx} + y \cdot 1\right) = 6x\frac{dy}{dx} + 6y$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: แก้สมการหา $\frac{dy}{dx}$</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        3x^2 + 3y^2\frac{dy}{dx} &= 6x\frac{dy}{dx} + 6y\\
+                                        3y^2\frac{dy}{dx} - 6x\frac{dy}{dx} &= 6y - 3x^2\\
+                                        (3y^2 - 6x)\frac{dy}{dx} &= 6y - 3x^2\\
+                                        \frac{dy}{dx} &= \frac{6y - 3x^2}{3y^2 - 6x}\\
+                                        &= \frac{3(2y - x^2)}{3(y^2 - 2x)}\\
+                                        &= \frac{2y - x^2}{y^2 - 2x}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\frac{dy}{dx} = \frac{2y - x^2}{y^2 - 2x}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 3 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หา $\frac{dy}{dx}$ จากสมการ $e^{xy} = x + y$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">หาอนุพันธ์ทั้งสองข้าง</div>
+                                    <p>ข้างซ้าย ใช้ Chain Rule กับ $e^{xy}$ และ Product Rule กับ $xy$:</p>
+                                    <div class="math-display">
+                                        $$\frac{d}{dx}(e^{xy}) = e^{xy} \cdot \frac{d}{dx}(xy) = e^{xy}\left(x\frac{dy}{dx} + y\right)$$
+                                    </div>
+                                    <p>ข้างขวา:</p>
+                                    <div class="math-display">
+                                        $$\frac{d}{dx}(x + y) = 1 + \frac{dy}{dx}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">แก้สมการ</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        e^{xy}\left(x\frac{dy}{dx} + y\right) &= 1 + \frac{dy}{dx}\\
+                                        xe^{xy}\frac{dy}{dx} + ye^{xy} &= 1 + \frac{dy}{dx}\\
+                                        xe^{xy}\frac{dy}{dx} - \frac{dy}{dx} &= 1 - ye^{xy}\\
+                                        (xe^{xy} - 1)\frac{dy}{dx} &= 1 - ye^{xy}\\
+                                        \frac{dy}{dx} &= \frac{1 - ye^{xy}}{xe^{xy} - 1}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\frac{dy}{dx} = \frac{1 - ye^{xy}}{xe^{xy} - 1}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 4 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 4</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>จากสมการวงกลม $x^2 + y^2 = 25$ หา:</p>
+                                <p>ก) $\frac{dy}{dx}$</p>
+                                <p>ข) $\frac{d^2y}{dx^2}$ (อนุพันธ์อันดับสอง)</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ก) หา $\frac{dy}{dx}$</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        2x + 2y\frac{dy}{dx} &= 0\\
+                                        \frac{dy}{dx} &= -\frac{x}{y}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ข) หา $\frac{d^2y}{dx^2}$</div>
+                                    <p>หาอนุพันธ์ของ $\frac{dy}{dx} = -\frac{x}{y}$ ใช้ Quotient Rule:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \frac{d^2y}{dx^2} &= \frac{d}{dx}\left(-\frac{x}{y}\right)\\
+                                        &= -\frac{y \cdot 1 - x \cdot \frac{dy}{dx}}{y^2}\\
+                                        &= -\frac{y - x\left(-\frac{x}{y}\right)}{y^2}\\
+                                        &= -\frac{y + \frac{x^2}{y}}{y^2}\\
+                                        &= -\frac{y^2 + x^2}{y^3}
+                                        \end{align}$$
+                                    </div>
+                                    <p>แต่จาก $x^2 + y^2 = 25$ ดังนั้น:</p>
+                                    <div class="math-display">
+                                        $$\frac{d^2y}{dx^2} = -\frac{25}{y^3}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>ก) $\frac{dy}{dx} = -\frac{x}{y}$</p>
+                                    <p>ข) $\frac{d^2y}{dx^2} = -\frac{25}{y^3}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 5 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 5</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาสมการเส้นสัมผัสของเส้นโค้ง $x^2 + xy + y^2 = 3$ ที่จุด $(1, 1)$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบว่าจุด $(1,1)$ อยู่บนเส้นโค้ง</div>
+                                    <div class="math-display">
+                                        $$(1)^2 + (1)(1) + (1)^2 = 1 + 1 + 1 = 3 \quad \checkmark$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หา $\frac{dy}{dx}$ ด้วย Implicit Differentiation</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \frac{d}{dx}(x^2 + xy + y^2) &= \frac{d}{dx}(3)\\
+                                        2x + \left(x\frac{dy}{dx} + y\right) + 2y\frac{dy}{dx} &= 0\\
+                                        2x + x\frac{dy}{dx} + y + 2y\frac{dy}{dx} &= 0\\
+                                        (x + 2y)\frac{dy}{dx} &= -2x - y\\
+                                        \frac{dy}{dx} &= \frac{-2x - y}{x + 2y}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หาความชันที่จุด $(1,1)$</div>
+                                    <div class="math-display">
+                                        $$m = \frac{dy}{dx}\bigg|_{(1,1)} = \frac{-2(1) - 1}{1 + 2(1)} = \frac{-3}{3} = -1$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: เขียนสมการเส้นสัมผัส</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        y - 1 &= -1(x - 1)\\
+                                        y - 1 &= -x + 1\\
+                                        y &= -x + 2
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>สมการเส้นสัมผัส: $y = -x + 2$ หรือ $x + y = 2$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ========== แบบฝึกหัด ========== -->
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <!-- ข้อ 1 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>กำหนด $f(x) = x^4 - 2x^3 + 5x$ หา $f''(x)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f'(x) &= 4x^3 - 6x^2 + 5\\
+                                        f''(x) &= 12x^2 - 12x
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $f''(x) = 12x^2 - 12x = 12x(x - 1)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 2 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>หา $\frac{dy}{dx}$ จาก $x^2 + y^2 = 16$ โดยใช้ Implicit Differentiation</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        2x + 2y\frac{dy}{dx} &= 0\\
+                                        \frac{dy}{dx} &= -\frac{x}{y}
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{dy}{dx} = -\frac{x}{y}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 3 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>หา $\frac{dy}{dx}$ จาก $x^2 - xy + y^2 = 7$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        2x - \left(x\frac{dy}{dx} + y\right) + 2y\frac{dy}{dx} &= 0\\
+                                        2x - x\frac{dy}{dx} - y + 2y\frac{dy}{dx} &= 0\\
+                                        (2y - x)\frac{dy}{dx} &= y - 2x\\
+                                        \frac{dy}{dx} &= \frac{y - 2x}{2y - x}
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{dy}{dx} = \frac{y - 2x}{2y - x}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <!-- ข้อ 4 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 4:</h4>
+                                <p>หา $\frac{dy}{dx}$ จาก $\sin(xy) = x$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \cos(xy) \cdot \left(x\frac{dy}{dx} + y\right) &= 1\\
+                                        x\cos(xy)\frac{dy}{dx} + y\cos(xy) &= 1\\
+                                        x\cos(xy)\frac{dy}{dx} &= 1 - y\cos(xy)\\
+                                        \frac{dy}{dx} &= \frac{1 - y\cos(xy)}{x\cos(xy)}
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{dy}{dx} = \frac{1 - y\cos(xy)}{x\cos(xy)}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 5 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 5:</h4>
+                                <p>กำหนด $g(x) = e^{2x}$ หา $g'''(x)$ (อนุพันธ์อันดับสาม)</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        g'(x) &= 2e^{2x}\\
+                                        g''(x) &= 4e^{2x}\\
+                                        g'''(x) &= 8e^{2x}
+                                        \end{align}$$
+                                    </div>
+                                    <p>สังเกตรูปแบบ: $g^{(n)}(x) = 2^n e^{2x}$</p>
+                                    <p><strong>คำตอบ:</strong> $g'''(x) = 8e^{2x}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 6 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 6:</h4>
+                                <p>หาสมการเส้นสัมผัสของเส้นโค้ง $x^2 + y^2 = 10$ ที่จุด $(3, 1)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หา $\frac{dy}{dx} = -\frac{x}{y}$</p>
+                                    <p>ที่จุด $(3,1)$: $m = -\frac{3}{1} = -3$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        y - 1 &= -3(x - 3)\\
+                                        y &= -3x + 10
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $y = -3x + 10$ หรือ $3x + y = 10$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

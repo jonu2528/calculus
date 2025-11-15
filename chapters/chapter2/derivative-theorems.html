@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ทฤษฎีบทสำคัญของอนุพันธ์ - Mean Value Theorem, Rolle's Theorem, L'Hopital's Rule">
+    <meta name="theme-color" content="#2c3e50">
+    <title>2.5 ทฤษฎีบทสำคัญของอนุพันธ์ - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น MVT, L'Hopital...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <a href="/" class="nav-home">🏠 หน้าแรก</a>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 1: ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter1/functions.html" data-topic="functions">1.1 ฟังก์ชัน</a></li>
+                        <li><a href="/chapters/chapter1/limits.html" data-topic="limits">1.2 ลิมิต</a></li>
+                        <li><a href="/chapters/chapter1/continuity.html" data-topic="continuity">1.3 ความต่อเนื่อง</a></li>
+                    </ul>
+                </div>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 2: อนุพันธ์</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter2/derivative-intro.html" data-topic="derivative-intro">2.1 ที่มาของอนุพันธ์</a></li>
+                        <li><a href="/chapters/chapter2/derivative-rules.html" data-topic="derivative-rules">2.2 กฎพื้นฐานของอนุพันธ์</a></li>
+                        <li><a href="/chapters/chapter2/standard-derivatives.html" data-topic="standard-derivatives">2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                        <li><a href="/chapters/chapter2/advanced-derivatives.html" data-topic="advanced-derivatives">2.4 อนุพันธ์ขั้นสูง</a></li>
+                        <li><a href="/chapters/chapter2/derivative-theorems.html" data-topic="derivative-theorems" class="active">2.5 ทฤษฎีบทสำคัญของอนุพันธ์</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 2: อนุพันธ์</a>
+                    <span>2.5 ทฤษฎีบทสำคัญของอนุพันธ์</span>
+                </nav>
+
+                <article>
+                    <h1>2.5 ทฤษฎีบทสำคัญของอนุพันธ์ (Important Derivative Theorems)</h1>
+
+                    <!-- ========== ส่วนทฤษฎี ========== -->
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>1. ทฤษฎีบทโรลล์ (Rolle's Theorem)</h3>
+
+                            <p>ทฤษฎีบทโรลล์เป็นพื้นฐานสำคัญสำหรับทฤษฎีบทค่าเฉลี่ย</p>
+
+                            <div class="note">
+                                <div class="note-title">ทฤษฎีบทโรลล์</div>
+                                <p>ถ้าฟังก์ชัน $f$ เป็นไปตามเงื่อนไข:</p>
+                                <ol>
+                                    <li>$f$ ต่อเนื่องบน $[a, b]$</li>
+                                    <li>$f$ หาอนุพันธ์ได้บน $(a, b)$</li>
+                                    <li>$f(a) = f(b)$</li>
+                                </ol>
+                                <p>แล้วจะมี $c \in (a, b)$ อย่างน้อยหนึ่งค่าที่ทำให้ $f'(c) = 0$</p>
+                            </div>
+
+                            <p><strong>ความหมาย:</strong> ถ้ากราฟของฟังก์ชันเริ่มและจบที่ความสูงเดียวกัน จะต้องมีจุดหนึ่งที่เส้นสัมผัสราบ (ความชันเป็นศูนย์)</p>
+
+                            <h3>2. ทฤษฎีบทค่าเฉลี่ย (Mean Value Theorem - MVT)</h3>
+
+                            <p>ทฤษฎีบทนี้เป็นหนึ่งในทฤษฎีบทที่สำคัญที่สุดในแคลคูลัส</p>
+
+                            <div class="note">
+                                <div class="note-title">ทฤษฎีบทค่าเฉลี่ย (MVT)</div>
+                                <p>ถ้าฟังก์ชัน $f$ เป็นไปตามเงื่อนไข:</p>
+                                <ol>
+                                    <li>$f$ ต่อเนื่องบน $[a, b]$</li>
+                                    <li>$f$ หาอนุพันธ์ได้บน $(a, b)$</li>
+                                </ol>
+                                <p>แล้วจะมี $c \in (a, b)$ อย่างน้อยหนึ่งค่าที่ทำให้:</p>
+                                <div class="math-display">
+                                    $$f'(c) = \frac{f(b) - f(a)}{b - a}$$
+                                </div>
+                            </div>
+
+                            <p><strong>ความหมาย:</strong> มีจุดหนึ่งบนกราฟที่เส้นสัมผัส ณ จุดนั้นขนานกับเส้นตัดที่ลากผ่านจุดปลายทั้งสอง</p>
+
+                            <p><strong>ความสัมพันธ์กับทฤษฎีบทโรลล์:</strong> ทฤษฎีบทโรลล์คือกรณีพิเศษของ MVT เมื่อ $f(a) = f(b)$ (ทำให้ความชันเฉลี่ยเป็น 0)</p>
+
+                            <h4>การประยุกต์ใช้ MVT</h4>
+                            <ul>
+                                <li>พิสูจน์ว่าฟังก์ชันเป็นค่าคงที่ (ถ้า $f'(x) = 0$ ทุกจุด)</li>
+                                <li>พิสูจน์ความไม่เท่ากัน (inequalities)</li>
+                                <li>ประมาณค่าของฟังก์ชัน</li>
+                            </ul>
+
+                            <h3>3. กฎของลอปิทาล (L'Hopital's Rule)</h3>
+
+                            <p>กฎนี้ใช้หาลิมิตของรูปไม่กำหนด (indeterminate forms)</p>
+
+                            <div class="note">
+                                <div class="note-title">กฎของลอปิทาล</div>
+                                <p>ถ้า $\lim_{x \to a} f(x) = 0$ และ $\lim_{x \to a} g(x) = 0$ (รูป $\frac{0}{0}$)</p>
+                                <p>หรือ $\lim_{x \to a} f(x) = \pm\infty$ และ $\lim_{x \to a} g(x) = \pm\infty$ (รูป $\frac{\infty}{\infty}$)</p>
+                                <p>และถ้า $\lim_{x \to a} \frac{f'(x)}{g'(x)}$ มีค่าจำกัดหรือเป็น $\pm\infty$ แล้ว:</p>
+                                <div class="math-display">
+                                    $$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$$
+                                </div>
+                                <p>โดยที่ $a$ อาจเป็น $\pm\infty$ ก็ได้</p>
+                            </div>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <ul>
+                                    <li>ต้องตรวจสอบให้แน่ใจว่าเป็นรูป $\frac{0}{0}$ หรือ $\frac{\infty}{\infty}$ ก่อนใช้กฎนี้</li>
+                                    <li>ใช้กฎนี้กับ <strong>อนุพันธ์ของตัวเศษและตัวส่วนแยกกัน</strong> ไม่ใช่อนุพันธ์ของเศษส่วน!</li>
+                                    <li>อาจต้องใช้กฎนี้หลายครั้งติดกัน</li>
+                                </ul>
+                            </div>
+
+                            <h4>รูปไม่กำหนดอื่นๆ</h4>
+                            <p>รูปไม่กำหนดบางรูปต้องแปลงก่อนใช้กฎของลอปิทาล:</p>
+                            <ul>
+                                <li>$0 \cdot \infty$: แปลงเป็น $\frac{0}{0}$ หรือ $\frac{\infty}{\infty}$</li>
+                                <li>$\infty - \infty$: รวมเป็นเศษส่วนเดียว</li>
+                                <li>$0^0$, $1^\infty$, $\infty^0$: ใช้ ln แล้วหาอนุพันธ์</li>
+                            </ul>
+
+                            <div class="tip">
+                                <div class="tip-title">เคล็ดลับ</div>
+                                <p>ถ้าใช้กฎของลอปิทาลแล้วได้รูปไม่กำหนดเหมือนเดิม ให้ใช้อีกครั้ง!</p>
+                                <p>ตัวอย่าง: $\lim_{x \to 0} \frac{e^x - 1 - x}{x^2}$ ต้องใช้กฎสองครั้ง</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========== ตัวอย่าง ========== -->
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 1 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ตรวจสอบว่าทฤษฎีบทโรลล์ใช้ได้กับ $f(x) = x^2 - 4x + 3$ บน $[1, 3]$ หรือไม่ ถ้าใช้ได้ให้หาค่า $c$ ที่ทำให้ $f'(c) = 0$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบเงื่อนไข</div>
+                                    <p>1. $f(x) = x^2 - 4x + 3$ เป็นพหุนาม จึงต่อเนื่องบน $[1, 3]$ ✓</p>
+                                    <p>2. $f'(x) = 2x - 4$ หาอนุพันธ์ได้บน $(1, 3)$ ✓</p>
+                                    <p>3. ตรวจสอบ $f(1)$ และ $f(3)$:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(1) &= 1 - 4 + 3 = 0\\
+                                        f(3) &= 9 - 12 + 3 = 0
+                                        \end{align}$$
+                                    </div>
+                                    <p>ดังนั้น $f(1) = f(3) = 0$ ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ใช้ทฤษฎีบทโรลล์</div>
+                                    <p>เงื่อนไขครบทั้งสาม ดังนั้นมี $c \in (1, 3)$ ที่ $f'(c) = 0$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f'(c) &= 0\\
+                                        2c - 4 &= 0\\
+                                        c &= 2
+                                        \end{align}$$
+                                    </div>
+                                    <p>เช็ค: $2 \in (1, 3)$ ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>ใช้ทฤษฎีบทโรลล์ได้ และ $c = 2$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 2 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ใช้ทฤษฎีบทค่าเฉลี่ยหาค่า $c$ สำหรับ $f(x) = x^3 - 2x$ บน $[0, 2]$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบเงื่อนไข MVT</div>
+                                    <p>$f(x) = x^3 - 2x$ เป็นพหุนาม ดังนั้น:</p>
+                                    <ul>
+                                        <li>ต่อเนื่องบน $[0, 2]$ ✓</li>
+                                        <li>หาอนุพันธ์ได้บน $(0, 2)$ ✓</li>
+                                    </ul>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: คำนวณความชันเฉลี่ย</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(0) &= 0\\
+                                        f(2) &= 8 - 4 = 4\\
+                                        \frac{f(2) - f(0)}{2 - 0} &= \frac{4 - 0}{2} = 2
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หา $c$ ที่ $f'(c) = 2$</div>
+                                    <p>$f'(x) = 3x^2 - 2$ ดังนั้น:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f'(c) &= 2\\
+                                        3c^2 - 2 &= 2\\
+                                        3c^2 &= 4\\
+                                        c^2 &= \frac{4}{3}\\
+                                        c &= \pm\frac{2}{\sqrt{3}} = \pm\frac{2\sqrt{3}}{3}
+                                        \end{align}$$
+                                    </div>
+                                    <p>เนื่องจาก $c \in (0, 2)$ เราเลือก $c = \frac{2\sqrt{3}}{3} \approx 1.15$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$c = \frac{2\sqrt{3}}{3}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 3 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ใช้กฎของลอปิทาลหาลิมิต: $\lim_{x \to 0} \frac{\sin x}{x}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบรูปไม่กำหนด</div>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 0} \sin x = 0, \quad \lim_{x \to 0} x = 0$$
+                                    </div>
+                                    <p>เป็นรูป $\frac{0}{0}$ ใช้กฎของลอปิทาลได้ ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาอนุพันธ์ของตัวเศษและตัวส่วน</div>
+                                    <div class="math-display">
+                                        $$\frac{d}{dx}(\sin x) = \cos x, \quad \frac{d}{dx}(x) = 1$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: ใช้กฎของลอปิทาล</div>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{\cos x}{1} = \frac{\cos 0}{1} = 1$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to 0} \frac{\sin x}{x} = 1$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 4 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 4</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาลิมิต: $\lim_{x \to \infty} \frac{3x^2 + 2x}{5x^2 - 7}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบรูปไม่กำหนด</div>
+                                    <p>เมื่อ $x \to \infty$: ตัวเศษ $\to \infty$ และตัวส่วน $\to \infty$</p>
+                                    <p>เป็นรูป $\frac{\infty}{\infty}$ ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ใช้กฎของลอปิทาล</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \lim_{x \to \infty} \frac{3x^2 + 2x}{5x^2 - 7} &= \lim_{x \to \infty} \frac{6x + 2}{10x}\\
+                                        &= \lim_{x \to \infty} \frac{6 + \frac{2}{x}}{10}\\
+                                        &= \frac{6}{10} = \frac{3}{5}
+                                        \end{align}$$
+                                    </div>
+                                    <p>หรือใช้กฎของลอปิทาลอีกครั้ง:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to \infty} \frac{6x + 2}{10x} = \lim_{x \to \infty} \frac{6}{10} = \frac{3}{5}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to \infty} \frac{3x^2 + 2x}{5x^2 - 7} = \frac{3}{5}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 5 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 5</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาลิมิต: $\lim_{x \to 0} \frac{e^x - 1 - x}{x^2}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ตรวจสอบรูปไม่กำหนด</div>
+                                    <p>เมื่อ $x \to 0$: $e^0 - 1 - 0 = 0$ และ $0^2 = 0$</p>
+                                    <p>เป็นรูป $\frac{0}{0}$ ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ใช้กฎของลอปิทาลครั้งแรก</div>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 0} \frac{e^x - 1 - x}{x^2} = \lim_{x \to 0} \frac{e^x - 1}{2x}$$
+                                    </div>
+                                    <p>ยังเป็นรูป $\frac{0}{0}$!</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: ใช้กฎของลอปิทาลครั้งที่สอง</div>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 0} \frac{e^x - 1}{2x} = \lim_{x \to 0} \frac{e^x}{2} = \frac{e^0}{2} = \frac{1}{2}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to 0} \frac{e^x - 1 - x}{x^2} = \frac{1}{2}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 6 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 6</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาลิมิต: $\lim_{x \to 0^+} x \ln x$ (รูป $0 \cdot \infty$)</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ระบุรูปไม่กำหนด</div>
+                                    <p>เมื่อ $x \to 0^+$: $x \to 0$ และ $\ln x \to -\infty$</p>
+                                    <p>เป็นรูป $0 \cdot (-\infty)$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: แปลงเป็นรูป $\frac{\infty}{\infty}$</div>
+                                    <div class="math-display">
+                                        $$x \ln x = \frac{\ln x}{\frac{1}{x}}$$
+                                    </div>
+                                    <p>เมื่อ $x \to 0^+$: $\ln x \to -\infty$ และ $\frac{1}{x} \to +\infty$</p>
+                                    <p>เป็นรูป $\frac{-\infty}{\infty}$ ซึ่งเหมือนกับ $\frac{\infty}{\infty}$ ✓</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: ใช้กฎของลอปิทาล</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \lim_{x \to 0^+} \frac{\ln x}{\frac{1}{x}} &= \lim_{x \to 0^+} \frac{\frac{1}{x}}{-\frac{1}{x^2}}\\
+                                        &= \lim_{x \to 0^+} \frac{x^2}{x} \cdot (-1)\\
+                                        &= \lim_{x \to 0^+} (-x)\\
+                                        &= 0
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$\lim_{x \to 0^+} x \ln x = 0$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ========== แบบฝึกหัด ========== -->
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <!-- ข้อ 1 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>ใช้ทฤษฎีบทโรลล์หา $c$ สำหรับ $f(x) = x^2 - 6x + 8$ บน $[2, 4]$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ตรวจสอบ: $f(2) = 4 - 12 + 8 = 0$ และ $f(4) = 16 - 24 + 8 = 0$ ✓</p>
+                                    <p>$f'(x) = 2x - 6$, ดังนั้น:</p>
+                                    <div class="math-display">
+                                        $$2c - 6 = 0 \Rightarrow c = 3$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $c = 3$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 2 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>หาลิมิต: $\lim_{x \to 0} \frac{e^x - 1}{x}$ ด้วยกฎของลอปิทาล</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>รูป $\frac{0}{0}$ ใช้กฎของลอปิทาล:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 0} \frac{e^x - 1}{x} = \lim_{x \to 0} \frac{e^x}{1} = e^0 = 1$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $1$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 3 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>หาลิมิต: $\lim_{x \to 0} \frac{\tan x}{x}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>รูป $\frac{0}{0}$ ใช้กฎของลอปิทาล:</p>
+                                    <div class="math-display">
+                                        $$\lim_{x \to 0} \frac{\tan x}{x} = \lim_{x \to 0} \frac{\sec^2 x}{1} = \sec^2 0 = 1$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $1$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <!-- ข้อ 4 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 4:</h4>
+                                <p>หาลิมิต: $\lim_{x \to \infty} \frac{x^2}{e^x}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>รูป $\frac{\infty}{\infty}$ ใช้กฎของลอปิทาลสองครั้ง:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \lim_{x \to \infty} \frac{x^2}{e^x} &= \lim_{x \to \infty} \frac{2x}{e^x}\\
+                                        &= \lim_{x \to \infty} \frac{2}{e^x} = 0
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $0$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 5 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 5:</h4>
+                                <p>หาลิมิต: $\lim_{x \to 0} \frac{1 - \cos x}{x^2}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>รูป $\frac{0}{0}$ ใช้กฎของลอปิทาลสองครั้ง:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \lim_{x \to 0} \frac{1 - \cos x}{x^2} &= \lim_{x \to 0} \frac{\sin x}{2x}\\
+                                        &= \lim_{x \to 0} \frac{\cos x}{2}\\
+                                        &= \frac{1}{2}
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $\frac{1}{2}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 6 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 6:</h4>
+                                <p>หาลิมิต: $\lim_{x \to 1^+} x^{\frac{1}{1-x}}$ (รูป $1^\infty$)</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ให้ $y = x^{\frac{1}{1-x}}$ แล้ว $\ln y = \frac{\ln x}{1-x}$ (รูป $\frac{0}{0}$)</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \lim_{x \to 1^+} \ln y &= \lim_{x \to 1^+} \frac{\ln x}{1-x}\\
+                                        &= \lim_{x \to 1^+} \frac{\frac{1}{x}}{-1}\\
+                                        &= -1
+                                        \end{align}$$
+                                    </div>
+                                    <p>ดังนั้น $\lim_{x \to 1^+} y = e^{-1} = \frac{1}{e}$</p>
+                                    <p><strong>คำตอบ:</strong> $\frac{1}{e}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

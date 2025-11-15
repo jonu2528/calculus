@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ที่มาของอนุพันธ์ - เรียนรู้แนวคิดอัตราการเปลี่ยนแปลง นิยามอนุพันธ์จากลิมิต และความหมายเชิงเรขาคณิต">
+    <meta name="theme-color" content="#2c3e50">
+    <title>2.1 ที่มาของอนุพันธ์ - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา เช่น อนุพันธ์, derivative...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+
+                <a href="/" class="nav-home">🏠 หน้าแรก</a>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 1: ฟังก์ชัน ลิมิต และความต่อเนื่อง</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter1/functions.html" data-topic="functions">1.1 ฟังก์ชัน</a></li>
+                        <li><a href="/chapters/chapter1/limits.html" data-topic="limits">1.2 ลิมิต</a></li>
+                        <li><a href="/chapters/chapter1/continuity.html" data-topic="continuity">1.3 ความต่อเนื่อง</a></li>
+                    </ul>
+                </div>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 2: อนุพันธ์</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter2/derivative-intro.html" data-topic="derivative-intro" class="active">2.1 ที่มาของอนุพันธ์</a></li>
+                        <li><a href="/chapters/chapter2/derivative-rules.html" data-topic="derivative-rules">2.2 กฎพื้นฐานของอนุพันธ์</a></li>
+                        <li><a href="/chapters/chapter2/standard-derivatives.html" data-topic="standard-derivatives">2.3 อนุพันธ์ของฟังก์ชันมาตรฐาน</a></li>
+                        <li><a href="/chapters/chapter2/advanced-derivatives.html" data-topic="advanced-derivatives">2.4 อนุพันธ์ขั้นสูง</a></li>
+                        <li><a href="/chapters/chapter2/derivative-theorems.html" data-topic="derivative-theorems">2.5 ทฤษฎีบทสำคัญของอนุพันธ์</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb" id="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 2: อนุพันธ์</a>
+                    <span>2.1 ที่มาของอนุพันธ์</span>
+                </nav>
+
+                <article>
+                    <h1>2.1 ที่มาของอนุพันธ์ (Introduction to Derivatives)</h1>
+
+                    <!-- ========== ส่วนทฤษฎี ========== -->
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>1. แนวคิดอัตราการเปลี่ยนแปลง (Rate of Change)</h3>
+
+                            <p>ในชีวิตประจำวัน เรามักพบกับแนวคิดของการเปลี่ยนแปลง เช่น ความเร็วของรถ อัตราการเติบโตของประชากร หรือการเปลี่ยนแปลงของอุณหภูมิ อนุพันธ์เป็นเครื่องมือทางคณิตศาสตร์ที่ใช้วัดอัตราการเปลี่ยนแปลงเหล่านี้</p>
+
+                            <h4>อัตราการเปลี่ยนแปลงเฉลี่ย (Average Rate of Change)</h4>
+
+                            <p>ถ้าเรามีฟังก์ชัน $f(x)$ ต้องการหาอัตราการเปลี่ยนแปลงเฉลี่ยระหว่างจุด $x = a$ และ $x = b$ สามารถหาได้จาก:</p>
+
+                            <div class="math-display">
+                                $$\text{อัตราการเปลี่ยนแปลงเฉลี่ย} = \frac{f(b) - f(a)}{b - a}$$
+                            </div>
+
+                            <p>สูตรนี้คล้ายกับการหาความชัน (slope) ของเส้นตรงที่ผ่านสองจุด $(a, f(a))$ และ $(b, f(b))$ ซึ่งเรียกว่า <strong>เส้นตัด (secant line)</strong></p>
+
+                            <h4>อัตราการเปลี่ยนแปลง ณ ขณะหนึ่ง (Instantaneous Rate of Change)</h4>
+
+                            <p>แต่ถ้าเราต้องการหาอัตราการเปลี่ยนแปลง ณ จุดเดียว (เช่น ความเร็ว ณ เวลาใดเวลาหนึ่งพอดี) เราต้องให้ $b$ เข้าใกล้ $a$ มากขึ้นเรื่อยๆ ซึ่งนำไปสู่แนวคิดของอนุพันธ์</p>
+
+                            <div class="note">
+                                <div class="note-title">หมายเหตุ</div>
+                                <p>อนุพันธ์คือ "อัตราการเปลี่ยนแปลง ณ ขณะหนึ่ง" ซึ่งได้มาจากการหาลิมิตของอัตราการเปลี่ยนแปลงเฉลี่ย</p>
+                            </div>
+
+                            <h3>2. นิยามอนุพันธ์จากลิมิต (Definition of Derivative)</h3>
+
+                            <p>อนุพันธ์ของฟังก์ชัน $f(x)$ ที่จุด $x$ หาได้จากลิมิต:</p>
+
+                            <div class="math-display">
+                                $$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
+                            </div>
+
+                            <p>โดยที่ $h$ คือการเปลี่ยนแปลงเล็กๆ ของ $x$ และเมื่อ $h \to 0$ เราจะได้อัตราการเปลี่ยนแปลง ณ ขณะหนึ่งที่จุด $x$</p>
+
+                            <h4>นิยามอีกรูปแบบหนึ่ง</h4>
+
+                            <p>อนุพันธ์ที่จุด $x = a$ สามารถเขียนได้อีกรูปแบบหนึ่งว่า:</p>
+
+                            <div class="math-display">
+                                $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$
+                            </div>
+
+                            <h4>สัญลักษณ์ของอนุพันธ์</h4>
+
+                            <p>มีหลายวิธีในการแสดงอนุพันธ์:</p>
+                            <ul>
+                                <li>$f'(x)$ (อ่านว่า "f prime of x") - Lagrange notation</li>
+                                <li>$\frac{df}{dx}$ หรือ $\frac{dy}{dx}$ - Leibniz notation</li>
+                                <li>$\frac{d}{dx}f(x)$ - operator notation</li>
+                                <li>$Df(x)$ - Euler notation</li>
+                            </ul>
+
+                            <div class="tip">
+                                <div class="tip-title">เทคนิค</div>
+                                <p>เมื่อหาอนุพันธ์จากนิยาม ให้ทำตามขั้นตอน:</p>
+                                <ol>
+                                    <li>เขียน $f(x+h)$ โดยแทน $x$ ด้วย $x+h$ ในสูตรของฟังก์ชัน</li>
+                                    <li>คำนวณ $f(x+h) - f(x)$</li>
+                                    <li>หารด้วย $h$ และทำให้เป็นรูปแบบที่ง่ายขึ้น</li>
+                                    <li>หาลิมิตเมื่อ $h \to 0$</li>
+                                </ol>
+                            </div>
+
+                            <h3>3. ความหมายเชิงเรขาคณิต (Geometric Interpretation)</h3>
+
+                            <p>อนุพันธ์มีความหมายทางเรขาคณิตที่สำคัญ:</p>
+
+                            <h4>ความชันของเส้นสัมผัส (Slope of Tangent Line)</h4>
+
+                            <p>ค่าของ $f'(a)$ คือความชันของเส้นสัมผัส (tangent line) ของกราฟ $y = f(x)$ ที่จุด $(a, f(a))$</p>
+
+                            <div class="math-display">
+                                $$m_{\text{tangent}} = f'(a)$$
+                            </div>
+
+                            <p>สมการของเส้นสัมผัสที่จุด $(a, f(a))$ คือ:</p>
+
+                            <div class="math-display">
+                                $$y - f(a) = f'(a)(x - a)$$
+                            </div>
+
+                            <h4>จากเส้นตัดสู่เส้นสัมผัส</h4>
+
+                            <p>เมื่อเรามีจุดสองจุดบนกราฟ $(a, f(a))$ และ $(a+h, f(a+h))$:</p>
+                            <ul>
+                                <li><strong>เส้นตัด (Secant line)</strong>: เส้นตรงที่ลากผ่านสองจุดนี้ มีความชัน $\frac{f(a+h) - f(a)}{h}$</li>
+                                <li>เมื่อ $h \to 0$: จุด $(a+h, f(a+h))$ เข้าใกล้จุด $(a, f(a))$ มากขึ้น</li>
+                                <li><strong>เส้นสัมผัส (Tangent line)</strong>: เส้นตรงที่ได้เมื่อ $h \to 0$ มีความชัน $f'(a)$</li>
+                            </ul>
+
+                            <div class="note">
+                                <div class="note-title">การมีอนุพันธ์ (Differentiability)</div>
+                                <p>ฟังก์ชัน $f(x)$ หาอนุพันธ์ได้ที่ $x = a$ ถ้าลิมิต $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$ มีค่าจำกัด</p>
+                                <p><strong>ข้อสังเกต:</strong> ถ้าฟังก์ชันหาอนุพันธ์ได้ที่จุดหนึ่ง แสดงว่าฟังก์ชันต้องต่อเนื่องที่จุดนั้น แต่ฟังก์ชันต่อเนื่องไม่จำเป็นต้องหาอนุพันธ์ได้ (เช่น $f(x) = |x|$ ที่ $x = 0$)</p>
+                            </div>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <p>ฟังก์ชันที่มีจุดมุม (corner), จุดแหลม (cusp), หรือจุดไม่ต่อเนื่อง (discontinuity) จะไม่สามารถหาอนุพันธ์ได้ที่จุดเหล่านั้น</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========== ตัวอย่าง ========== -->
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 1 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>กำหนดฟังก์ชันตำแหน่งของวัตถุเคลื่อนที่เป็น $s(t) = 2t^2 + 3t$ เมตร โดยที่ $t$ เป็นเวลาในหน่วยวินาที</p>
+                                <p>ก) หาอัตราการเปลี่ยนแปลงเฉลี่ยของตำแหน่งระหว่างเวลา $t = 1$ วินาที ถึง $t = 3$ วินาที</p>
+                                <p>ข) อัตราการเปลี่ยนแปลงนี้มีความหมายว่าอย่างไร?</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หาค่าฟังก์ชันที่จุดทั้งสอง</div>
+                                    <p>หา $s(1)$ และ $s(3)$:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        s(1) &= 2(1)^2 + 3(1) = 2 + 3 = 5 \text{ เมตร}\\
+                                        s(3) &= 2(3)^2 + 3(3) = 18 + 9 = 27 \text{ เมตร}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: คำนวณอัตราการเปลี่ยนแปลงเฉลี่ย</div>
+                                    <p>ใช้สูตร:</p>
+                                    <div class="math-display">
+                                        $$\frac{s(3) - s(1)}{3 - 1} = \frac{27 - 5}{2} = \frac{22}{2} = 11 \text{ เมตร/วินาที}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>ก) อัตราการเปลี่ยนแปลงเฉลี่ย = $11$ เมตร/วินาที</p>
+                                    <p>ข) ความหมาย: ในช่วงเวลา 2 วินาที (จาก $t=1$ ถึง $t=3$) วัตถุเคลื่อนที่ได้ระยะทาง 22 เมตร ซึ่งเฉลี่ยแล้วเท่ากับความเร็ว 11 เมตร/วินาที (นี่คือความเร็วเฉลี่ย ไม่ใช่ความเร็วขณะหนึ่ง)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 2 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ใช้นิยามของอนุพันธ์หาอนุพันธ์ของฟังก์ชัน $f(x) = 3x + 5$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: เขียนนิยามอนุพันธ์</div>
+                                    <div class="math-display">
+                                        $$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หา $f(x+h)$</div>
+                                    <p>แทน $x$ ด้วย $x+h$ ในสูตรของฟังก์ชัน:</p>
+                                    <div class="math-display">
+                                        $$f(x+h) = 3(x+h) + 5 = 3x + 3h + 5$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: คำนวณ $f(x+h) - f(x)$</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(x+h) - f(x) &= (3x + 3h + 5) - (3x + 5)\\
+                                        &= 3x + 3h + 5 - 3x - 5\\
+                                        &= 3h
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: หารด้วย $h$ และทำให้ง่าย</div>
+                                    <div class="math-display">
+                                        $$\frac{f(x+h) - f(x)}{h} = \frac{3h}{h} = 3 \quad (h \neq 0)$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 5: หาลิมิตเมื่อ $h \to 0$</div>
+                                    <div class="math-display">
+                                        $$f'(x) = \lim_{h \to 0} 3 = 3$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$f'(x) = 3$ (อนุพันธ์ของฟังก์ชันเชิงเส้นคือความชันของเส้นตรงนั้น)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 3 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ใช้นิยามของอนุพันธ์หาอนุพันธ์ของฟังก์ชัน $f(x) = x^2$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: เขียนนิยามอนุพันธ์</div>
+                                    <div class="math-display">
+                                        $$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หา $f(x+h)$</div>
+                                    <div class="math-display">
+                                        $$f(x+h) = (x+h)^2 = x^2 + 2xh + h^2$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: คำนวณ $f(x+h) - f(x)$</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(x+h) - f(x) &= (x^2 + 2xh + h^2) - x^2\\
+                                        &= 2xh + h^2\\
+                                        &= h(2x + h)
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: หารด้วย $h$</div>
+                                    <div class="math-display">
+                                        $$\frac{f(x+h) - f(x)}{h} = \frac{h(2x + h)}{h} = 2x + h \quad (h \neq 0)$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 5: หาลิมิตเมื่อ $h \to 0$</div>
+                                    <div class="math-display">
+                                        $$f'(x) = \lim_{h \to 0} (2x + h) = 2x + 0 = 2x$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$f'(x) = 2x$</p>
+                                    <p>ตัวอย่าง: ที่ $x = 3$ อนุพันธ์คือ $f'(3) = 2(3) = 6$ หมายความว่าเส้นสัมผัสที่จุด $(3, 9)$ มีความชัน 6</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 4 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 4</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ใช้นิยามของอนุพันธ์หาอนุพันธ์ของฟังก์ชัน $f(x) = \sqrt{x}$</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: เขียนนิยามอนุพันธ์</div>
+                                    <div class="math-display">
+                                        $$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = \lim_{h \to 0} \frac{\sqrt{x+h} - \sqrt{x}}{h}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: คูณด้วยส่วนเสริม (rationalize)</div>
+                                    <p>คูณทั้งเศษและส่วนด้วย $\sqrt{x+h} + \sqrt{x}$:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \frac{\sqrt{x+h} - \sqrt{x}}{h} &= \frac{\sqrt{x+h} - \sqrt{x}}{h} \cdot \frac{\sqrt{x+h} + \sqrt{x}}{\sqrt{x+h} + \sqrt{x}}\\
+                                        &= \frac{(\sqrt{x+h})^2 - (\sqrt{x})^2}{h(\sqrt{x+h} + \sqrt{x})}\\
+                                        &= \frac{(x+h) - x}{h(\sqrt{x+h} + \sqrt{x})}\\
+                                        &= \frac{h}{h(\sqrt{x+h} + \sqrt{x})}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: ตัด $h$ ออก</div>
+                                    <div class="math-display">
+                                        $$\frac{h}{h(\sqrt{x+h} + \sqrt{x})} = \frac{1}{\sqrt{x+h} + \sqrt{x}} \quad (h \neq 0)$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: หาลิมิตเมื่อ $h \to 0$</div>
+                                    <div class="math-display">
+                                        $$f'(x) = \lim_{h \to 0} \frac{1}{\sqrt{x+h} + \sqrt{x}} = \frac{1}{\sqrt{x+0} + \sqrt{x}} = \frac{1}{2\sqrt{x}}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$f'(x) = \frac{1}{2\sqrt{x}}$ โดยที่ $x > 0$</p>
+                                    <p>สังเกตว่าอนุพันธ์ไม่มีนิยามที่ $x = 0$ เพราะจะทำให้เกิดการหารด้วยศูนย์</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 5 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 5</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ลูกบอลถูกโยนขึ้นจากยอดอาคารสูง 80 เมตร โดยมีความเร็วต้น 10 เมตร/วินาที สมการตำแหน่งของลูกบอลคือ:</p>
+                                <div class="math-display">
+                                    $$s(t) = 80 + 10t - 5t^2$$
+                                </div>
+                                <p>โดยที่ $s$ คือความสูงจากพื้น (เมตร) และ $t$ คือเวลา (วินาที)</p>
+                                <p>ก) หาความเร็วของลูกบอล ณ เวลา $t = 2$ วินาที</p>
+                                <p>ข) ความเร็วนี้เป็นบวกหรือลบ และหมายความว่าอย่างไร?</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: ความเร็ว ณ ขณะหนึ่งคืออนุพันธ์ของตำแหน่ง</div>
+                                    <p>ความเร็ว $v(t) = s'(t)$ จึงต้องหาอนุพันธ์ของ $s(t) = 80 + 10t - 5t^2$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาอนุพันธ์จากนิยาม</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        s'(t) &= \lim_{h \to 0} \frac{s(t+h) - s(t)}{h}\\
+                                        s(t+h) &= 80 + 10(t+h) - 5(t+h)^2\\
+                                        &= 80 + 10t + 10h - 5(t^2 + 2th + h^2)\\
+                                        &= 80 + 10t + 10h - 5t^2 - 10th - 5h^2
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: คำนวณ $s(t+h) - s(t)$</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        s(t+h) - s(t) &= (80 + 10t + 10h - 5t^2 - 10th - 5h^2) - (80 + 10t - 5t^2)\\
+                                        &= 10h - 10th - 5h^2\\
+                                        &= h(10 - 10t - 5h)
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: หารด้วย $h$ และหาลิมิต</div>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        \frac{s(t+h) - s(t)}{h} &= \frac{h(10 - 10t - 5h)}{h} = 10 - 10t - 5h\\
+                                        s'(t) &= \lim_{h \to 0} (10 - 10t - 5h) = 10 - 10t
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 5: หาความเร็วที่ $t = 2$</div>
+                                    <div class="math-display">
+                                        $$v(2) = s'(2) = 10 - 10(2) = 10 - 20 = -10 \text{ เมตร/วินาที}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>ก) ความเร็ว ณ เวลา $t = 2$ วินาทีคือ $-10$ เมตร/วินาที</p>
+                                    <p>ข) ความเร็วเป็น<strong>ลบ</strong> หมายความว่าลูกบอลกำลัง<strong>ตกลงมา</strong> (เคลื่อนที่ในทิศทางลบ คือลงด้านล่าง) ด้วยอัตรา 10 เมตร/วินาที</p>
+                                    <p>หมายเหตุ: ที่ $t = 0$ ความเร็วคือ $v(0) = 10$ เมตร/วินาที (กำลังขึ้น) และที่ $t = 1$ ความเร็วคือ $v(1) = 0$ เมตร/วินาที (ถึงจุดสูงสุด)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ตัวอย่างที่ 6 -->
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 6</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>กำหนดฟังก์ชัน $f(x) = x^2 + 2x - 3$</p>
+                                <p>ก) หาสมการเส้นสัมผัสของกราฟฟังก์ชันนี้ที่จุด $x = 1$</p>
+                                <p>ข) หาสมการเส้นตั้งฉากกับเส้นสัมผัสที่จุดเดียวกัน</p>
+                            </div>
+
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หา $f(1)$</div>
+                                    <div class="math-display">
+                                        $$f(1) = (1)^2 + 2(1) - 3 = 1 + 2 - 3 = 0$$
+                                    </div>
+                                    <p>ดังนั้นจุดที่สนใจคือ $(1, 0)$</p>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาอนุพันธ์ $f'(x)$ จากนิยาม</div>
+                                    <p>จากตัวอย่างที่ 3 เรารู้ว่า $\frac{d}{dx}(x^2) = 2x$ และจากตัวอย่างที่ 2 รู้ว่าอนุพันธ์ของฟังก์ชันเชิงเส้นเท่ากับความชัน</p>
+                                    <p>สำหรับ $f(x) = x^2 + 2x - 3$ เราสามารถหาได้ว่า:</p>
+                                    <div class="math-display">
+                                        $$f'(x) = 2x + 2$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หาความชันของเส้นสัมผัสที่ $x = 1$</div>
+                                    <div class="math-display">
+                                        $$m = f'(1) = 2(1) + 2 = 4$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: เขียนสมการเส้นสัมผัส</div>
+                                    <p>ใช้รูป point-slope form: $y - y_1 = m(x - x_1)$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        y - 0 &= 4(x - 1)\\
+                                        y &= 4x - 4
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 5: เขียนสมการเส้นตั้งฉาก</div>
+                                    <p>เส้นตั้งฉากมีความชัน $m_{\perp} = -\frac{1}{m} = -\frac{1}{4}$</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        y - 0 &= -\frac{1}{4}(x - 1)\\
+                                        y &= -\frac{1}{4}x + \frac{1}{4}
+                                        \end{align}$$
+                                    </div>
+                                </div>
+
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>ก) สมการเส้นสัมผัส: $y = 4x - 4$</p>
+                                    <p>ข) สมการเส้นตั้งฉาก: $y = -\frac{1}{4}x + \frac{1}{4}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ========== แบบฝึกหัด ========== -->
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <!-- ข้อ 1 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>กำหนด $f(x) = x^2 - 4x + 1$ หาอัตราการเปลี่ยนแปลงเฉลี่ยของฟังก์ชันนี้ระหว่าง $x = 2$ และ $x = 5$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>หา $f(2)$ และ $f(5)$:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(2) &= (2)^2 - 4(2) + 1 = 4 - 8 + 1 = -3\\
+                                        f(5) &= (5)^2 - 4(5) + 1 = 25 - 20 + 1 = 6
+                                        \end{align}$$
+                                    </div>
+                                    <p>อัตราการเปลี่ยนแปลงเฉลี่ย:</p>
+                                    <div class="math-display">
+                                        $$\frac{f(5) - f(2)}{5 - 2} = \frac{6 - (-3)}{3} = \frac{9}{3} = 3$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $3$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 2 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>ใช้นิยามของอนุพันธ์หาอนุพันธ์ของ $f(x) = 5x - 7$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(x+h) &= 5(x+h) - 7 = 5x + 5h - 7\\
+                                        f(x+h) - f(x) &= (5x + 5h - 7) - (5x - 7) = 5h\\
+                                        \frac{f(x+h) - f(x)}{h} &= \frac{5h}{h} = 5\\
+                                        f'(x) &= \lim_{h \to 0} 5 = 5
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $f'(x) = 5$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 3 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>ใช้นิยามของอนุพันธ์หาอนุพันธ์ของ $f(x) = x^2 + 3x$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(x+h) &= (x+h)^2 + 3(x+h)\\
+                                        &= x^2 + 2xh + h^2 + 3x + 3h\\
+                                        f(x+h) - f(x) &= (x^2 + 2xh + h^2 + 3x + 3h) - (x^2 + 3x)\\
+                                        &= 2xh + h^2 + 3h = h(2x + h + 3)\\
+                                        \frac{f(x+h) - f(x)}{h} &= 2x + h + 3\\
+                                        f'(x) &= \lim_{h \to 0} (2x + h + 3) = 2x + 3
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $f'(x) = 2x + 3$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <!-- ข้อ 4 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 4:</h4>
+                                <p>ใช้นิยามของอนุพันธ์หาอนุพันธ์ของ $f(x) = \frac{1}{x}$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        f(x+h) &= \frac{1}{x+h}\\
+                                        f(x+h) - f(x) &= \frac{1}{x+h} - \frac{1}{x} = \frac{x - (x+h)}{x(x+h)} = \frac{-h}{x(x+h)}\\
+                                        \frac{f(x+h) - f(x)}{h} &= \frac{-h}{h \cdot x(x+h)} = \frac{-1}{x(x+h)}\\
+                                        f'(x) &= \lim_{h \to 0} \frac{-1}{x(x+h)} = \frac{-1}{x \cdot x} = -\frac{1}{x^2}
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $f'(x) = -\frac{1}{x^2}$ โดยที่ $x \neq 0$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ข้อ 5 -->
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 5:</h4>
+                                <p>กำหนดฟังก์ชัน $f(x) = 2x^2 - 4x + 1$ หาสมการเส้นสัมผัสของกราฟที่จุด $(2, 1)$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>ตรวจสอบว่าจุด $(2, 1)$ อยู่บนกราฟ:</p>
+                                    <div class="math-display">
+                                        $$f(2) = 2(2)^2 - 4(2) + 1 = 8 - 8 + 1 = 1 \quad \checkmark$$
+                                    </div>
+                                    <p>หาอนุพันธ์: จากการหาแบบเดียวกับตัวอย่างก่อนหน้า $f'(x) = 4x - 4$</p>
+                                    <p>ความชันที่ $x = 2$ คือ:</p>
+                                    <div class="math-display">
+                                        $$m = f'(2) = 4(2) - 4 = 4$$
+                                    </div>
+                                    <p>สมการเส้นสัมผัส:</p>
+                                    <div class="math-display">
+                                        $$\begin{align}
+                                        y - 1 &= 4(x - 2)\\
+                                        y &= 4x - 8 + 1\\
+                                        y &= 4x - 7
+                                        \end{align}$$
+                                    </div>
+                                    <p><strong>คำตอบ:</strong> $y = 4x - 7$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online. สร้างด้วยความตั้งใจเพื่อการเรียนรู้</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

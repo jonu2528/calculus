@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="การประยุกต์อนุพันธ์กับเรขาคณิตและกราฟ - เส้นสัมผัส ช่วงเพิ่มลด ความเว้าโค้ง จุดเปลี่ยนเว้า">
+    <meta name="theme-color" content="#2c3e50">
+    <title>3.1 เรขาคณิตและกราฟ - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+                <a href="/" class="nav-home">🏠 หน้าแรก</a>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 3: การประยุกต์อนุพันธ์</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter3/geometry-graphs.html" class="active">3.1 เรขาคณิตและกราฟ</a></li>
+                        <li><a href="/chapters/chapter3/physics-motion.html">3.2 ฟิสิกส์และการเคลื่อนที่</a></li>
+                        <li><a href="/chapters/chapter3/extrema.html">3.3 ค่าสูงสุดและต่ำสุด</a></li>
+                        <li><a href="/chapters/chapter3/approximation.html">3.4 การประมาณค่า</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 3: การประยุกต์อนุพันธ์</a>
+                    <span>3.1 เรขาคณิตและกราฟ</span>
+                </nav>
+
+                <article>
+                    <h1>3.1 เรขาคณิตและกราฟ (Geometry and Graphs)</h1>
+
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>1. เส้นสัมผัสและเส้นตั้งฉาก (Tangent and Normal Lines)</h3>
+
+                            <h4>สมการเส้นสัมผัส (Tangent Line)</h4>
+                            <p>เส้นสัมผัสของกราฟ $y = f(x)$ ที่จุด $(a, f(a))$ มีสมการ:</p>
+                            <div class="math-display">
+                                $$y - f(a) = f'(a)(x - a)$$
+                            </div>
+                            <p>โดยที่ $f'(a)$ คือความชันของเส้นสัมผัส ณ จุดนั้น</p>
+
+                            <h4>สมการเส้นตั้งฉาก (Normal Line)</h4>
+                            <p>เส้นตั้งฉากกับเส้นสัมผัสที่จุดเดียวกันมีความชัน $m_n = -\frac{1}{f'(a)}$ (ถ้า $f'(a) \neq 0$)</p>
+                            <div class="math-display">
+                                $$y - f(a) = -\frac{1}{f'(a)}(x - a)$$
+                            </div>
+
+                            <h3>2. ช่วงที่ฟังก์ชันเพิ่มและลด (Increasing/Decreasing Intervals)</h3>
+
+                            <div class="note">
+                                <div class="note-title">กฎการเพิ่ม/ลด</div>
+                                <p>สำหรับฟังก์ชัน $f$ ที่หาอนุพันธ์ได้บนช่วง $I$:</p>
+                                <ul>
+                                    <li>ถ้า $f'(x) > 0$ ทุก $x \in I$ แล้ว $f$ <strong>เพิ่ม</strong> บน $I$</li>
+                                    <li>ถ้า $f'(x) < 0$ ทุก $x \in I$ แล้ว $f$ <strong>ลด</strong> บน $I$</li>
+                                    <li>ถ้า $f'(x) = 0$ ทุก $x \in I$ แล้ว $f$ เป็น<strong>ค่าคงที่</strong>บน $I$</li>
+                                </ul>
+                            </div>
+
+                            <h4>จุดวิกฤต (Critical Points)</h4>
+                            <p>จุด $c$ เป็นจุดวิกฤตของ $f$ ถ้า $f'(c) = 0$ หรือ $f'(c)$ ไม่มีนิยาม</p>
+
+                            <h3>3. ความเว้าโค้ง (Concavity)</h3>
+
+                            <div class="note">
+                                <div class="note-title">กฎความเว้า</div>
+                                <ul>
+                                    <li>ถ้า $f''(x) > 0$ บนช่วง $I$ แล้ว $f$ <strong>เว้าขึ้น (concave up)</strong> บน $I$</li>
+                                    <li>ถ้า $f''(x) < 0$ บนช่วง $I$ แล้ว $f$ <strong>เว้าลง (concave down)</strong> บน $I$</li>
+                                </ul>
+                            </div>
+
+                            <p><strong>เว้าขึ้น:</strong> กราฟอยู่เหนือเส้นสัมผัส (รูปถ้วย ∪)</p>
+                            <p><strong>เว้าลง:</strong> กราฟอยู่ใต้เส้นสัมผัส (รูปหงาย ∩)</p>
+
+                            <h3>4. จุดเปลี่ยนเว้า (Inflection Points)</h3>
+
+                            <p>จุด $(c, f(c))$ เป็น<strong>จุดเปลี่ยนเว้า</strong>ถ้าความเว้าของกราฟเปลี่ยนที่จุดนั้น</p>
+
+                            <div class="tip">
+                                <div class="tip-title">วิธีหาจุดเปลี่ยนเว้า</div>
+                                <ol>
+                                    <li>หา $f''(x)$ และแก้สมการ $f''(x) = 0$</li>
+                                    <li>ตรวจสอบว่า $f''(x)$ เปลี่ยนเครื่องหมายที่จุดนั้นหรือไม่</li>
+                                    <li>ถ้าเปลี่ยนเครื่องหมาย จุดนั้นคือจุดเปลี่ยนเว้า</li>
+                                </ol>
+                            </div>
+
+                            <div class="warning">
+                                <div class="warning-title">ข้อควรระวัง</div>
+                                <p>$f''(c) = 0$ ไม่ได้หมายความว่า $c$ เป็นจุดเปลี่ยนเว้าเสมอ! ต้องตรวจสอบว่าเครื่องหมายเปลี่ยนหรือไม่</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาสมการเส้นสัมผัสและเส้นตั้งฉากของ $f(x) = x^2 - 3x + 2$ ที่จุด $x = 2$</p>
+                            </div>
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หาจุดสัมผัส</div>
+                                    <div class="math-display">$$f(2) = 4 - 6 + 2 = 0$$</div>
+                                    <p>จุดสัมผัส: $(2, 0)$</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาความชัน</div>
+                                    <div class="math-display">$$f'(x) = 2x - 3 \Rightarrow f'(2) = 4 - 3 = 1$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: เขียนสมการ</div>
+                                    <p>เส้นสัมผัส: $y - 0 = 1(x - 2) \Rightarrow y = x - 2$</p>
+                                    <p>เส้นตั้งฉาก: $y - 0 = -1(x - 2) \Rightarrow y = -x + 2$</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>เส้นสัมผัส: $y = x - 2$ และ เส้นตั้งฉาก: $y = -x + 2$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาช่วงที่ $f(x) = x^3 - 3x^2 - 9x + 5$ เพิ่มและลด</p>
+                            </div>
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หาจุดวิกฤต</div>
+                                    <div class="math-display">$$f'(x) = 3x^2 - 6x - 9 = 3(x^2 - 2x - 3) = 3(x-3)(x+1)$$</div>
+                                    <p>$f'(x) = 0$ เมื่อ $x = -1$ หรือ $x = 3$</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: ทดสอบเครื่องหมาย</div>
+                                    <table style="width:100%; text-align:center; margin: 1em 0;">
+                                        <tr><th>ช่วง</th><th>$x < -1$</th><th>$-1 < x < 3$</th><th>$x > 3$</th></tr>
+                                        <tr><td>$f'(x)$</td><td>$+$</td><td>$-$</td><td>$+$</td></tr>
+                                        <tr><td>$f$</td><td>เพิ่ม</td><td>ลด</td><td>เพิ่ม</td></tr>
+                                    </table>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>$f$ เพิ่มบน $(-\infty, -1)$ และ $(3, \infty)$</p>
+                                    <p>$f$ ลดบน $(-1, 3)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>หาช่วงที่ $f(x) = x^4 - 2x^2$ เว้าขึ้นและเว้าลง และหาจุดเปลี่ยนเว้า</p>
+                            </div>
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หา $f''(x)$</div>
+                                    <div class="math-display">$$f'(x) = 4x^3 - 4x$$</div>
+                                    <div class="math-display">$$f''(x) = 12x^2 - 4 = 4(3x^2 - 1)$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาจุดที่ $f''(x) = 0$</div>
+                                    <div class="math-display">$$3x^2 - 1 = 0 \Rightarrow x = \pm\frac{1}{\sqrt{3}} = \pm\frac{\sqrt{3}}{3}$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: ทดสอบเครื่องหมาย</div>
+                                    <table style="width:100%; text-align:center; margin: 1em 0;">
+                                        <tr><th>ช่วง</th><th>$x < -\frac{\sqrt{3}}{3}$</th><th>$-\frac{\sqrt{3}}{3} < x < \frac{\sqrt{3}}{3}$</th><th>$x > \frac{\sqrt{3}}{3}$</th></tr>
+                                        <tr><td>$f''(x)$</td><td>$+$</td><td>$-$</td><td>$+$</td></tr>
+                                        <tr><td>ความเว้า</td><td>เว้าขึ้น</td><td>เว้าลง</td><td>เว้าขึ้น</td></tr>
+                                    </table>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>เว้าขึ้นบน $\left(-\infty, -\frac{\sqrt{3}}{3}\right)$ และ $\left(\frac{\sqrt{3}}{3}, \infty\right)$</p>
+                                    <p>เว้าลงบน $\left(-\frac{\sqrt{3}}{3}, \frac{\sqrt{3}}{3}\right)$</p>
+                                    <p>จุดเปลี่ยนเว้าที่ $x = \pm\frac{\sqrt{3}}{3}$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 4</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>วิเคราะห์กราฟของ $f(x) = \frac{x}{x^2 + 1}$ หาช่วงเพิ่ม/ลด ความเว้า และจุดเปลี่ยนเว้า</p>
+                            </div>
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: หา $f'(x)$</div>
+                                    <div class="math-display">$$f'(x) = \frac{(1)(x^2+1) - x(2x)}{(x^2+1)^2} = \frac{1 - x^2}{(x^2+1)^2}$$</div>
+                                    <p>$f'(x) = 0$ เมื่อ $1 - x^2 = 0 \Rightarrow x = \pm 1$</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: วิเคราะห์ช่วงเพิ่ม/ลด</div>
+                                    <p>$(x^2+1)^2 > 0$ เสมอ ดังนั้นเครื่องหมายขึ้นกับ $1-x^2$</p>
+                                    <p>$f'(x) > 0$ เมื่อ $-1 < x < 1$ → เพิ่ม</p>
+                                    <p>$f'(x) < 0$ เมื่อ $x < -1$ หรือ $x > 1$ → ลด</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หา $f''(x)$ และวิเคราะห์ความเว้า</div>
+                                    <div class="math-display">$$f''(x) = \frac{2x(x^2-3)}{(x^2+1)^3}$$</div>
+                                    <p>$f''(x) = 0$ เมื่อ $x = 0$ หรือ $x = \pm\sqrt{3}$</p>
+                                    <p>จุดเปลี่ยนเว้าที่ $x = 0, \pm\sqrt{3}$</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>เพิ่มบน $(-1, 1)$, ลดบน $(-\infty,-1)$ และ $(1,\infty)$</p>
+                                    <p>ค่าสูงสุดสัมพัทธ์ที่ $(1, \frac{1}{2})$, ค่าต่ำสุดสัมพัทธ์ที่ $(-1, -\frac{1}{2})$</p>
+                                    <p>จุดเปลี่ยนเว้าที่ $x = 0, \pm\sqrt{3}$</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>หาสมการเส้นสัมผัสของ $f(x) = x^3$ ที่จุด $x = 2$</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>$f(2) = 8$, $f'(x) = 3x^2$, $f'(2) = 12$</p>
+                                    <div class="math-display">$$y - 8 = 12(x - 2) \Rightarrow y = 12x - 16$$</div>
+                                    <p><strong>คำตอบ:</strong> $y = 12x - 16$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>หาช่วงที่ $f(x) = x^3 - 6x^2 + 9x + 1$ เพิ่มและลด</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>$f'(x) = 3x^2 - 12x + 9 = 3(x-1)(x-3)$</p>
+                                    <p>จุดวิกฤต: $x = 1, 3$</p>
+                                    <p><strong>คำตอบ:</strong> เพิ่มบน $(-\infty, 1)$ และ $(3, \infty)$, ลดบน $(1, 3)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>หาช่วงที่ $f(x) = x^3 - 3x$ เว้าขึ้นและเว้าลง</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>$f''(x) = 6x$</p>
+                                    <p>$f''(x) = 0$ เมื่อ $x = 0$</p>
+                                    <p>$f''(x) > 0$ เมื่อ $x > 0$ → เว้าขึ้น</p>
+                                    <p>$f''(x) < 0$ เมื่อ $x < 0$ → เว้าลง</p>
+                                    <p><strong>คำตอบ:</strong> เว้าขึ้นบน $(0, \infty)$, เว้าลงบน $(-\infty, 0)$, จุดเปลี่ยนเว้าที่ $(0, 0)$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 4:</h4>
+                                <p>วิเคราะห์กราฟของ $f(x) = xe^{-x}$ หาช่วงเพิ่ม/ลด ความเว้า และจุดเปลี่ยนเว้า</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>$f'(x) = e^{-x} - xe^{-x} = e^{-x}(1-x)$</p>
+                                    <p>$f'(x) = 0$ เมื่อ $x = 1$ → เพิ่มบน $(-\infty, 1)$, ลดบน $(1, \infty)$</p>
+                                    <p>$f''(x) = e^{-x}(x-2)$</p>
+                                    <p>$f''(x) = 0$ เมื่อ $x = 2$ → จุดเปลี่ยนเว้าที่ $x = 2$</p>
+                                    <p><strong>คำตอบ:</strong> ค่าสูงสุดสัมพัทธ์ที่ $(1, e^{-1})$, จุดเปลี่ยนเว้าที่ $(2, 2e^{-2})$</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.4 การประมาณค่า | Calculus 1</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="manifest" href="../../manifest.json">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Calculus 1</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">หน้าแรก</a></li>
+                <li><a href="../chapter1/functions.html">บทที่ 1</a></li>
+                <li><a href="../chapter2/derivative-intro.html">บทที่ 2</a></li>
+                <li><a href="geometry-graphs.html" class="active">บทที่ 3</a></li>
+                <li><a href="../chapter4/antiderivatives.html">บทที่ 4</a></li>
+                <li><a href="../chapter5/integration-by-parts.html">บทที่ 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">หน้าแรก</a>
+                <span>&gt;</span>
+                <a href="geometry-graphs.html">บทที่ 3: การประยุกต์อนุพันธ์</a>
+                <span>&gt;</span>
+                <span>3.4 การประมาณค่า</span>
+            </nav>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav-box">
+                <h4>บทที่ 3: การประยุกต์อนุพันธ์</h4>
+                <ul class="chapter-nav-list">
+                    <li><a href="geometry-graphs.html">3.1 เรขาคณิตและกราฟ</a></li>
+                    <li><a href="physics-motion.html">3.2 ฟิสิกส์และการเคลื่อนที่</a></li>
+                    <li><a href="extrema.html">3.3 ค่าสูงสุดและต่ำสุด</a></li>
+                    <li class="active"><a href="approximation.html">3.4 การประมาณค่า</a></li>
+                </ul>
+            </div>
+
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>3.4 การประมาณค่า (Approximation)</h1>
+                    <p class="article-intro">
+                        การประมาณค่าเป็นการประยุกต์สำคัญของอนุพันธ์ในการหาค่าประมาณของฟังก์ชันใกล้จุดที่กำหนด
+                        เราจะศึกษาการประมาณเชิงเส้น (Linear Approximation) และดิฟเฟอเรนเชียล (Differentials)
+                        ซึ่งเป็นเครื่องมือที่มีประโยชน์มากในวิศวกรรมและวิทยาศาสตร์
+                    </p>
+                </header>
+
+                <!-- Section 1: Linear Approximation -->
+                <section class="content-section">
+                    <h2>1. การประมาณเชิงเส้น (Linear Approximation)</h2>
+
+                    <div class="concept-box">
+                        <h3>แนวคิดพื้นฐาน</h3>
+                        <p>
+                            ถ้า \(f(x)\) หาอนุพันธ์ได้ที่ \(x = a\) เราสามารถประมาณค่า \(f(x)\)
+                            ใกล้จุด \(a\) ด้วยเส้นสัมผัส (tangent line) ที่จุดนั้นได้
+                        </p>
+                        <p>
+                            เส้นสัมผัสที่จุด \((a, f(a))\) มีสมการ:
+                        </p>
+                        <div class="math-display">
+                            \[y = f(a) + f'(a)(x - a)\]
+                        </div>
+                    </div>
+
+                    <div class="definition-box">
+                        <h3>นิยาม: การประมาณเชิงเส้น</h3>
+                        <p>
+                            <strong>การประมาณเชิงเส้น (Linear Approximation)</strong> ของ \(f(x)\) ที่ \(x = a\) คือ:
+                        </p>
+                        <div class="math-display">
+                            \[L(x) = f(a) + f'(a)(x - a)\]
+                        </div>
+                        <p>
+                            โดยที่ \(L(x)\) เรียกว่า <strong>linearization</strong> ของ \(f\) ที่ \(x = a\)
+                        </p>
+                        <p>
+                            เมื่อ \(x\) อยู่ใกล้ \(a\) เราได้:
+                        </p>
+                        <div class="math-display">
+                            \[f(x) \approx f(a) + f'(a)(x - a)\]
+                        </div>
+                    </div>
+
+                    <div class="why-box">
+                        <h3>ทำไมการประมาณเชิงเส้นจึงใช้ได้?</h3>
+                        <p>
+                            จากนิยามของอนุพันธ์:
+                        </p>
+                        <div class="math-display">
+                            \[f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}\]
+                        </div>
+                        <p>
+                            เมื่อ \(x\) ใกล้ \(a\):
+                        </p>
+                        <div class="math-display">
+                            \[\frac{f(x) - f(a)}{x - a} \approx f'(a)\]
+                        </div>
+                        <p>
+                            จัดรูปใหม่: \(f(x) - f(a) \approx f'(a)(x - a)\)
+                        </p>
+                        <p>
+                            ดังนั้น: \(f(x) \approx f(a) + f'(a)(x - a)\)
+                        </p>
+                    </div>
+
+                    <!-- Example 1 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 1</h3>
+                        <p>
+                            จงหาค่าประมาณของ \(\sqrt{4.1}\) โดยใช้การประมาณเชิงเส้น
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> เลือกฟังก์ชันและจุดอ้างอิง</p>
+                            <p>ให้ \(f(x) = \sqrt{x}\) และเลือก \(a = 4\) (เพราะ \(\sqrt{4} = 2\) คำนวณง่าย)</p>
+
+                            <p><strong>ขั้นที่ 2:</strong> หาอนุพันธ์</p>
+                            <div class="math-display">
+                                \[f'(x) = \frac{1}{2\sqrt{x}}\]
+                            </div>
+                            <div class="math-display">
+                                \[f'(4) = \frac{1}{2\sqrt{4}} = \frac{1}{4}\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> สร้าง linearization</p>
+                            <div class="math-display">
+                                \[L(x) = f(4) + f'(4)(x - 4) = 2 + \frac{1}{4}(x - 4)\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 4:</strong> ประมาณค่า</p>
+                            <div class="math-display">
+                                \[\sqrt{4.1} \approx L(4.1) = 2 + \frac{1}{4}(4.1 - 4) = 2 + \frac{1}{4}(0.1) = 2 + 0.025 = 2.025\]
+                            </div>
+
+                            <p><strong>ตรวจสอบ:</strong> ค่าจริง \(\sqrt{4.1} = 2.02485...\)</p>
+                            <p>ค่าประมาณ \(2.025\) มีความคลาดเคลื่อนเพียง \(0.0001\) หรือ \(0.007\%\)</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 2</h3>
+                        <p>
+                            จงหาค่าประมาณของ \(\sin(32°)\) โดยใช้การประมาณเชิงเส้น
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> แปลงเป็นเรเดียน</p>
+                            <div class="math-display">
+                                \[32° = \frac{32\pi}{180} = \frac{8\pi}{45} \text{ เรเดียน}\]
+                            </div>
+                            <p>เลือก \(a = 30° = \frac{\pi}{6}\) (เพราะ \(\sin(30°) = 0.5\))</p>
+
+                            <p><strong>ขั้นที่ 2:</strong> หา \(f(a)\) และ \(f'(a)\)</p>
+                            <p>ให้ \(f(x) = \sin(x)\)</p>
+                            <div class="math-display">
+                                \[f\left(\frac{\pi}{6}\right) = \sin\left(\frac{\pi}{6}\right) = \frac{1}{2}\]
+                            </div>
+                            <div class="math-display">
+                                \[f'(x) = \cos(x), \quad f'\left(\frac{\pi}{6}\right) = \cos\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2}\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> ประมาณค่า</p>
+                            <p>ผลต่างมุม: \(32° - 30° = 2° = \frac{\pi}{90}\) เรเดียน</p>
+                            <div class="math-display">
+                                \[\sin(32°) \approx \frac{1}{2} + \frac{\sqrt{3}}{2} \cdot \frac{\pi}{90}\]
+                            </div>
+                            <div class="math-display">
+                                \[\approx 0.5 + 0.866 \times 0.0349 \approx 0.5 + 0.0302 \approx 0.5302\]
+                            </div>
+
+                            <p><strong>ตรวจสอบ:</strong> ค่าจริง \(\sin(32°) = 0.5299...\)</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 3</h3>
+                        <p>
+                            จงหาค่าประมาณของ \(\sqrt[3]{8.1}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(f(x) = x^{1/3}\) และ \(a = 8\) (เพราะ \(\sqrt[3]{8} = 2\))</p>
+
+                            <div class="math-display">
+                                \[f'(x) = \frac{1}{3}x^{-2/3} = \frac{1}{3x^{2/3}}\]
+                            </div>
+                            <div class="math-display">
+                                \[f'(8) = \frac{1}{3 \cdot 8^{2/3}} = \frac{1}{3 \cdot 4} = \frac{1}{12}\]
+                            </div>
+
+                            <p>การประมาณเชิงเส้น:</p>
+                            <div class="math-display">
+                                \[\sqrt[3]{8.1} \approx 2 + \frac{1}{12}(8.1 - 8) = 2 + \frac{0.1}{12} = 2 + 0.00833... \approx 2.0083\]
+                            </div>
+
+                            <p><strong>ตรวจสอบ:</strong> ค่าจริง \(\sqrt[3]{8.1} = 2.00830...\)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Differentials -->
+                <section class="content-section">
+                    <h2>2. ดิฟเฟอเรนเชียล (Differentials)</h2>
+
+                    <div class="definition-box">
+                        <h3>นิยาม: ดิฟเฟอเรนเชียล</h3>
+                        <p>ให้ \(y = f(x)\) เป็นฟังก์ชันที่หาอนุพันธ์ได้</p>
+                        <ul>
+                            <li><strong>ดิฟเฟอเรนเชียลของ \(x\)</strong> คือ \(dx\) ซึ่งเป็นตัวแปรอิสระ (เลือกค่าได้)</li>
+                            <li><strong>ดิฟเฟอเรนเชียลของ \(y\)</strong> นิยามโดย:</li>
+                        </ul>
+                        <div class="math-display">
+                            \[dy = f'(x) \, dx\]
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h3>ความสัมพันธ์ระหว่าง \(\Delta y\) และ \(dy\)</h3>
+                        <p>
+                            ให้ \(\Delta x = dx\) เป็นการเปลี่ยนแปลงเล็กๆ ของ \(x\)
+                        </p>
+                        <ul>
+                            <li><strong>\(\Delta y\)</strong> = การเปลี่ยนแปลง<em>จริง</em>ของ \(y\):
+                                \[\Delta y = f(x + \Delta x) - f(x)\]
+                            </li>
+                            <li><strong>\(dy\)</strong> = การเปลี่ยนแปลง<em>ประมาณ</em>ของ \(y\):
+                                \[dy = f'(x) \, dx\]
+                            </li>
+                        </ul>
+                        <p>เมื่อ \(\Delta x\) มีค่าน้อย: \(\Delta y \approx dy\)</p>
+                        <div class="math-display">
+                            \[f(x + dx) - f(x) \approx f'(x) \, dx\]
+                        </div>
+                    </div>
+
+                    <div class="visual-box">
+                        <h3>การตีความทางเรขาคณิต</h3>
+                        <p>
+                            บนกราฟของ \(y = f(x)\):
+                        </p>
+                        <ul>
+                            <li>\(\Delta y\) = ระยะทางแนวตั้งบนเส้นโค้ง (จาก \(f(x)\) ถึง \(f(x+dx)\))</li>
+                            <li>\(dy\) = ระยะทางแนวตั้งบนเส้นสัมผัส</li>
+                        </ul>
+                        <p>
+                            เมื่อ \(dx\) มีค่าน้อย เส้นสัมผัสจะอยู่ใกล้เส้นโค้ง ทำให้ \(dy \approx \Delta y\)
+                        </p>
+                    </div>
+
+                    <!-- Example 4 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 4</h3>
+                        <p>
+                            ให้ \(y = x^3 + 2x\) จงหา \(dy\) เมื่อ \(x = 2\) และ \(dx = 0.1\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หาอนุพันธ์</p>
+                            <div class="math-display">
+                                \[\frac{dy}{dx} = 3x^2 + 2\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> แทนค่า \(x = 2\)</p>
+                            <div class="math-display">
+                                \[f'(2) = 3(2)^2 + 2 = 12 + 2 = 14\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> คำนวณ \(dy\)</p>
+                            <div class="math-display">
+                                \[dy = f'(x) \, dx = 14 \times 0.1 = 1.4\]
+                            </div>
+
+                            <p><strong>เปรียบเทียบกับ \(\Delta y\) จริง:</strong></p>
+                            <div class="math-display">
+                                \[f(2) = 2^3 + 2(2) = 12\]
+                            </div>
+                            <div class="math-display">
+                                \[f(2.1) = (2.1)^3 + 2(2.1) = 9.261 + 4.2 = 13.461\]
+                            </div>
+                            <div class="math-display">
+                                \[\Delta y = 13.461 - 12 = 1.461\]
+                            </div>
+                            <p>ความคลาดเคลื่อน: \(|1.461 - 1.4| = 0.061\) หรือประมาณ \(4.2\%\)</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 5 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 5</h3>
+                        <p>
+                            รัศมีของทรงกลมวัดได้ \(10\) เซนติเมตร โดยมีความคลาดเคลื่อนไม่เกิน \(0.02\) ซม.
+                            จงหาความคลาดเคลื่อนสูงสุดที่เป็นไปได้ของปริมาตร
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ปริมาตรทรงกลม: \(V = \frac{4}{3}\pi r^3\)</p>
+
+                            <p><strong>ขั้นที่ 1:</strong> หาดิฟเฟอเรนเชียล</p>
+                            <div class="math-display">
+                                \[\frac{dV}{dr} = 4\pi r^2\]
+                            </div>
+                            <div class="math-display">
+                                \[dV = 4\pi r^2 \, dr\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> แทนค่า</p>
+                            <p>ให้ \(r = 10\) และ \(dr = 0.02\)</p>
+                            <div class="math-display">
+                                \[dV = 4\pi (10)^2 (0.02) = 4\pi (100)(0.02) = 8\pi \approx 25.13 \text{ ซม.}^3\]
+                            </div>
+
+                            <p><strong>คำตอบ:</strong> ความคลาดเคลื่อนสูงสุดของปริมาตรประมาณ \(25.13\) ลูกบาศก์เซนติเมตร</p>
+
+                            <p><strong>ความคลาดเคลื่อนสัมพัทธ์:</strong></p>
+                            <div class="math-display">
+                                \[V = \frac{4}{3}\pi (10)^3 = \frac{4000\pi}{3} \approx 4188.79 \text{ ซม.}^3\]
+                            </div>
+                            <div class="math-display">
+                                \[\frac{dV}{V} = \frac{8\pi}{4000\pi/3} = \frac{8 \times 3}{4000} = \frac{24}{4000} = 0.006 = 0.6\%\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 6 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 6</h3>
+                        <p>
+                            จงใช้ดิฟเฟอเรนเชียลประมาณค่า \(\cos(61°)\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(y = \cos(x)\), เลือก \(x = 60° = \frac{\pi}{3}\)</p>
+                            <p>\(dx = 1° = \frac{\pi}{180}\) เรเดียน</p>
+
+                            <p><strong>ขั้นที่ 1:</strong> หาค่าที่จุดอ้างอิง</p>
+                            <div class="math-display">
+                                \[y = \cos\left(\frac{\pi}{3}\right) = \frac{1}{2}\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> หา \(dy\)</p>
+                            <div class="math-display">
+                                \[\frac{dy}{dx} = -\sin(x)\]
+                            </div>
+                            <div class="math-display">
+                                \[dy = -\sin\left(\frac{\pi}{3}\right) \cdot \frac{\pi}{180} = -\frac{\sqrt{3}}{2} \cdot \frac{\pi}{180}\]
+                            </div>
+                            <div class="math-display">
+                                \[dy \approx -0.866 \times 0.01745 \approx -0.0151\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> ประมาณค่า</p>
+                            <div class="math-display">
+                                \[\cos(61°) \approx y + dy = 0.5 + (-0.0151) = 0.4849\]
+                            </div>
+
+                            <p><strong>ตรวจสอบ:</strong> ค่าจริง \(\cos(61°) = 0.4848...\)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Error Analysis -->
+                <section class="content-section">
+                    <h2>3. การวิเคราะห์ความคลาดเคลื่อน (Error Analysis)</h2>
+
+                    <div class="definition-box">
+                        <h3>ประเภทของความคลาดเคลื่อน</h3>
+                        <p>ให้ \(y = f(x)\) และมีความคลาดเคลื่อนในการวัด \(x\) เป็น \(dx\)</p>
+                        <ul>
+                            <li><strong>ความคลาดเคลื่อนสัมบูรณ์ (Absolute Error):</strong>
+                                \[|dy| = |f'(x)| \, |dx|\]
+                            </li>
+                            <li><strong>ความคลาดเคลื่อนสัมพัทธ์ (Relative Error):</strong>
+                                \[\frac{|dy|}{|y|} = \frac{|f'(x)|}{|f(x)|} |dx|\]
+                            </li>
+                            <li><strong>ความคลาดเคลื่อนเป็นเปอร์เซ็นต์ (Percentage Error):</strong>
+                                \[\frac{|dy|}{|y|} \times 100\%\]
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Example 7 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 7</h3>
+                        <p>
+                            ด้านของลูกบาศก์วัดได้ \(5\) เมตร โดยมีความคลาดเคลื่อน \(\pm 1\%\)
+                            จงหาความคลาดเคลื่อนสูงสุดของปริมาตรเป็นเปอร์เซ็นต์
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ปริมาตรลูกบาศก์: \(V = s^3\)</p>
+                            <p>ความคลาดเคลื่อนของด้าน: \(\frac{ds}{s} = 1\% = 0.01\)</p>
+
+                            <p><strong>ขั้นที่ 1:</strong> หา \(dV\)</p>
+                            <div class="math-display">
+                                \[dV = 3s^2 \, ds\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> หาความคลาดเคลื่อนสัมพัทธ์</p>
+                            <div class="math-display">
+                                \[\frac{dV}{V} = \frac{3s^2 \, ds}{s^3} = \frac{3 \, ds}{s} = 3 \times \frac{ds}{s}\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> แทนค่า</p>
+                            <div class="math-display">
+                                \[\frac{dV}{V} = 3 \times 0.01 = 0.03 = 3\%\]
+                            </div>
+
+                            <p><strong>คำตอบ:</strong> ความคลาดเคลื่อนสูงสุดของปริมาตรคือ \(\pm 3\%\)</p>
+
+                            <div class="note-box">
+                                <strong>หมายเหตุ:</strong> ความคลาดเคลื่อนของปริมาตรเป็น 3 เท่าของความคลาดเคลื่อนของด้าน
+                                เพราะ \(V = s^3\) (กำลังสามของด้าน)
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Newton's Method -->
+                <section class="content-section">
+                    <h2>4. วิธีของนิวตัน (Newton's Method)</h2>
+
+                    <div class="concept-box">
+                        <h3>แนวคิด</h3>
+                        <p>
+                            วิธีของนิวตันใช้ในการหารากของสมการ \(f(x) = 0\) โดยใช้การประมาณเชิงเส้นซ้ำๆ
+                        </p>
+                        <p>
+                            เริ่มจากค่าประมาณเริ่มต้น \(x_0\) แล้วปรับปรุงค่าประมาณโดยใช้สูตร:
+                        </p>
+                        <div class="math-display">
+                            \[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\]
+                        </div>
+                    </div>
+
+                    <div class="why-box">
+                        <h3>ที่มาของสูตร</h3>
+                        <p>
+                            ที่จุด \((x_n, f(x_n))\) เส้นสัมผัสมีสมการ:
+                        </p>
+                        <div class="math-display">
+                            \[y - f(x_n) = f'(x_n)(x - x_n)\]
+                        </div>
+                        <p>
+                            เส้นสัมผัสตัดแกน \(x\) (เมื่อ \(y = 0\)):
+                        </p>
+                        <div class="math-display">
+                            \[0 - f(x_n) = f'(x_n)(x - x_n)\]
+                        </div>
+                        <div class="math-display">
+                            \[x = x_n - \frac{f(x_n)}{f'(x_n)} = x_{n+1}\]
+                        </div>
+                    </div>
+
+                    <!-- Example 8 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 8</h3>
+                        <p>
+                            จงหาค่าประมาณของ \(\sqrt{2}\) โดยใช้วิธีของนิวตัน
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(\sqrt{2}\) คือรากของ \(f(x) = x^2 - 2 = 0\)</p>
+                            <p>\(f'(x) = 2x\)</p>
+
+                            <p>สูตรนิวตัน:</p>
+                            <div class="math-display">
+                                \[x_{n+1} = x_n - \frac{x_n^2 - 2}{2x_n} = x_n - \frac{x_n}{2} + \frac{1}{x_n} = \frac{x_n}{2} + \frac{1}{x_n}\]
+                            </div>
+
+                            <p><strong>เริ่มต้นที่ \(x_0 = 1\):</strong></p>
+
+                            <div class="math-display">
+                                \[x_1 = \frac{1}{2} + \frac{1}{1} = 1.5\]
+                            </div>
+                            <div class="math-display">
+                                \[x_2 = \frac{1.5}{2} + \frac{1}{1.5} = 0.75 + 0.6667 = 1.4167\]
+                            </div>
+                            <div class="math-display">
+                                \[x_3 = \frac{1.4167}{2} + \frac{1}{1.4167} = 0.7084 + 0.7059 = 1.4142\]
+                            </div>
+
+                            <p><strong>ผลลัพธ์:</strong> หลังจาก 3 รอบ ได้ \(x_3 = 1.4142\)</p>
+                            <p>ค่าจริง: \(\sqrt{2} = 1.41421356...\)</p>
+                            <p>ความแม่นยำถึงทศนิยม 4 ตำแหน่งภายใน 3 รอบเท่านั้น!</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 9 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 9</h3>
+                        <p>
+                            จงหารากของ \(x^3 - 2x - 5 = 0\) โดยใช้วิธีของนิวตัน เริ่มต้นที่ \(x_0 = 2\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(f(x) = x^3 - 2x - 5\), \(f'(x) = 3x^2 - 2\)</p>
+
+                            <p>สูตรนิวตัน:</p>
+                            <div class="math-display">
+                                \[x_{n+1} = x_n - \frac{x_n^3 - 2x_n - 5}{3x_n^2 - 2}\]
+                            </div>
+
+                            <p><strong>รอบที่ 1 (\(x_0 = 2\)):</strong></p>
+                            <div class="math-display">
+                                \[f(2) = 8 - 4 - 5 = -1, \quad f'(2) = 12 - 2 = 10\]
+                            </div>
+                            <div class="math-display">
+                                \[x_1 = 2 - \frac{-1}{10} = 2.1\]
+                            </div>
+
+                            <p><strong>รอบที่ 2 (\(x_1 = 2.1\)):</strong></p>
+                            <div class="math-display">
+                                \[f(2.1) = 9.261 - 4.2 - 5 = 0.061\]
+                            </div>
+                            <div class="math-display">
+                                \[f'(2.1) = 3(4.41) - 2 = 11.23\]
+                            </div>
+                            <div class="math-display">
+                                \[x_2 = 2.1 - \frac{0.061}{11.23} \approx 2.0946\]
+                            </div>
+
+                            <p><strong>รอบที่ 3 (\(x_2 = 2.0946\)):</strong></p>
+                            <div class="math-display">
+                                \[x_3 \approx 2.09455\]
+                            </div>
+
+                            <p><strong>ผลลัพธ์:</strong> รากของสมการประมาณ \(2.0946\)</p>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h3>ข้อควรระวังของวิธีนิวตัน</h3>
+                        <ul>
+                            <li>ต้องเลือก \(x_0\) ใกล้รากพอสมควร มิฉะนั้นอาจไม่ลู่เข้า</li>
+                            <li>ถ้า \(f'(x_n) = 0\) สูตรจะใช้ไม่ได้</li>
+                            <li>บางกรณีอาจวนซ้ำไม่สิ้นสุด (oscillate)</li>
+                            <li>ไม่รับประกันว่าจะหารากได้ทุกครั้ง</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="content-section">
+                    <h2>สรุป</h2>
+                    <div class="summary-box">
+                        <h3>สูตรสำคัญ</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>หัวข้อ</th>
+                                <th>สูตร</th>
+                            </tr>
+                            <tr>
+                                <td>การประมาณเชิงเส้น</td>
+                                <td>\(f(x) \approx f(a) + f'(a)(x - a)\)</td>
+                            </tr>
+                            <tr>
+                                <td>Linearization</td>
+                                <td>\(L(x) = f(a) + f'(a)(x - a)\)</td>
+                            </tr>
+                            <tr>
+                                <td>ดิฟเฟอเรนเชียล</td>
+                                <td>\(dy = f'(x) \, dx\)</td>
+                            </tr>
+                            <tr>
+                                <td>ความคลาดเคลื่อนสัมพัทธ์</td>
+                                <td>\(\displaystyle\frac{dy}{y} = \frac{f'(x)}{f(x)} dx\)</td>
+                            </tr>
+                            <tr>
+                                <td>วิธีนิวตัน</td>
+                                <td>\(\displaystyle x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Exercises -->
+                <section class="content-section exercises-section">
+                    <h2>แบบฝึกหัด</h2>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 1</h3>
+                        <p>จงใช้การประมาณเชิงเส้นหาค่าประมาณของ \(\sqrt{9.1}\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(f(x) = \sqrt{x}\), \(a = 9\)</p>
+                            <div class="math-display">
+                                \[f(9) = 3, \quad f'(x) = \frac{1}{2\sqrt{x}}, \quad f'(9) = \frac{1}{6}\]
+                            </div>
+                            <div class="math-display">
+                                \[\sqrt{9.1} \approx 3 + \frac{1}{6}(0.1) = 3 + 0.0167 = 3.0167\]
+                            </div>
+                            <p>ค่าจริง: \(3.01662...\)</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 2</h3>
+                        <p>จงหาค่าประมาณของ \(\tan(44°)\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(f(x) = \tan(x)\), \(a = 45° = \frac{\pi}{4}\)</p>
+                            <div class="math-display">
+                                \[f\left(\frac{\pi}{4}\right) = 1, \quad f'(x) = \sec^2(x), \quad f'\left(\frac{\pi}{4}\right) = 2\]
+                            </div>
+                            <p>\(dx = -1° = -\frac{\pi}{180}\)</p>
+                            <div class="math-display">
+                                \[\tan(44°) \approx 1 + 2\left(-\frac{\pi}{180}\right) = 1 - \frac{\pi}{90} \approx 1 - 0.0349 = 0.9651\]
+                            </div>
+                            <p>ค่าจริง: \(0.9657...\)</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 3</h3>
+                        <p>ให้ \(y = x^4\) จงหา \(dy\) และ \(\Delta y\) เมื่อ \(x = 1\) และ \(dx = 0.01\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[dy = 4x^3 \, dx = 4(1)^3(0.01) = 0.04\]
+                            </div>
+                            <div class="math-display">
+                                \[\Delta y = f(1.01) - f(1) = (1.01)^4 - 1 = 1.0406... - 1 = 0.0406\]
+                            </div>
+                            <p>ความคลาดเคลื่อน: \(|0.0406 - 0.04| = 0.0006\)</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 4</h3>
+                        <p>
+                            รัศมีของวงกลมวัดได้ \(20\) ซม. โดยมีความคลาดเคลื่อน \(\pm 0.5\) ซม.
+                            จงหาความคลาดเคลื่อนสูงสุดของพื้นที่
+                        </p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>พื้นที่วงกลม: \(A = \pi r^2\)</p>
+                            <div class="math-display">
+                                \[dA = 2\pi r \, dr = 2\pi(20)(0.5) = 20\pi \approx 62.83 \text{ ซม.}^2\]
+                            </div>
+                            <p>ความคลาดเคลื่อนสัมพัทธ์:</p>
+                            <div class="math-display">
+                                \[\frac{dA}{A} = \frac{2\pi r \, dr}{\pi r^2} = \frac{2dr}{r} = \frac{2(0.5)}{20} = 0.05 = 5\%\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 5</h3>
+                        <p>
+                            จงใช้วิธีนิวตันหาค่าประมาณของ \(\sqrt[3]{10}\) โดยเริ่มต้นที่ \(x_0 = 2\) (ทำ 2 รอบ)
+                        </p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(\sqrt[3]{10}\) คือรากของ \(f(x) = x^3 - 10 = 0\)</p>
+                            <p>\(f'(x) = 3x^2\)</p>
+                            <div class="math-display">
+                                \[x_{n+1} = x_n - \frac{x_n^3 - 10}{3x_n^2} = \frac{2x_n^3 + 10}{3x_n^2}\]
+                            </div>
+                            <p><strong>รอบที่ 1:</strong></p>
+                            <div class="math-display">
+                                \[x_1 = 2 - \frac{8-10}{12} = 2 - \frac{-2}{12} = 2 + 0.167 = 2.167\]
+                            </div>
+                            <p><strong>รอบที่ 2:</strong></p>
+                            <div class="math-display">
+                                \[x_2 = 2.167 - \frac{(2.167)^3 - 10}{3(2.167)^2} = 2.167 - \frac{10.18 - 10}{14.09} \approx 2.154\]
+                            </div>
+                            <p>ค่าจริง: \(\sqrt[3]{10} = 2.15443...\)</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 6</h3>
+                        <p>จงหาค่าประมาณของ \(e^{0.1}\) โดยใช้การประมาณเชิงเส้นที่ \(a = 0\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(f(x) = e^x\), \(a = 0\)</p>
+                            <div class="math-display">
+                                \[f(0) = e^0 = 1, \quad f'(x) = e^x, \quad f'(0) = 1\]
+                            </div>
+                            <div class="math-display">
+                                \[e^{0.1} \approx 1 + 1(0.1 - 0) = 1.1\]
+                            </div>
+                            <p>ค่าจริง: \(e^{0.1} = 1.10517...\)</p>
+                            <p>ความคลาดเคลื่อน: \(0.47\%\)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <nav class="chapter-navigation">
+                    <a href="extrema.html" class="nav-button prev">
+                        <span class="arrow">&larr;</span>
+                        <span class="nav-text">3.3 ค่าสูงสุดและต่ำสุด</span>
+                    </a>
+                    <a href="../chapter4/antiderivatives.html" class="nav-button next">
+                        <span class="nav-text">4.1 แอนตี้อนุพันธ์</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Calculus 1 Online Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

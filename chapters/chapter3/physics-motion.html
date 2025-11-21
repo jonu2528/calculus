@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="การประยุกต์อนุพันธ์กับฟิสิกส์และการเคลื่อนที่ - ตำแหน่ง ความเร็ว ความเร่ง">
+    <meta name="theme-color" content="#2c3e50">
+    <title>3.2 ฟิสิกส์และการเคลื่อนที่ - Calculus 1 Online</title>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Calculus 1 Online</h1>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเนื้อหา...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <div class="progress-summary">
+                    <h3>ความคืบหน้า</h3>
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                    <p class="progress-text" id="progressText">0%</p>
+                </div>
+                <a href="/" class="nav-home">🏠 หน้าแรก</a>
+
+                <div class="chapter-nav">
+                    <h3 class="chapter-title">บทที่ 3: การประยุกต์อนุพันธ์</h3>
+                    <ul class="topic-list">
+                        <li><a href="/chapters/chapter3/geometry-graphs.html">3.1 เรขาคณิตและกราฟ</a></li>
+                        <li><a href="/chapters/chapter3/physics-motion.html" class="active">3.2 ฟิสิกส์และการเคลื่อนที่</a></li>
+                        <li><a href="/chapters/chapter3/extrema.html">3.3 ค่าสูงสุดและต่ำสุด</a></li>
+                        <li><a href="/chapters/chapter3/approximation.html">3.4 การประมาณค่า</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="content-wrapper">
+                <nav class="breadcrumb">
+                    <a href="/">หน้าแรก</a>
+                    <a href="#">บทที่ 3: การประยุกต์อนุพันธ์</a>
+                    <span>3.2 ฟิสิกส์และการเคลื่อนที่</span>
+                </nav>
+
+                <article>
+                    <h1>3.2 ฟิสิกส์และการเคลื่อนที่ (Physics and Motion)</h1>
+
+                    <section class="theory-section section">
+                        <div class="section-header">
+                            <span class="section-icon">📖</span>
+                            <h2>ทฤษฎีและแนวคิด</h2>
+                        </div>
+
+                        <div class="theory-content">
+                            <h3>1. ความสัมพันธ์ระหว่างตำแหน่ง ความเร็ว และความเร่ง</h3>
+
+                            <p>ถ้า $s(t)$ คือฟังก์ชันตำแหน่ง (position function) ของวัตถุที่เคลื่อนที่ในแนวเส้นตรง:</p>
+
+                            <div class="math-display">
+                                $$\begin{align}
+                                \text{ตำแหน่ง:} \quad &s(t)\\
+                                \text{ความเร็ว:} \quad &v(t) = s'(t) = \frac{ds}{dt}\\
+                                \text{ความเร่ง:} \quad &a(t) = v'(t) = s''(t) = \frac{d^2s}{dt^2}
+                                \end{align}$$
+                            </div>
+
+                            <div class="note">
+                                <div class="note-title">ความแตกต่างระหว่างความเร็วและอัตราเร็ว</div>
+                                <ul>
+                                    <li><strong>ความเร็ว (Velocity):</strong> เป็นปริมาณเวกเตอร์ มีทั้งขนาดและทิศทาง อาจเป็นบวกหรือลบ</li>
+                                    <li><strong>อัตราเร็ว (Speed):</strong> คือค่าสัมบูรณ์ของความเร็ว $|v(t)|$ เป็นปริมาณสเกลาร์ ไม่มีทิศทาง</li>
+                                </ul>
+                            </div>
+
+                            <h3>2. การตีความทางฟิสิกส์</h3>
+
+                            <h4>เครื่องหมายของความเร็ว:</h4>
+                            <ul>
+                                <li>$v(t) > 0$: วัตถุเคลื่อนที่ในทิศทางบวก (ขวาหรือขึ้น)</li>
+                                <li>$v(t) < 0$: วัตถุเคลื่อนที่ในทิศทางลบ (ซ้ายหรือลง)</li>
+                                <li>$v(t) = 0$: วัตถุหยุดชั่วขณะ หรือเปลี่ยนทิศทาง</li>
+                            </ul>
+
+                            <h4>เครื่องหมายของความเร่ง:</h4>
+                            <ul>
+                                <li>$a(t) > 0$: วัตถุเร่ง (ถ้า $v > 0$) หรือชะลอตัว (ถ้า $v < 0$)</li>
+                                <li>$a(t) < 0$: วัตถุชะลอตัว (ถ้า $v > 0$) หรือเร่ง (ถ้า $v < 0$)</li>
+                            </ul>
+
+                            <div class="tip">
+                                <div class="tip-title">เคล็ดลับ</div>
+                                <p>วัตถุ<strong>เร่ง</strong>เมื่อ $v$ และ $a$ มีเครื่องหมายเดียวกัน</p>
+                                <p>วัตถุ<strong>ชะลอตัว</strong>เมื่อ $v$ และ $a$ มีเครื่องหมายต่างกัน</p>
+                            </div>
+
+                            <h3>3. การตกอิสระ (Free Fall)</h3>
+
+                            <p>สำหรับการตกอิสระใกล้ผิวโลก (ไม่คิดแรงต้านอากาศ):</p>
+                            <div class="math-display">
+                                $$s(t) = s_0 + v_0 t - \frac{1}{2}gt^2$$
+                            </div>
+                            <p>โดยที่ $g \approx 9.8$ m/s$^2$ หรือ $g \approx 10$ m/s$^2$ (ค่าประมาณ)</p>
+
+                            <h3>4. Related Rates (อัตราสัมพันธ์)</h3>
+
+                            <p>ใช้ Chain Rule เมื่อปริมาณหลายตัวเปลี่ยนแปลงตามเวลา และเกี่ยวข้องกันผ่านสมการ</p>
+
+                            <div class="warning">
+                                <div class="warning-title">ขั้นตอนแก้ปัญหา Related Rates</div>
+                                <ol>
+                                    <li>อ่านโจทย์และวาดรูป (ถ้าจำเป็น)</li>
+                                    <li>ระบุปริมาณที่ต้องการหาและปริมาณที่กำหนดให้</li>
+                                    <li>เขียนสมการที่เชื่อมโยงปริมาณทั้งหมด</li>
+                                    <li>หาอนุพันธ์เทียบกับ $t$ ทั้งสองข้าง</li>
+                                    <li>แทนค่าและแก้สมการ</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="examples-section section">
+                        <div class="section-header">
+                            <span class="section-icon">💡</span>
+                            <h2>ตัวอย่าง</h2>
+                        </div>
+
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 1</span>
+                                <span class="example-difficulty difficulty-easy">ง่าย</span>
+                            </div>
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>วัตถุเคลื่อนที่ตามสมการ $s(t) = t^3 - 6t^2 + 9t$ เมตร เมื่อ $t$ มีหน่วยวินาที</p>
+                                <p>หา (ก) ความเร็วและความเร่งที่เวลา $t = 2$ วินาที</p>
+                                <p>(ข) เวลาที่วัตถุหยุดชั่วขณะ</p>
+                            </div>
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+                                <div class="solution-step">
+                                    <div class="step-label">หาความเร็วและความเร่ง</div>
+                                    <div class="math-display">$$v(t) = s'(t) = 3t^2 - 12t + 9$$</div>
+                                    <div class="math-display">$$a(t) = v'(t) = 6t - 12$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">(ก) ที่ $t = 2$</div>
+                                    <div class="math-display">$$v(2) = 3(4) - 12(2) + 9 = 12 - 24 + 9 = -3 \text{ m/s}$$</div>
+                                    <div class="math-display">$$a(2) = 6(2) - 12 = 0 \text{ m/s}^2$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">(ข) หาเวลาที่ $v(t) = 0$</div>
+                                    <div class="math-display">$$3t^2 - 12t + 9 = 0 \Rightarrow t^2 - 4t + 3 = 0 \Rightarrow (t-1)(t-3) = 0$$</div>
+                                    <p>$t = 1$ หรือ $t = 3$ วินาที</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>(ก) $v(2) = -3$ m/s (เคลื่อนที่ในทิศลบ), $a(2) = 0$ m/s$^2$</p>
+                                    <p>(ข) วัตถุหยุดชั่วขณะที่ $t = 1$ และ $t = 3$ วินาที</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 2</span>
+                                <span class="example-difficulty difficulty-medium">ปานกลาง</span>
+                            </div>
+                            <div class="example-problem">
+                                <h4>โจทย์:</h4>
+                                <p>ลูกบอลถูกโยนขึ้นจากพื้นด้วยความเร็วต้น 30 m/s ความสูงของลูกบอลคือ $h(t) = 30t - 5t^2$ เมตร</p>
+                                <p>(ก) หาความสูงสูงสุดที่ลูกบอลขึ้นไปถึง</p>
+                                <p>(ข) หาเวลาที่ลูกบอลกลับมาถึงพื้น</p>
+                            </div>
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+                                <div class="solution-step">
+                                    <div class="step-label">(ก) ความสูงสูงสุดเมื่อ $v(t) = 0$</div>
+                                    <div class="math-display">$$v(t) = h'(t) = 30 - 10t = 0 \Rightarrow t = 3 \text{ วินาที}$$</div>
+                                    <div class="math-display">$$h(3) = 30(3) - 5(9) = 90 - 45 = 45 \text{ เมตร}$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">(ข) ถึงพื้นเมื่อ $h(t) = 0$</div>
+                                    <div class="math-display">$$30t - 5t^2 = 0 \Rightarrow 5t(6 - t) = 0$$</div>
+                                    <p>$t = 0$ (เริ่มต้น) หรือ $t = 6$ วินาที</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>(ก) ความสูงสูงสุด 45 เมตร ที่เวลา $t = 3$ วินาที</p>
+                                    <p>(ข) ลูกบอลกลับถึงพื้นที่ $t = 6$ วินาที</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="example">
+                            <div class="example-header">
+                                <span class="example-number">ตัวอย่างที่ 3</span>
+                                <span class="example-difficulty difficulty-hard">ท้าทาย</span>
+                            </div>
+                            <div class="example-problem">
+                                <h4>โจทย์ (Related Rates):</h4>
+                                <p>บันไดยาว 10 เมตรพิงกำแพง ปลายบนเลื่อนลงด้วยอัตรา 2 m/s เมื่อปลายบนอยู่สูง 6 เมตรจากพื้น ปลายล่างเลื่อนออกด้วยอัตราเท่าใด?</p>
+                            </div>
+                            <div class="solution">
+                                <h4>วิธีทำ:</h4>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 1: เขียนสมการความสัมพันธ์</div>
+                                    <p>ให้ $x$ = ระยะจากกำแพงถึงปลายล่าง, $y$ = ความสูงของปลายบน</p>
+                                    <p>จากทฤษฎีบทพีทาโกรัส: $x^2 + y^2 = 100$</p>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 2: หาอนุพันธ์เทียบกับ $t$</div>
+                                    <div class="math-display">$$2x\frac{dx}{dt} + 2y\frac{dy}{dt} = 0$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 3: หาค่า $x$ เมื่อ $y = 6$</div>
+                                    <div class="math-display">$$x^2 + 36 = 100 \Rightarrow x = 8 \text{ เมตร}$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">ขั้นตอนที่ 4: แทนค่า</div>
+                                    <p>กำหนด $\frac{dy}{dt} = -2$ (ลบเพราะเลื่อนลง)</p>
+                                    <div class="math-display">$$2(8)\frac{dx}{dt} + 2(6)(-2) = 0$$</div>
+                                    <div class="math-display">$$16\frac{dx}{dt} = 24 \Rightarrow \frac{dx}{dt} = 1.5 \text{ m/s}$$</div>
+                                </div>
+                                <div class="solution-step">
+                                    <div class="step-label">คำตอบ:</div>
+                                    <p>ปลายล่างเลื่อนออกด้วยอัตรา 1.5 m/s</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="exercises-section section">
+                        <div class="section-header">
+                            <span class="section-icon">✍️</span>
+                            <h2>แบบฝึกหัด</h2>
+                        </div>
+
+                        <h3>ระดับพื้นฐาน</h3>
+
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 1:</h4>
+                                <p>วัตถุเคลื่อนที่ตาม $s(t) = 2t^3 - 9t^2 + 12t$ เมตร หาความเร็วและความเร่งที่ $t = 1$ วินาที</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>$v(t) = 6t^2 - 18t + 12$, $a(t) = 12t - 18$</p>
+                                    <p>$v(1) = 6 - 18 + 12 = 0$ m/s</p>
+                                    <p>$a(1) = 12 - 18 = -6$ m/s$^2$</p>
+                                    <p><strong>คำตอบ:</strong> $v(1) = 0$ m/s, $a(1) = -6$ m/s$^2$</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 2:</h4>
+                                <p>ลูกบอลตกอิสระจากความสูง 80 เมตร ($s(t) = 80 - 5t^2$) หาความเร็วขณะกระทบพื้น</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>กระทบพื้นเมื่อ $s(t) = 0$: $80 - 5t^2 = 0 \Rightarrow t = 4$ วินาที</p>
+                                    <p>$v(t) = -10t$</p>
+                                    <p>$v(4) = -40$ m/s (เครื่องหมายลบแสดงทิศทางลง)</p>
+                                    <p><strong>คำตอบ:</strong> ความเร็ว 40 m/s ลงพื้น</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>ระดับท้าทาย</h3>
+
+                        <div class="exercise">
+                            <div class="exercise-problem">
+                                <h4>ข้อ 3:</h4>
+                                <p>อากาศถูกสูบเข้าลูกโป่งทรงกลมในอัตรา 10 cm$^3$/s หารัศมีเพิ่มขึ้นในอัตราเท่าใดเมื่อรัศมียาว 5 cm</p>
+                                <p>(ปริมาตรทรงกลม: $V = \frac{4}{3}\pi r^3$)</p>
+                            </div>
+                            <button class="btn btn-show-solution">ดูเฉลย</button>
+                            <div class="solution hidden">
+                                <h4>เฉลย:</h4>
+                                <div class="solution-step">
+                                    <p>$\frac{dV}{dt} = 4\pi r^2 \frac{dr}{dt}$</p>
+                                    <p>$10 = 4\pi(25)\frac{dr}{dt}$</p>
+                                    <p>$\frac{dr}{dt} = \frac{10}{100\pi} = \frac{1}{10\pi}$ cm/s</p>
+                                    <p><strong>คำตอบ:</strong> $\frac{1}{10\pi} \approx 0.032$ cm/s</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Calculus 1 Online</p>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

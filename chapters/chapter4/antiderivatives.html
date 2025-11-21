@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.1 แอนตี้อนุพันธ์ | Calculus 1</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="manifest" href="../../manifest.json">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Calculus 1</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">หน้าแรก</a></li>
+                <li><a href="../chapter1/functions.html">บทที่ 1</a></li>
+                <li><a href="../chapter2/derivative-intro.html">บทที่ 2</a></li>
+                <li><a href="../chapter3/geometry-graphs.html">บทที่ 3</a></li>
+                <li><a href="antiderivatives.html" class="active">บทที่ 4</a></li>
+                <li><a href="../chapter5/integration-by-parts.html">บทที่ 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">หน้าแรก</a>
+                <span>&gt;</span>
+                <a href="antiderivatives.html">บทที่ 4: อินทิกรัล</a>
+                <span>&gt;</span>
+                <span>4.1 แอนตี้อนุพันธ์</span>
+            </nav>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav-box">
+                <h4>บทที่ 4: อินทิกรัล</h4>
+                <ul class="chapter-nav-list">
+                    <li class="active"><a href="antiderivatives.html">4.1 แอนตี้อนุพันธ์</a></li>
+                    <li><a href="indefinite-integrals.html">4.2 อินทิกรัลไม่จำกัดเขต</a></li>
+                    <li><a href="definite-integrals.html">4.3 อินทิกรัลจำกัดเขต</a></li>
+                    <li><a href="fundamental-theorem.html">4.4 ทฤษฎีบทมูลฐาน</a></li>
+                    <li><a href="integral-applications.html">4.5 การประยุกต์อินทิกรัล</a></li>
+                </ul>
+            </div>
+
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>4.1 แอนตี้อนุพันธ์ (Antiderivatives)</h1>
+                    <p class="article-intro">
+                        แอนตี้อนุพันธ์เป็นกระบวนการย้อนกลับของการหาอนุพันธ์ ถ้าอนุพันธ์บอกเราว่าฟังก์ชันเปลี่ยนแปลงอย่างไร
+                        แอนตี้อนุพันธ์จะช่วยเราหาฟังก์ชันเดิมจากอัตราการเปลี่ยนแปลงที่ทราบ
+                    </p>
+                </header>
+
+                <!-- Section 1: Definition -->
+                <section class="content-section">
+                    <h2>1. นิยามของแอนตี้อนุพันธ์</h2>
+
+                    <div class="definition-box">
+                        <h3>นิยาม: แอนตี้อนุพันธ์</h3>
+                        <p>
+                            ฟังก์ชัน \(F(x)\) เรียกว่า <strong>แอนตี้อนุพันธ์ (antiderivative)</strong> ของ \(f(x)\)
+                            บนช่วง \(I\) ถ้า
+                        </p>
+                        <div class="math-display">
+                            \[F'(x) = f(x) \quad \text{สำหรับทุก } x \text{ ในช่วง } I\]
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h3>แนวคิดพื้นฐาน</h3>
+                        <p>
+                            การหาแอนตี้อนุพันธ์คือการตอบคำถามว่า:
+                            <strong>"ฟังก์ชันอะไรที่เมื่อหาอนุพันธ์แล้วจะได้ฟังก์ชันที่กำหนดให้?"</strong>
+                        </p>
+                        <div class="math-display">
+                            \[\text{ถ้า } \frac{d}{dx}[F(x)] = f(x) \text{ แล้ว } F(x) \text{ คือแอนตี้อนุพันธ์ของ } f(x)\]
+                        </div>
+                    </div>
+
+                    <!-- Example 1 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 1</h3>
+                        <p>
+                            จงหาแอนตี้อนุพันธ์ของ \(f(x) = 2x\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>เราต้องหาฟังก์ชัน \(F(x)\) ที่ \(F'(x) = 2x\)</p>
+                            <p>
+                                ลองนึกถึง: ฟังก์ชันอะไรที่เมื่อหาอนุพันธ์แล้วได้ \(2x\)?
+                            </p>
+                            <p>เรารู้ว่า:</p>
+                            <div class="math-display">
+                                \[\frac{d}{dx}[x^2] = 2x\]
+                            </div>
+                            <p><strong>ดังนั้น \(F(x) = x^2\) คือแอนตี้อนุพันธ์ของ \(f(x) = 2x\)</strong></p>
+
+                            <div class="note-box">
+                                <strong>หมายเหตุ:</strong> แต่ \(x^2 + 1\), \(x^2 - 5\), \(x^2 + 100\) ก็เป็นแอนตี้อนุพันธ์ของ \(2x\) ด้วย!
+                                <br>เพราะ \(\frac{d}{dx}[x^2 + C] = 2x\) สำหรับทุกค่าคงที่ \(C\)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theorem-box">
+                        <h3>ทฤษฎีบท: รูปแบบทั่วไปของแอนตี้อนุพันธ์</h3>
+                        <p>
+                            ถ้า \(F(x)\) เป็นแอนตี้อนุพันธ์ของ \(f(x)\) บนช่วง \(I\) แล้ว
+                            <strong>แอนตี้อนุพันธ์ทั่วไป</strong>ของ \(f(x)\) บนช่วง \(I\) คือ
+                        </p>
+                        <div class="math-display">
+                            \[F(x) + C\]
+                        </div>
+                        <p>โดยที่ \(C\) เป็นค่าคงที่ใดๆ เรียกว่า <strong>ค่าคงที่การอินทิเกรต (constant of integration)</strong></p>
+                    </div>
+
+                    <div class="why-box">
+                        <h3>ทำไมต้องมีค่าคงที่ C?</h3>
+                        <p>
+                            เพราะอนุพันธ์ของค่าคงที่เป็นศูนย์เสมอ:
+                        </p>
+                        <div class="math-display">
+                            \[\frac{d}{dx}[C] = 0\]
+                        </div>
+                        <p>
+                            ดังนั้นถ้า \(F'(x) = f(x)\) แล้ว \((F(x) + C)' = F'(x) + 0 = f(x)\) เช่นกัน
+                        </p>
+                        <p>
+                            นั่นหมายความว่ามีแอนตี้อนุพันธ์ของฟังก์ชันหนึ่งๆ มากมายนับไม่ถ้วน!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Section 2: Basic Antiderivative Rules -->
+                <section class="content-section">
+                    <h2>2. กฎพื้นฐานของแอนตี้อนุพันธ์</h2>
+
+                    <div class="formula-box">
+                        <h3>สูตรแอนตี้อนุพันธ์พื้นฐาน</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>\(f(x)\)</th>
+                                <th>แอนตี้อนุพันธ์ \(F(x) + C\)</th>
+                            </tr>
+                            <tr>
+                                <td>\(0\)</td>
+                                <td>\(C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(k\) (ค่าคงที่)</td>
+                                <td>\(kx + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(x^n\) (เมื่อ \(n \neq -1\))</td>
+                                <td>\(\displaystyle\frac{x^{n+1}}{n+1} + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\frac{1}{x}\) หรือ \(x^{-1}\)</td>
+                                <td>\(\ln|x| + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(e^x\)</td>
+                                <td>\(e^x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(a^x\)</td>
+                                <td>\(\displaystyle\frac{a^x}{\ln a} + C\)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="theorem-box">
+                        <h3>กฎผลรวมและตัวคูณคงที่</h3>
+                        <p>ให้ \(F(x)\) เป็นแอนตี้อนุพันธ์ของ \(f(x)\) และ \(G(x)\) เป็นแอนตี้อนุพันธ์ของ \(g(x)\):</p>
+                        <ul>
+                            <li><strong>กฎผลรวม:</strong> แอนตี้อนุพันธ์ของ \(f(x) + g(x)\) คือ \(F(x) + G(x) + C\)</li>
+                            <li><strong>กฎผลต่าง:</strong> แอนตี้อนุพันธ์ของ \(f(x) - g(x)\) คือ \(F(x) - G(x) + C\)</li>
+                            <li><strong>กฎตัวคูณคงที่:</strong> แอนตี้อนุพันธ์ของ \(kf(x)\) คือ \(kF(x) + C\)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 2</h3>
+                        <p>
+                            จงหาแอนตี้อนุพันธ์ทั่วไปของ \(f(x) = x^4\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้สูตร: แอนตี้อนุพันธ์ของ \(x^n\) คือ \(\displaystyle\frac{x^{n+1}}{n+1} + C\)</p>
+                            <p>เมื่อ \(n = 4\):</p>
+                            <div class="math-display">
+                                \[F(x) = \frac{x^{4+1}}{4+1} + C = \frac{x^5}{5} + C\]
+                            </div>
+                            <p><strong>ตรวจสอบ:</strong></p>
+                            <div class="math-display">
+                                \[F'(x) = \frac{d}{dx}\left[\frac{x^5}{5} + C\right] = \frac{5x^4}{5} = x^4 = f(x) \quad \checkmark\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 3</h3>
+                        <p>
+                            จงหาแอนตี้อนุพันธ์ทั่วไปของ \(f(x) = 3x^2 - 4x + 5\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้กฎผลรวมและตัวคูณคงที่:</p>
+                            <div class="math-display">
+                                \[F(x) = 3 \cdot \frac{x^3}{3} - 4 \cdot \frac{x^2}{2} + 5x + C\]
+                            </div>
+                            <div class="math-display">
+                                \[F(x) = x^3 - 2x^2 + 5x + C\]
+                            </div>
+                            <p><strong>ตรวจสอบ:</strong></p>
+                            <div class="math-display">
+                                \[F'(x) = 3x^2 - 4x + 5 = f(x) \quad \checkmark\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 4 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 4</h3>
+                        <p>
+                            จงหาแอนตี้อนุพันธ์ทั่วไปของ \(f(x) = \sqrt{x}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> เขียนในรูปเลขยกกำลัง</p>
+                            <div class="math-display">
+                                \[f(x) = \sqrt{x} = x^{1/2}\]
+                            </div>
+                            <p><strong>ขั้นที่ 2:</strong> ใช้สูตร (เมื่อ \(n = \frac{1}{2}\))</p>
+                            <div class="math-display">
+                                \[F(x) = \frac{x^{1/2 + 1}}{1/2 + 1} + C = \frac{x^{3/2}}{3/2} + C = \frac{2}{3}x^{3/2} + C\]
+                            </div>
+                            <p>หรือเขียนได้เป็น:</p>
+                            <div class="math-display">
+                                \[F(x) = \frac{2}{3}x\sqrt{x} + C = \frac{2}{3}\sqrt{x^3} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 5 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 5</h3>
+                        <p>
+                            จงหาแอนตี้อนุพันธ์ทั่วไปของ \(\displaystyle f(x) = \frac{1}{x^3}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> เขียนในรูปเลขยกกำลัง</p>
+                            <div class="math-display">
+                                \[f(x) = \frac{1}{x^3} = x^{-3}\]
+                            </div>
+                            <p><strong>ขั้นที่ 2:</strong> ใช้สูตร (เมื่อ \(n = -3\))</p>
+                            <div class="math-display">
+                                \[F(x) = \frac{x^{-3+1}}{-3+1} + C = \frac{x^{-2}}{-2} + C = -\frac{1}{2x^2} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 6 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 6</h3>
+                        <p>
+                            จงหาแอนตี้อนุพันธ์ทั่วไปของ \(\displaystyle f(x) = \frac{2x^3 - 5x + 1}{x}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> ทำให้เป็นพจน์แยก</p>
+                            <div class="math-display">
+                                \[f(x) = \frac{2x^3}{x} - \frac{5x}{x} + \frac{1}{x} = 2x^2 - 5 + \frac{1}{x}\]
+                            </div>
+                            <p><strong>ขั้นที่ 2:</strong> หาแอนตี้อนุพันธ์ทีละพจน์</p>
+                            <div class="math-display">
+                                \[F(x) = 2 \cdot \frac{x^3}{3} - 5x + \ln|x| + C\]
+                            </div>
+                            <div class="math-display">
+                                \[F(x) = \frac{2x^3}{3} - 5x + \ln|x| + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Trigonometric Antiderivatives -->
+                <section class="content-section">
+                    <h2>3. แอนตี้อนุพันธ์ของฟังก์ชันตรีโกณมิติ</h2>
+
+                    <div class="formula-box">
+                        <h3>สูตรแอนตี้อนุพันธ์ของฟังก์ชันตรีโกณมิติ</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>\(f(x)\)</th>
+                                <th>แอนตี้อนุพันธ์ \(F(x) + C\)</th>
+                            </tr>
+                            <tr>
+                                <td>\(\cos x\)</td>
+                                <td>\(\sin x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\sin x\)</td>
+                                <td>\(-\cos x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\sec^2 x\)</td>
+                                <td>\(\tan x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\csc^2 x\)</td>
+                                <td>\(-\cot x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\sec x \tan x\)</td>
+                                <td>\(\sec x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\csc x \cot x\)</td>
+                                <td>\(-\csc x + C\)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Example 7 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 7</h3>
+                        <p>
+                            จงหาแอนตี้อนุพันธ์ทั่วไปของ \(f(x) = 3\cos x - 2\sin x\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <div class="math-display">
+                                \[F(x) = 3\sin x - 2(-\cos x) + C = 3\sin x + 2\cos x + C\]
+                            </div>
+                            <p><strong>ตรวจสอบ:</strong></p>
+                            <div class="math-display">
+                                \[F'(x) = 3\cos x - 2\sin x = f(x) \quad \checkmark\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 8 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 8</h3>
+                        <p>
+                            จงหาแอนตี้อนุพันธ์ทั่วไปของ \(f(x) = \sec x(\sec x + \tan x)\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> กระจาย</p>
+                            <div class="math-display">
+                                \[f(x) = \sec^2 x + \sec x \tan x\]
+                            </div>
+                            <p><strong>ขั้นที่ 2:</strong> หาแอนตี้อนุพันธ์ทีละพจน์</p>
+                            <div class="math-display">
+                                \[F(x) = \tan x + \sec x + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Initial Value Problems -->
+                <section class="content-section">
+                    <h2>4. ปัญหาค่าเริ่มต้น (Initial Value Problems)</h2>
+
+                    <div class="concept-box">
+                        <h3>แนวคิด</h3>
+                        <p>
+                            เมื่อเราทราบ <strong>เงื่อนไขเริ่มต้น</strong> เช่น \(F(a) = b\) เราสามารถหาค่าคงที่ \(C\)
+                            เพื่อให้ได้แอนตี้อนุพันธ์เฉพาะที่ผ่านจุดที่กำหนด
+                        </p>
+                    </div>
+
+                    <!-- Example 9 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 9</h3>
+                        <p>
+                            จงหาฟังก์ชัน \(F(x)\) ที่ \(F'(x) = 4x - 3\) และ \(F(1) = 5\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หาแอนตี้อนุพันธ์ทั่วไป</p>
+                            <div class="math-display">
+                                \[F(x) = 2x^2 - 3x + C\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> ใช้เงื่อนไขเริ่มต้น \(F(1) = 5\)</p>
+                            <div class="math-display">
+                                \[F(1) = 2(1)^2 - 3(1) + C = 5\]
+                            </div>
+                            <div class="math-display">
+                                \[2 - 3 + C = 5\]
+                            </div>
+                            <div class="math-display">
+                                \[C = 6\]
+                            </div>
+
+                            <p><strong>คำตอบ:</strong> \(F(x) = 2x^2 - 3x + 6\)</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 10 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 10</h3>
+                        <p>
+                            วัตถุเคลื่อนที่ในแนวเส้นตรงโดยมีความเร่ง \(a(t) = 6t\) เมตร/วินาที\(^2\)
+                            ถ้าความเร็วเริ่มต้น \(v(0) = 4\) ม./วินาที และตำแหน่งเริ่มต้น \(s(0) = 2\) เมตร
+                            จงหาตำแหน่ง \(s(t)\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หาความเร็วจากความเร่ง</p>
+                            <p>เรารู้ว่า \(v'(t) = a(t) = 6t\)</p>
+                            <div class="math-display">
+                                \[v(t) = 3t^2 + C_1\]
+                            </div>
+                            <p>ใช้เงื่อนไข \(v(0) = 4\):</p>
+                            <div class="math-display">
+                                \[v(0) = 3(0)^2 + C_1 = 4 \Rightarrow C_1 = 4\]
+                            </div>
+                            <div class="math-display">
+                                \[v(t) = 3t^2 + 4\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> หาตำแหน่งจากความเร็ว</p>
+                            <p>เรารู้ว่า \(s'(t) = v(t) = 3t^2 + 4\)</p>
+                            <div class="math-display">
+                                \[s(t) = t^3 + 4t + C_2\]
+                            </div>
+                            <p>ใช้เงื่อนไข \(s(0) = 2\):</p>
+                            <div class="math-display">
+                                \[s(0) = 0 + 0 + C_2 = 2 \Rightarrow C_2 = 2\]
+                            </div>
+
+                            <p><strong>คำตอบ:</strong> \(s(t) = t^3 + 4t + 2\) เมตร</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 11 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 11</h3>
+                        <p>
+                            จงหาฟังก์ชัน \(f(x)\) โดยที่ \(f''(x) = 12x - 6\), \(f'(0) = 1\) และ \(f(0) = 3\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หา \(f'(x)\) จาก \(f''(x)\)</p>
+                            <div class="math-display">
+                                \[f'(x) = 6x^2 - 6x + C_1\]
+                            </div>
+                            <p>ใช้ \(f'(0) = 1\):</p>
+                            <div class="math-display">
+                                \[f'(0) = 0 - 0 + C_1 = 1 \Rightarrow C_1 = 1\]
+                            </div>
+                            <div class="math-display">
+                                \[f'(x) = 6x^2 - 6x + 1\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> หา \(f(x)\) จาก \(f'(x)\)</p>
+                            <div class="math-display">
+                                \[f(x) = 2x^3 - 3x^2 + x + C_2\]
+                            </div>
+                            <p>ใช้ \(f(0) = 3\):</p>
+                            <div class="math-display">
+                                \[f(0) = 0 - 0 + 0 + C_2 = 3 \Rightarrow C_2 = 3\]
+                            </div>
+
+                            <p><strong>คำตอบ:</strong> \(f(x) = 2x^3 - 3x^2 + x + 3\)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="content-section">
+                    <h2>สรุป</h2>
+                    <div class="summary-box">
+                        <h3>สิ่งที่ควรจำ</h3>
+                        <ul>
+                            <li>\(F(x)\) เป็นแอนตี้อนุพันธ์ของ \(f(x)\) ถ้า \(F'(x) = f(x)\)</li>
+                            <li>แอนตี้อนุพันธ์ทั่วไป = \(F(x) + C\) (ต้องมีค่าคงที่ \(C\) เสมอ)</li>
+                            <li>สูตรหลัก: \(\displaystyle\int x^n \, dx = \frac{x^{n+1}}{n+1} + C\) เมื่อ \(n \neq -1\)</li>
+                            <li>สำหรับ \(n = -1\): \(\displaystyle\int \frac{1}{x} \, dx = \ln|x| + C\)</li>
+                            <li>ปัญหาค่าเริ่มต้น: ใช้เงื่อนไขที่กำหนดเพื่อหาค่า \(C\)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Exercises -->
+                <section class="content-section exercises-section">
+                    <h2>แบบฝึกหัด</h2>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 1</h3>
+                        <p>จงหาแอนตี้อนุพันธ์ทั่วไปของ \(f(x) = 5x^4 - 3x^2 + 2\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[F(x) = 5 \cdot \frac{x^5}{5} - 3 \cdot \frac{x^3}{3} + 2x + C = x^5 - x^3 + 2x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 2</h3>
+                        <p>จงหาแอนตี้อนุพันธ์ทั่วไปของ \(\displaystyle f(x) = \frac{3}{\sqrt{x}}\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(\displaystyle f(x) = 3x^{-1/2}\)</p>
+                            <div class="math-display">
+                                \[F(x) = 3 \cdot \frac{x^{1/2}}{1/2} + C = 6\sqrt{x} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 3</h3>
+                        <p>จงหาแอนตี้อนุพันธ์ทั่วไปของ \(f(x) = 2\sin x + 5\cos x\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[F(x) = -2\cos x + 5\sin x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 4</h3>
+                        <p>จงหาแอนตี้อนุพันธ์ทั่วไปของ \(\displaystyle f(x) = \frac{x^4 + 2x^2 - 1}{x^2}\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ทำให้เป็นพจน์แยก: \(f(x) = x^2 + 2 - x^{-2}\)</p>
+                            <div class="math-display">
+                                \[F(x) = \frac{x^3}{3} + 2x + \frac{1}{x} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 5</h3>
+                        <p>จงหา \(F(x)\) ที่ \(F'(x) = x^2 - 4x + 3\) และ \(F(2) = 1\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>แอนตี้อนุพันธ์ทั่วไป: \(\displaystyle F(x) = \frac{x^3}{3} - 2x^2 + 3x + C\)</p>
+                            <p>ใช้ \(F(2) = 1\):</p>
+                            <div class="math-display">
+                                \[\frac{8}{3} - 8 + 6 + C = 1\]
+                            </div>
+                            <div class="math-display">
+                                \[\frac{8}{3} - 2 + C = 1 \Rightarrow C = 1 - \frac{8}{3} + 2 = 3 - \frac{8}{3} = \frac{1}{3}\]
+                            </div>
+                            <div class="math-display">
+                                \[F(x) = \frac{x^3}{3} - 2x^2 + 3x + \frac{1}{3}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 6</h3>
+                        <p>
+                            วัตถุตกอิสระจากที่สูง โดยมีความเร่ง \(a(t) = -10\) ม./วินาที\(^2\)
+                            ถ้า \(v(0) = 0\) และ \(s(0) = 100\) ม. จงหา \(s(t)\) และเวลาที่วัตถุตกถึงพื้น
+                        </p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(v(t) = -10t + C_1\), ใช้ \(v(0) = 0\): \(C_1 = 0\)</p>
+                            <p>\(v(t) = -10t\)</p>
+                            <p>\(s(t) = -5t^2 + C_2\), ใช้ \(s(0) = 100\): \(C_2 = 100\)</p>
+                            <div class="math-display">
+                                \[s(t) = -5t^2 + 100\]
+                            </div>
+                            <p>ตกถึงพื้นเมื่อ \(s(t) = 0\):</p>
+                            <div class="math-display">
+                                \[-5t^2 + 100 = 0 \Rightarrow t^2 = 20 \Rightarrow t = \sqrt{20} = 2\sqrt{5} \approx 4.47 \text{ วินาที}\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <nav class="chapter-navigation">
+                    <a href="../chapter3/approximation.html" class="nav-button prev">
+                        <span class="arrow">&larr;</span>
+                        <span class="nav-text">3.4 การประมาณค่า</span>
+                    </a>
+                    <a href="indefinite-integrals.html" class="nav-button next">
+                        <span class="nav-text">4.2 อินทิกรัลไม่จำกัดเขต</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Calculus 1 Online Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

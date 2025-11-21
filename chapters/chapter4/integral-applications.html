@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.5 การประยุกต์อินทิกรัล | Calculus 1</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="manifest" href="../../manifest.json">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Calculus 1</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">หน้าแรก</a></li>
+                <li><a href="../chapter1/functions.html">บทที่ 1</a></li>
+                <li><a href="../chapter2/derivative-intro.html">บทที่ 2</a></li>
+                <li><a href="../chapter3/geometry-graphs.html">บทที่ 3</a></li>
+                <li><a href="antiderivatives.html" class="active">บทที่ 4</a></li>
+                <li><a href="../chapter5/integration-by-parts.html">บทที่ 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">หน้าแรก</a>
+                <span>&gt;</span>
+                <a href="antiderivatives.html">บทที่ 4: อินทิกรัล</a>
+                <span>&gt;</span>
+                <span>4.5 การประยุกต์อินทิกรัล</span>
+            </nav>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav-box">
+                <h4>บทที่ 4: อินทิกรัล</h4>
+                <ul class="chapter-nav-list">
+                    <li><a href="antiderivatives.html">4.1 แอนตี้อนุพันธ์</a></li>
+                    <li><a href="indefinite-integrals.html">4.2 อินทิกรัลไม่จำกัดเขต</a></li>
+                    <li><a href="definite-integrals.html">4.3 อินทิกรัลจำกัดเขต</a></li>
+                    <li><a href="fundamental-theorem.html">4.4 ทฤษฎีบทมูลฐาน</a></li>
+                    <li class="active"><a href="integral-applications.html">4.5 การประยุกต์อินทิกรัล</a></li>
+                </ul>
+            </div>
+
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>4.5 การประยุกต์อินทิกรัล (Applications of Integrals)</h1>
+                    <p class="article-intro">
+                        อินทิกรัลมีการประยุกต์มากมายในคณิตศาสตร์และวิทยาศาสตร์
+                        ในบทนี้เราจะศึกษาการหาพื้นที่ระหว่างเส้นโค้ง ปริมาตรของทรงหมุน และความยาวเส้นโค้ง
+                    </p>
+                </header>
+
+                <!-- Section 1: Area Between Curves -->
+                <section class="content-section">
+                    <h2>1. พื้นที่ระหว่างเส้นโค้ง (Area Between Curves)</h2>
+
+                    <div class="formula-box">
+                        <h3>สูตรพื้นที่ระหว่างเส้นโค้ง</h3>
+                        <p>พื้นที่ระหว่างกราฟ \(y = f(x)\) และ \(y = g(x)\) ตั้งแต่ \(x = a\) ถึง \(x = b\):</p>
+                        <div class="math-display">
+                            \[A = \int_a^b |f(x) - g(x)| \, dx\]
+                        </div>
+                        <p>ถ้า \(f(x) \geq g(x)\) ตลอดช่วง \([a, b]\):</p>
+                        <div class="math-display">
+                            \[A = \int_a^b [f(x) - g(x)] \, dx\]
+                        </div>
+                    </div>
+
+                    <!-- Example 1 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 1</h3>
+                        <p>
+                            จงหาพื้นที่ระหว่างกราฟ \(y = x^2\) และ \(y = x\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หาจุดตัด</p>
+                            <div class="math-display">
+                                \[x^2 = x \Rightarrow x^2 - x = 0 \Rightarrow x(x-1) = 0 \Rightarrow x = 0, 1\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> พิจารณาว่ากราฟใดอยู่บน</p>
+                            <p>ในช่วง \([0, 1]\): \(x \geq x^2\) (เช่น \(x = 0.5\): \(0.5 > 0.25\))</p>
+
+                            <p><strong>ขั้นที่ 3:</strong> คำนวณพื้นที่</p>
+                            <div class="math-display">
+                                \[A = \int_0^1 (x - x^2) \, dx = \left[\frac{x^2}{2} - \frac{x^3}{3}\right]_0^1\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{2} - \frac{1}{3} = \frac{3-2}{6} = \frac{1}{6} \text{ ตารางหน่วย}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 2</h3>
+                        <p>
+                            จงหาพื้นที่ระหว่างกราฟ \(y = x^2 - 4\) และ \(y = -x^2 + 4\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หาจุดตัด</p>
+                            <div class="math-display">
+                                \[x^2 - 4 = -x^2 + 4 \Rightarrow 2x^2 = 8 \Rightarrow x = \pm 2\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> กราฟบน: \(-x^2 + 4 \geq x^2 - 4\) ในช่วง \([-2, 2]\)</p>
+
+                            <p><strong>ขั้นที่ 3:</strong> คำนวณ</p>
+                            <div class="math-display">
+                                \[A = \int_{-2}^{2} [(-x^2 + 4) - (x^2 - 4)] \, dx = \int_{-2}^{2} (-2x^2 + 8) \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \left[-\frac{2x^3}{3} + 8x\right]_{-2}^{2}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \left(-\frac{16}{3} + 16\right) - \left(\frac{16}{3} - 16\right) = -\frac{32}{3} + 32 = \frac{64}{3} \text{ ตารางหน่วย}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 3</h3>
+                        <p>
+                            จงหาพื้นที่ระหว่างกราฟ \(y = \sin x\) และ \(y = \cos x\) ตั้งแต่ \(x = 0\) ถึง \(x = \frac{\pi}{2}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หาจุดตัด</p>
+                            <div class="math-display">
+                                \[\sin x = \cos x \Rightarrow x = \frac{\pi}{4}\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> พิจารณาช่วง</p>
+                            <ul>
+                                <li>\([0, \frac{\pi}{4}]\): \(\cos x \geq \sin x\)</li>
+                                <li>\([\frac{\pi}{4}, \frac{\pi}{2}]\): \(\sin x \geq \cos x\)</li>
+                            </ul>
+
+                            <p><strong>ขั้นที่ 3:</strong> คำนวณ</p>
+                            <div class="math-display">
+                                \[A = \int_0^{\pi/4} (\cos x - \sin x) \, dx + \int_{\pi/4}^{\pi/2} (\sin x - \cos x) \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \left[\sin x + \cos x\right]_0^{\pi/4} + \left[-\cos x - \sin x\right]_{\pi/4}^{\pi/2}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \left(\frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2} - 0 - 1\right) + \left(0 - 1 + \frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2}\right)\]
+                            </div>
+                            <div class="math-display">
+                                \[= (\sqrt{2} - 1) + (\sqrt{2} - 1) = 2\sqrt{2} - 2 \approx 0.828 \text{ ตารางหน่วย}\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Volumes of Revolution -->
+                <section class="content-section">
+                    <h2>2. ปริมาตรของทรงหมุน (Volumes of Revolution)</h2>
+
+                    <div class="concept-box">
+                        <h3>แนวคิด</h3>
+                        <p>
+                            เมื่อหมุนพื้นที่รอบแกนจะได้ทรงสามมิติ ปริมาตรหาได้โดยการอินทิเกรต
+                        </p>
+                    </div>
+
+                    <div class="formula-box">
+                        <h3>วิธีแผ่นดิสก์ (Disk Method)</h3>
+                        <p>หมุนรอบแกน \(x\):</p>
+                        <div class="math-display">
+                            \[V = \pi\int_a^b [f(x)]^2 \, dx\]
+                        </div>
+                        <p>หมุนรอบแกน \(y\):</p>
+                        <div class="math-display">
+                            \[V = \pi\int_c^d [g(y)]^2 \, dy\]
+                        </div>
+                    </div>
+
+                    <div class="formula-box">
+                        <h3>วิธีวงแหวน (Washer Method)</h3>
+                        <p>เมื่อมีช่องว่างตรงกลาง (หมุนพื้นที่ระหว่างสองเส้นโค้ง):</p>
+                        <div class="math-display">
+                            \[V = \pi\int_a^b \left([R(x)]^2 - [r(x)]^2\right) dx\]
+                        </div>
+                        <p>โดย \(R(x)\) = รัศมีนอก, \(r(x)\) = รัศมีใน</p>
+                    </div>
+
+                    <!-- Example 4 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 4</h3>
+                        <p>
+                            จงหาปริมาตรที่เกิดจากการหมุนพื้นที่ใต้กราฟ \(y = \sqrt{x}\) ตั้งแต่ \(x = 0\) ถึง \(x = 4\) รอบแกน \(x\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้วิธีแผ่นดิสก์:</p>
+                            <div class="math-display">
+                                \[V = \pi\int_0^4 (\sqrt{x})^2 \, dx = \pi\int_0^4 x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \pi\left[\frac{x^2}{2}\right]_0^4 = \pi \cdot \frac{16}{2} = 8\pi \text{ ลูกบาศก์หน่วย}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 5 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 5</h3>
+                        <p>
+                            จงหาปริมาตรทรงกรวยที่มีฐานรัศมี \(r\) และสูง \(h\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>วางกรวยให้จุดยอดอยู่ที่จุดกำเนิด ฐานอยู่ที่ \(x = h\)</p>
+                            <p>สมการขอบกรวย: \(y = \frac{r}{h}x\)</p>
+                            <div class="math-display">
+                                \[V = \pi\int_0^h \left(\frac{r}{h}x\right)^2 dx = \pi\frac{r^2}{h^2}\int_0^h x^2 \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{\pi r^2}{h^2}\left[\frac{x^3}{3}\right]_0^h = \frac{\pi r^2}{h^2} \cdot \frac{h^3}{3} = \frac{1}{3}\pi r^2 h\]
+                            </div>
+                            <p>ซึ่งตรงกับสูตร \(V = \frac{1}{3}\pi r^2 h\) ที่เราคุ้นเคย!</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 6 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 6</h3>
+                        <p>
+                            จงหาปริมาตรที่เกิดจากการหมุนพื้นที่ระหว่าง \(y = x^2\) และ \(y = x\) รอบแกน \(x\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>จุดตัด: \(x = 0\) และ \(x = 1\)</p>
+                            <p>ในช่วง \([0, 1]\): \(x \geq x^2\)</p>
+                            <p>ใช้วิธีวงแหวน: \(R = x\), \(r = x^2\)</p>
+                            <div class="math-display">
+                                \[V = \pi\int_0^1 [x^2 - (x^2)^2] \, dx = \pi\int_0^1 (x^2 - x^4) \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \pi\left[\frac{x^3}{3} - \frac{x^5}{5}\right]_0^1 = \pi\left(\frac{1}{3} - \frac{1}{5}\right) = \pi \cdot \frac{2}{15} = \frac{2\pi}{15}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="formula-box">
+                        <h3>วิธีเปลือกทรงกระบอก (Shell Method)</h3>
+                        <p>หมุนรอบแกน \(y\):</p>
+                        <div class="math-display">
+                            \[V = 2\pi\int_a^b x \cdot f(x) \, dx\]
+                        </div>
+                    </div>
+
+                    <!-- Example 7 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 7</h3>
+                        <p>
+                            จงหาปริมาตรที่เกิดจากการหมุนพื้นที่ใต้กราฟ \(y = x^2\) ตั้งแต่ \(x = 0\) ถึง \(x = 2\) รอบแกน \(y\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้วิธีเปลือกทรงกระบอก:</p>
+                            <div class="math-display">
+                                \[V = 2\pi\int_0^2 x \cdot x^2 \, dx = 2\pi\int_0^2 x^3 \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= 2\pi\left[\frac{x^4}{4}\right]_0^2 = 2\pi \cdot \frac{16}{4} = 8\pi \text{ ลูกบาศก์หน่วย}\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Arc Length -->
+                <section class="content-section">
+                    <h2>3. ความยาวเส้นโค้ง (Arc Length)</h2>
+
+                    <div class="formula-box">
+                        <h3>สูตรความยาวเส้นโค้ง</h3>
+                        <p>ความยาวของเส้นโค้ง \(y = f(x)\) ตั้งแต่ \(x = a\) ถึง \(x = b\):</p>
+                        <div class="math-display">
+                            \[L = \int_a^b \sqrt{1 + \left(\frac{dy}{dx}\right)^2} \, dx = \int_a^b \sqrt{1 + [f'(x)]^2} \, dx\]
+                        </div>
+                    </div>
+
+                    <!-- Example 8 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 8</h3>
+                        <p>
+                            จงหาความยาวของเส้นโค้ง \(y = x^{3/2}\) ตั้งแต่ \(x = 0\) ถึง \(x = 4\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หาอนุพันธ์</p>
+                            <div class="math-display">
+                                \[\frac{dy}{dx} = \frac{3}{2}x^{1/2} = \frac{3}{2}\sqrt{x}\]
+                            </div>
+                            <div class="math-display">
+                                \[\left(\frac{dy}{dx}\right)^2 = \frac{9}{4}x\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> ตั้งอินทิกรัล</p>
+                            <div class="math-display">
+                                \[L = \int_0^4 \sqrt{1 + \frac{9x}{4}} \, dx\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> แทนค่า</p>
+                            <p>ให้ \(u = 1 + \frac{9x}{4}\), \(du = \frac{9}{4}dx\), \(dx = \frac{4}{9}du\)</p>
+                            <ul>
+                                <li>\(x = 0\): \(u = 1\)</li>
+                                <li>\(x = 4\): \(u = 10\)</li>
+                            </ul>
+                            <div class="math-display">
+                                \[L = \int_1^{10} \sqrt{u} \cdot \frac{4}{9} \, du = \frac{4}{9}\left[\frac{2}{3}u^{3/2}\right]_1^{10}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{8}{27}\left(10^{3/2} - 1\right) = \frac{8}{27}(10\sqrt{10} - 1) \approx 9.07\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 9 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 9</h3>
+                        <p>
+                            จงหาความยาวของเส้นตรง \(y = 3x + 2\) ตั้งแต่ \(x = 0\) ถึง \(x = 4\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(\displaystyle\frac{dy}{dx} = 3\)</p>
+                            <div class="math-display">
+                                \[L = \int_0^4 \sqrt{1 + 9} \, dx = \int_0^4 \sqrt{10} \, dx = \sqrt{10} \cdot 4 = 4\sqrt{10}\]
+                            </div>
+                            <p><strong>ตรวจสอบ:</strong> ใช้ทฤษฎีบทพีทาโกรัส</p>
+                            <div class="math-display">
+                                \[L = \sqrt{4^2 + 12^2} = \sqrt{16 + 144} = \sqrt{160} = 4\sqrt{10} \quad \checkmark\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Surface Area -->
+                <section class="content-section">
+                    <h2>4. พื้นที่ผิวของทรงหมุน (Surface Area of Revolution)</h2>
+
+                    <div class="formula-box">
+                        <h3>สูตรพื้นที่ผิว</h3>
+                        <p>พื้นที่ผิวที่เกิดจากการหมุนเส้นโค้ง \(y = f(x)\) รอบแกน \(x\):</p>
+                        <div class="math-display">
+                            \[S = 2\pi\int_a^b f(x)\sqrt{1 + [f'(x)]^2} \, dx\]
+                        </div>
+                    </div>
+
+                    <!-- Example 10 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 10</h3>
+                        <p>
+                            จงหาพื้นที่ผิวของทรงกลมรัศมี \(r\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ครึ่งวงกลม: \(y = \sqrt{r^2 - x^2}\), \(x \in [-r, r]\)</p>
+                            <div class="math-display">
+                                \[\frac{dy}{dx} = \frac{-x}{\sqrt{r^2 - x^2}}\]
+                            </div>
+                            <div class="math-display">
+                                \[1 + \left(\frac{dy}{dx}\right)^2 = 1 + \frac{x^2}{r^2 - x^2} = \frac{r^2}{r^2 - x^2}\]
+                            </div>
+                            <div class="math-display">
+                                \[S = 2\pi\int_{-r}^r \sqrt{r^2 - x^2} \cdot \frac{r}{\sqrt{r^2 - x^2}} \, dx = 2\pi\int_{-r}^r r \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= 2\pi r \cdot [x]_{-r}^r = 2\pi r (2r) = 4\pi r^2\]
+                            </div>
+                            <p>ซึ่งตรงกับสูตรพื้นที่ผิวทรงกลม \(S = 4\pi r^2\)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="content-section">
+                    <h2>สรุป</h2>
+                    <div class="summary-box">
+                        <h3>สูตรสำคัญ</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>การประยุกต์</th>
+                                <th>สูตร</th>
+                            </tr>
+                            <tr>
+                                <td>พื้นที่ระหว่างเส้นโค้ง</td>
+                                <td>\(\displaystyle A = \int_a^b |f(x) - g(x)| \, dx\)</td>
+                            </tr>
+                            <tr>
+                                <td>ปริมาตร (Disk)</td>
+                                <td>\(\displaystyle V = \pi\int_a^b [f(x)]^2 \, dx\)</td>
+                            </tr>
+                            <tr>
+                                <td>ปริมาตร (Washer)</td>
+                                <td>\(\displaystyle V = \pi\int_a^b [R^2 - r^2] \, dx\)</td>
+                            </tr>
+                            <tr>
+                                <td>ปริมาตร (Shell)</td>
+                                <td>\(\displaystyle V = 2\pi\int_a^b x \cdot f(x) \, dx\)</td>
+                            </tr>
+                            <tr>
+                                <td>ความยาวเส้นโค้ง</td>
+                                <td>\(\displaystyle L = \int_a^b \sqrt{1 + [f'(x)]^2} \, dx\)</td>
+                            </tr>
+                            <tr>
+                                <td>พื้นที่ผิว</td>
+                                <td>\(\displaystyle S = 2\pi\int_a^b f(x)\sqrt{1 + [f'(x)]^2} \, dx\)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Exercises -->
+                <section class="content-section exercises-section">
+                    <h2>แบบฝึกหัด</h2>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 1</h3>
+                        <p>จงหาพื้นที่ระหว่างกราฟ \(y = x^2\) และ \(y = 2x\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>จุดตัด: \(x^2 = 2x \Rightarrow x = 0, 2\)</p>
+                            <div class="math-display">
+                                \[A = \int_0^2 (2x - x^2) \, dx = \left[x^2 - \frac{x^3}{3}\right]_0^2 = 4 - \frac{8}{3} = \frac{4}{3}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 2</h3>
+                        <p>จงหาปริมาตรที่เกิดจากการหมุนพื้นที่ใต้กราฟ \(y = x^3\) ตั้งแต่ \(x = 0\) ถึง \(x = 1\) รอบแกน \(x\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[V = \pi\int_0^1 (x^3)^2 \, dx = \pi\int_0^1 x^6 \, dx = \pi\left[\frac{x^7}{7}\right]_0^1 = \frac{\pi}{7}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 3</h3>
+                        <p>จงหาปริมาตรที่เกิดจากการหมุนพื้นที่ระหว่าง \(y = x\) และ \(y = x^2\) รอบแกน \(y\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ใช้วิธี Shell: จุดตัด \(x = 0, 1\)</p>
+                            <div class="math-display">
+                                \[V = 2\pi\int_0^1 x(x - x^2) \, dx = 2\pi\int_0^1 (x^2 - x^3) \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= 2\pi\left[\frac{x^3}{3} - \frac{x^4}{4}\right]_0^1 = 2\pi\left(\frac{1}{3} - \frac{1}{4}\right) = 2\pi \cdot \frac{1}{12} = \frac{\pi}{6}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 4</h3>
+                        <p>จงหาความยาวของเส้นโค้ง \(y = \frac{2}{3}x^{3/2}\) ตั้งแต่ \(x = 0\) ถึง \(x = 3\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(\displaystyle\frac{dy}{dx} = x^{1/2} = \sqrt{x}\)</p>
+                            <div class="math-display">
+                                \[L = \int_0^3 \sqrt{1 + x} \, dx = \left[\frac{2}{3}(1+x)^{3/2}\right]_0^3\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{2}{3}(8 - 1) = \frac{14}{3}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 5</h3>
+                        <p>จงหาพื้นที่ผิวที่เกิดจากการหมุนเส้นโค้ง \(y = \sqrt{x}\) ตั้งแต่ \(x = 0\) ถึง \(x = 1\) รอบแกน \(x\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(\displaystyle\frac{dy}{dx} = \frac{1}{2\sqrt{x}}\), \(\displaystyle 1 + \left(\frac{dy}{dx}\right)^2 = 1 + \frac{1}{4x} = \frac{4x+1}{4x}\)</p>
+                            <div class="math-display">
+                                \[S = 2\pi\int_0^1 \sqrt{x} \cdot \sqrt{\frac{4x+1}{4x}} \, dx = 2\pi\int_0^1 \frac{\sqrt{4x+1}}{2} \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \pi\left[\frac{(4x+1)^{3/2}}{6}\right]_0^1 = \frac{\pi}{6}(5\sqrt{5} - 1)\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <nav class="chapter-navigation">
+                    <a href="fundamental-theorem.html" class="nav-button prev">
+                        <span class="arrow">&larr;</span>
+                        <span class="nav-text">4.4 ทฤษฎีบทมูลฐาน</span>
+                    </a>
+                    <a href="../chapter5/integration-by-parts.html" class="nav-button next">
+                        <span class="nav-text">5.1 อินทิเกรตทีละส่วน</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Calculus 1 Online Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

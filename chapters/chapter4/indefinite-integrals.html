@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.2 อินทิกรัลไม่จำกัดเขต | Calculus 1</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="manifest" href="../../manifest.json">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Calculus 1</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">หน้าแรก</a></li>
+                <li><a href="../chapter1/functions.html">บทที่ 1</a></li>
+                <li><a href="../chapter2/derivative-intro.html">บทที่ 2</a></li>
+                <li><a href="../chapter3/geometry-graphs.html">บทที่ 3</a></li>
+                <li><a href="antiderivatives.html" class="active">บทที่ 4</a></li>
+                <li><a href="../chapter5/integration-by-parts.html">บทที่ 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">หน้าแรก</a>
+                <span>&gt;</span>
+                <a href="antiderivatives.html">บทที่ 4: อินทิกรัล</a>
+                <span>&gt;</span>
+                <span>4.2 อินทิกรัลไม่จำกัดเขต</span>
+            </nav>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav-box">
+                <h4>บทที่ 4: อินทิกรัล</h4>
+                <ul class="chapter-nav-list">
+                    <li><a href="antiderivatives.html">4.1 แอนตี้อนุพันธ์</a></li>
+                    <li class="active"><a href="indefinite-integrals.html">4.2 อินทิกรัลไม่จำกัดเขต</a></li>
+                    <li><a href="definite-integrals.html">4.3 อินทิกรัลจำกัดเขต</a></li>
+                    <li><a href="fundamental-theorem.html">4.4 ทฤษฎีบทมูลฐาน</a></li>
+                    <li><a href="integral-applications.html">4.5 การประยุกต์อินทิกรัล</a></li>
+                </ul>
+            </div>
+
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>4.2 อินทิกรัลไม่จำกัดเขต (Indefinite Integrals)</h1>
+                    <p class="article-intro">
+                        อินทิกรัลไม่จำกัดเขตคือสัญลักษณ์มาตรฐานสำหรับการหาแอนตี้อนุพันธ์
+                        ในบทนี้เราจะเรียนรู้สัญกรณ์อินทิกรัลและสูตรพื้นฐานที่จำเป็น
+                    </p>
+                </header>
+
+                <!-- Section 1: Notation -->
+                <section class="content-section">
+                    <h2>1. สัญกรณ์อินทิกรัล (Integral Notation)</h2>
+
+                    <div class="definition-box">
+                        <h3>นิยาม: อินทิกรัลไม่จำกัดเขต</h3>
+                        <p>
+                            <strong>อินทิกรัลไม่จำกัดเขต (Indefinite Integral)</strong> ของ \(f(x)\) เขียนแทนด้วย:
+                        </p>
+                        <div class="math-display">
+                            \[\int f(x) \, dx = F(x) + C\]
+                        </div>
+                        <p>โดยที่ \(F(x)\) คือแอนตี้อนุพันธ์ของ \(f(x)\) และ \(C\) คือค่าคงที่</p>
+                    </div>
+
+                    <div class="concept-box">
+                        <h3>ส่วนประกอบของสัญลักษณ์</h3>
+                        <ul>
+                            <li>\(\int\) - เครื่องหมายอินทิกรัล (integral sign)</li>
+                            <li>\(f(x)\) - ฟังก์ชันที่จะอินทิเกรต เรียกว่า <strong>integrand</strong></li>
+                            <li>\(dx\) - ดิฟเฟอเรนเชียล แสดงว่าตัวแปรคือ \(x\)</li>
+                            <li>\(C\) - ค่าคงที่การอินทิเกรต (constant of integration)</li>
+                        </ul>
+                    </div>
+
+                    <div class="note-box">
+                        <h3>ข้อควรจำ</h3>
+                        <p>
+                            การหาอนุพันธ์และการอินทิเกรตเป็นกระบวนการตรงข้ามกัน:
+                        </p>
+                        <div class="math-display">
+                            \[\frac{d}{dx}\left[\int f(x) \, dx\right] = f(x)\]
+                        </div>
+                        <div class="math-display">
+                            \[\int F'(x) \, dx = F(x) + C\]
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Basic Formulas -->
+                <section class="content-section">
+                    <h2>2. สูตรอินทิกรัลพื้นฐาน</h2>
+
+                    <div class="formula-box">
+                        <h3>สูตรอินทิกรัลพื้นฐาน</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>สูตร</th>
+                                <th>เงื่อนไข</th>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int k \, dx = kx + C\)</td>
+                                <td>\(k\) เป็นค่าคงที่</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int x^n \, dx = \frac{x^{n+1}}{n+1} + C\)</td>
+                                <td>\(n \neq -1\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \frac{1}{x} \, dx = \ln|x| + C\)</td>
+                                <td>\(x \neq 0\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int e^x \, dx = e^x + C\)</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int a^x \, dx = \frac{a^x}{\ln a} + C\)</td>
+                                <td>\(a > 0, a \neq 1\)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="formula-box">
+                        <h3>สูตรอินทิกรัลตรีโกณมิติ</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>สูตร</th>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \cos x \, dx = \sin x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \sin x \, dx = -\cos x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \sec^2 x \, dx = \tan x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \csc^2 x \, dx = -\cot x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \sec x \tan x \, dx = \sec x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \csc x \cot x \, dx = -\csc x + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \tan x \, dx = -\ln|\cos x| + C = \ln|\sec x| + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \cot x \, dx = \ln|\sin x| + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \sec x \, dx = \ln|\sec x + \tan x| + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \csc x \, dx = -\ln|\csc x + \cot x| + C\)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="theorem-box">
+                        <h3>สมบัติของอินทิกรัล</h3>
+                        <ul>
+                            <li><strong>ตัวคูณคงที่:</strong> \(\displaystyle\int kf(x) \, dx = k\int f(x) \, dx\)</li>
+                            <li><strong>ผลรวม:</strong> \(\displaystyle\int [f(x) + g(x)] \, dx = \int f(x) \, dx + \int g(x) \, dx\)</li>
+                            <li><strong>ผลต่าง:</strong> \(\displaystyle\int [f(x) - g(x)] \, dx = \int f(x) \, dx - \int g(x) \, dx\)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Section 3: Examples -->
+                <section class="content-section">
+                    <h2>3. ตัวอย่างการคำนวณ</h2>
+
+                    <!-- Example 1 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 1</h3>
+                        <p>
+                            จงหา \(\displaystyle\int (3x^2 + 4x - 5) \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้กฎผลรวมและสูตรพื้นฐาน:</p>
+                            <div class="math-display">
+                                \[\int (3x^2 + 4x - 5) \, dx = 3\int x^2 \, dx + 4\int x \, dx - 5\int dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= 3 \cdot \frac{x^3}{3} + 4 \cdot \frac{x^2}{2} - 5x + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= x^3 + 2x^2 - 5x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 2</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \left(x^3 - \frac{2}{x} + 3e^x\right) dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <div class="math-display">
+                                \[\int \left(x^3 - \frac{2}{x} + 3e^x\right) dx = \int x^3 \, dx - 2\int \frac{1}{x} \, dx + 3\int e^x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{x^4}{4} - 2\ln|x| + 3e^x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 3</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{x^2 + 3x - 2}{x} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> แยกเศษส่วน</p>
+                            <div class="math-display">
+                                \[\frac{x^2 + 3x - 2}{x} = x + 3 - \frac{2}{x}\]
+                            </div>
+                            <p><strong>ขั้นที่ 2:</strong> อินทิเกรตทีละพจน์</p>
+                            <div class="math-display">
+                                \[\int \left(x + 3 - \frac{2}{x}\right) dx = \frac{x^2}{2} + 3x - 2\ln|x| + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 4 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 4</h3>
+                        <p>
+                            จงหา \(\displaystyle\int (\sqrt{x} + \sqrt[3]{x^2}) \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> เขียนในรูปเลขยกกำลัง</p>
+                            <div class="math-display">
+                                \[\sqrt{x} = x^{1/2}, \quad \sqrt[3]{x^2} = x^{2/3}\]
+                            </div>
+                            <p><strong>ขั้นที่ 2:</strong> อินทิเกรต</p>
+                            <div class="math-display">
+                                \[\int (x^{1/2} + x^{2/3}) \, dx = \frac{x^{3/2}}{3/2} + \frac{x^{5/3}}{5/3} + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{2}{3}x^{3/2} + \frac{3}{5}x^{5/3} + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{2}{3}x\sqrt{x} + \frac{3}{5}\sqrt[3]{x^5} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 5 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 5</h3>
+                        <p>
+                            จงหา \(\displaystyle\int (2\sin x - 3\cos x + \sec^2 x) \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <div class="math-display">
+                                \[\int (2\sin x - 3\cos x + \sec^2 x) \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= 2(-\cos x) - 3(\sin x) + \tan x + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= -2\cos x - 3\sin x + \tan x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 6 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 6</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{1 + \cos^2 x}{\cos^2 x} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> แยกเศษส่วน</p>
+                            <div class="math-display">
+                                \[\frac{1 + \cos^2 x}{\cos^2 x} = \frac{1}{\cos^2 x} + 1 = \sec^2 x + 1\]
+                            </div>
+                            <p><strong>ขั้นที่ 2:</strong> อินทิเกรต</p>
+                            <div class="math-display">
+                                \[\int (\sec^2 x + 1) \, dx = \tan x + x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 7 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 7</h3>
+                        <p>
+                            จงหา \(\displaystyle\int (x + 1)^2 \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>วิธีที่ 1:</strong> กระจายก่อน</p>
+                            <div class="math-display">
+                                \[(x + 1)^2 = x^2 + 2x + 1\]
+                            </div>
+                            <div class="math-display">
+                                \[\int (x^2 + 2x + 1) \, dx = \frac{x^3}{3} + x^2 + x + C\]
+                            </div>
+
+                            <p><strong>วิธีที่ 2:</strong> ใช้สูตร \(\int u^n \, du = \frac{u^{n+1}}{n+1} + C\)</p>
+                            <p>ให้ \(u = x + 1\), \(du = dx\)</p>
+                            <div class="math-display">
+                                \[\int (x + 1)^2 \, dx = \frac{(x + 1)^3}{3} + C\]
+                            </div>
+
+                            <div class="note-box">
+                                <strong>หมายเหตุ:</strong> ทั้งสองคำตอบเท่ากัน!
+                                <br>\(\displaystyle\frac{(x+1)^3}{3} = \frac{x^3 + 3x^2 + 3x + 1}{3} = \frac{x^3}{3} + x^2 + x + \frac{1}{3}\)
+                                <br>ต่างกันแค่ค่าคงที่ ซึ่งรวมอยู่ใน \(C\) ได้
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Substitution Preview -->
+                <section class="content-section">
+                    <h2>4. บทนำการแทนค่า (Introduction to Substitution)</h2>
+
+                    <div class="concept-box">
+                        <h3>แนวคิดการแทนค่า</h3>
+                        <p>
+                            เมื่ออินทิกรัลมีรูปแบบ \(\displaystyle\int f(g(x)) \cdot g'(x) \, dx\)
+                            เราสามารถใช้วิธีการแทนค่า (u-substitution) เพื่อทำให้อินทิกรัลง่ายขึ้น
+                        </p>
+                        <div class="math-display">
+                            \[\text{ให้ } u = g(x), \quad du = g'(x) \, dx\]
+                        </div>
+                        <div class="math-display">
+                            \[\int f(g(x)) \cdot g'(x) \, dx = \int f(u) \, du\]
+                        </div>
+                    </div>
+
+                    <!-- Example 8 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 8</h3>
+                        <p>
+                            จงหา \(\displaystyle\int 2x(x^2 + 1)^4 \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> กำหนด \(u\)</p>
+                            <p>ให้ \(u = x^2 + 1\), \(du = 2x \, dx\)</p>
+
+                            <p><strong>ขั้นที่ 2:</strong> แทนค่า</p>
+                            <div class="math-display">
+                                \[\int 2x(x^2 + 1)^4 \, dx = \int u^4 \, du\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> อินทิเกรต</p>
+                            <div class="math-display">
+                                \[\int u^4 \, du = \frac{u^5}{5} + C\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 4:</strong> แทนค่ากลับ</p>
+                            <div class="math-display">
+                                \[= \frac{(x^2 + 1)^5}{5} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 9 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 9</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \cos(3x) \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(u = 3x\), \(du = 3 \, dx\), ดังนั้น \(dx = \frac{du}{3}\)</p>
+                            <div class="math-display">
+                                \[\int \cos(3x) \, dx = \int \cos u \cdot \frac{du}{3} = \frac{1}{3}\int \cos u \, du\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{3}\sin u + C = \frac{1}{3}\sin(3x) + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 10 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 10</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{x}{x^2 + 1} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(u = x^2 + 1\), \(du = 2x \, dx\), ดังนั้น \(x \, dx = \frac{du}{2}\)</p>
+                            <div class="math-display">
+                                \[\int \frac{x}{x^2 + 1} \, dx = \int \frac{1}{u} \cdot \frac{du}{2} = \frac{1}{2}\int \frac{1}{u} \, du\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{2}\ln|u| + C = \frac{1}{2}\ln(x^2 + 1) + C\]
+                            </div>
+                            <p><strong>หมายเหตุ:</strong> ไม่ต้องใส่ค่าสัมบูรณ์เพราะ \(x^2 + 1 > 0\) เสมอ</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 11 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 11</h3>
+                        <p>
+                            จงหา \(\displaystyle\int e^{5x} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(u = 5x\), \(du = 5 \, dx\), ดังนั้น \(dx = \frac{du}{5}\)</p>
+                            <div class="math-display">
+                                \[\int e^{5x} \, dx = \int e^u \cdot \frac{du}{5} = \frac{1}{5}e^u + C = \frac{1}{5}e^{5x} + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Common Patterns -->
+                <section class="content-section">
+                    <h2>5. รูปแบบที่พบบ่อย</h2>
+
+                    <div class="formula-box">
+                        <h3>สูตรสำหรับฟังก์ชันเชิงเส้นภายใน</h3>
+                        <p>ถ้า \(a \neq 0\):</p>
+                        <table class="formula-table">
+                            <tr>
+                                <th>อินทิกรัล</th>
+                                <th>ผลลัพธ์</th>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int (ax + b)^n \, dx\)</td>
+                                <td>\(\displaystyle\frac{(ax + b)^{n+1}}{a(n+1)} + C\) เมื่อ \(n \neq -1\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \frac{1}{ax + b} \, dx\)</td>
+                                <td>\(\displaystyle\frac{1}{a}\ln|ax + b| + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int e^{ax + b} \, dx\)</td>
+                                <td>\(\displaystyle\frac{1}{a}e^{ax + b} + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \sin(ax + b) \, dx\)</td>
+                                <td>\(\displaystyle-\frac{1}{a}\cos(ax + b) + C\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\displaystyle\int \cos(ax + b) \, dx\)</td>
+                                <td>\(\displaystyle\frac{1}{a}\sin(ax + b) + C\)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="content-section">
+                    <h2>สรุป</h2>
+                    <div class="summary-box">
+                        <h3>ประเด็นสำคัญ</h3>
+                        <ul>
+                            <li>\(\displaystyle\int f(x) \, dx = F(x) + C\) โดยที่ \(F'(x) = f(x)\)</li>
+                            <li>อย่าลืม \(+C\) ทุกครั้งสำหรับอินทิกรัลไม่จำกัดเขต</li>
+                            <li>ตรวจสอบคำตอบได้โดยการหาอนุพันธ์</li>
+                            <li>การแทนค่าช่วยให้อินทิกรัลซับซ้อนง่ายขึ้น</li>
+                            <li>สำหรับ \(\int f(ax + b) \, dx\) ต้องหารด้วย \(a\)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Exercises -->
+                <section class="content-section exercises-section">
+                    <h2>แบบฝึกหัด</h2>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 1</h3>
+                        <p>จงหา \(\displaystyle\int (4x^3 - 2x^2 + 7) \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\int (4x^3 - 2x^2 + 7) \, dx = x^4 - \frac{2x^3}{3} + 7x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 2</h3>
+                        <p>จงหา \(\displaystyle\int \left(\frac{1}{x^2} + \frac{1}{x^3}\right) dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\int (x^{-2} + x^{-3}) \, dx = -x^{-1} - \frac{x^{-2}}{2} + C = -\frac{1}{x} - \frac{1}{2x^2} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 3</h3>
+                        <p>จงหา \(\displaystyle\int (\sin x + \cos x)^2 \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>กระจาย: \((\sin x + \cos x)^2 = \sin^2 x + 2\sin x\cos x + \cos^2 x = 1 + \sin 2x\)</p>
+                            <div class="math-display">
+                                \[\int (1 + \sin 2x) \, dx = x - \frac{1}{2}\cos 2x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 4</h3>
+                        <p>จงหา \(\displaystyle\int 3x^2 e^{x^3} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(u = x^3\), \(du = 3x^2 \, dx\)</p>
+                            <div class="math-display">
+                                \[\int 3x^2 e^{x^3} \, dx = \int e^u \, du = e^u + C = e^{x^3} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 5</h3>
+                        <p>จงหา \(\displaystyle\int \frac{1}{2x - 3} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ใช้สูตร \(\displaystyle\int \frac{1}{ax + b} \, dx = \frac{1}{a}\ln|ax + b| + C\)</p>
+                            <div class="math-display">
+                                \[\int \frac{1}{2x - 3} \, dx = \frac{1}{2}\ln|2x - 3| + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 6</h3>
+                        <p>จงหา \(\displaystyle\int (3x + 2)^5 \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ใช้สูตร หรือให้ \(u = 3x + 2\), \(du = 3 \, dx\)</p>
+                            <div class="math-display">
+                                \[\int (3x + 2)^5 \, dx = \frac{(3x + 2)^6}{3 \cdot 6} + C = \frac{(3x + 2)^6}{18} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 7</h3>
+                        <p>จงหา \(\displaystyle\int \cos x \sin^3 x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(u = \sin x\), \(du = \cos x \, dx\)</p>
+                            <div class="math-display">
+                                \[\int \cos x \sin^3 x \, dx = \int u^3 \, du = \frac{u^4}{4} + C = \frac{\sin^4 x}{4} + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <nav class="chapter-navigation">
+                    <a href="antiderivatives.html" class="nav-button prev">
+                        <span class="arrow">&larr;</span>
+                        <span class="nav-text">4.1 แอนตี้อนุพันธ์</span>
+                    </a>
+                    <a href="definite-integrals.html" class="nav-button next">
+                        <span class="nav-text">4.3 อินทิกรัลจำกัดเขต</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Calculus 1 Online Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

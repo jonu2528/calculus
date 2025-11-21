@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.4 เศษส่วนย่อย | Calculus 1</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="manifest" href="../../manifest.json">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Calculus 1</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">หน้าแรก</a></li>
+                <li><a href="../chapter1/functions.html">บทที่ 1</a></li>
+                <li><a href="../chapter2/derivative-intro.html">บทที่ 2</a></li>
+                <li><a href="../chapter3/geometry-graphs.html">บทที่ 3</a></li>
+                <li><a href="../chapter4/antiderivatives.html">บทที่ 4</a></li>
+                <li><a href="integration-by-parts.html" class="active">บทที่ 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">หน้าแรก</a>
+                <span>&gt;</span>
+                <a href="integration-by-parts.html">บทที่ 5: เทคนิคการอินทิเกรต</a>
+                <span>&gt;</span>
+                <span>5.4 เศษส่วนย่อย</span>
+            </nav>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav-box">
+                <h4>บทที่ 5: เทคนิคการอินทิเกรต</h4>
+                <ul class="chapter-nav-list">
+                    <li><a href="integration-by-parts.html">5.1 อินทิเกรตทีละส่วน</a></li>
+                    <li><a href="trigonometric-integrals.html">5.2 อินทิกรัลตรีโกณมิติ</a></li>
+                    <li><a href="trigonometric-substitution.html">5.3 การแทนค่าตรีโกณมิติ</a></li>
+                    <li class="active"><a href="partial-fractions.html">5.4 เศษส่วนย่อย</a></li>
+                </ul>
+            </div>
+
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>5.4 เศษส่วนย่อย (Partial Fractions)</h1>
+                    <p class="article-intro">
+                        การแยกเศษส่วนย่อยเป็นเทคนิคที่ใช้อินทิเกรตเศษส่วนพหุนาม โดยแยกเศษส่วนที่ซับซ้อน
+                        ออกเป็นผลบวกของเศษส่วนที่ง่ายกว่าซึ่งอินทิเกรตได้โดยตรง
+                    </p>
+                </header>
+
+                <!-- Section 1: Prerequisites -->
+                <section class="content-section">
+                    <h2>1. เงื่อนไขเบื้องต้น</h2>
+
+                    <div class="concept-box">
+                        <h3>Proper vs Improper Fractions</h3>
+                        <p>สำหรับ \(\frac{P(x)}{Q(x)}\):</p>
+                        <ul>
+                            <li><strong>Proper fraction:</strong> ดีกรีของ \(P(x)\) &lt; ดีกรีของ \(Q(x)\)</li>
+                            <li><strong>Improper fraction:</strong> ดีกรีของ \(P(x)\) \(\geq\) ดีกรีของ \(Q(x)\)</li>
+                        </ul>
+                        <p>
+                            ถ้าเป็น improper fraction ต้องหารยาวก่อน แล้วค่อยแยกเศษส่วนย่อยส่วนที่เหลือ
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Section 2: Case 1 - Distinct Linear Factors -->
+                <section class="content-section">
+                    <h2>2. กรณีที่ 1: ตัวประกอบเชิงเส้นต่างกัน (Distinct Linear Factors)</h2>
+
+                    <div class="formula-box">
+                        <h3>รูปแบบ</h3>
+                        <p>ถ้า \(Q(x) = (a_1x + b_1)(a_2x + b_2) \cdots (a_nx + b_n)\) แล้ว:</p>
+                        <div class="math-display">
+                            \[\frac{P(x)}{Q(x)} = \frac{A_1}{a_1x + b_1} + \frac{A_2}{a_2x + b_2} + \cdots + \frac{A_n}{a_nx + b_n}\]
+                        </div>
+                    </div>
+
+                    <!-- Example 1 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 1</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{1}{x^2 - 1} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> แยกตัวส่วน</p>
+                            <div class="math-display">
+                                \[x^2 - 1 = (x-1)(x+1)\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> ตั้งเศษส่วนย่อย</p>
+                            <div class="math-display">
+                                \[\frac{1}{x^2 - 1} = \frac{A}{x-1} + \frac{B}{x+1}\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> หาค่า A และ B</p>
+                            <div class="math-display">
+                                \[1 = A(x+1) + B(x-1)\]
+                            </div>
+                            <ul>
+                                <li>แทน \(x = 1\): \(1 = A(2) + 0 \Rightarrow A = \frac{1}{2}\)</li>
+                                <li>แทน \(x = -1\): \(1 = 0 + B(-2) \Rightarrow B = -\frac{1}{2}\)</li>
+                            </ul>
+
+                            <p><strong>ขั้นที่ 4:</strong> อินทิเกรต</p>
+                            <div class="math-display">
+                                \[\int \frac{1}{x^2 - 1} dx = \frac{1}{2}\int \frac{dx}{x-1} - \frac{1}{2}\int \frac{dx}{x+1}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{2}\ln|x-1| - \frac{1}{2}\ln|x+1| + C = \frac{1}{2}\ln\left|\frac{x-1}{x+1}\right| + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 2</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{2x + 1}{x^2 + x - 2} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(x^2 + x - 2 = (x+2)(x-1)\)</p>
+                            <div class="math-display">
+                                \[\frac{2x + 1}{(x+2)(x-1)} = \frac{A}{x+2} + \frac{B}{x-1}\]
+                            </div>
+                            <div class="math-display">
+                                \[2x + 1 = A(x-1) + B(x+2)\]
+                            </div>
+                            <ul>
+                                <li>\(x = 1\): \(3 = 3B \Rightarrow B = 1\)</li>
+                                <li>\(x = -2\): \(-3 = -3A \Rightarrow A = 1\)</li>
+                            </ul>
+                            <div class="math-display">
+                                \[\int \frac{2x + 1}{x^2 + x - 2} dx = \int \frac{dx}{x+2} + \int \frac{dx}{x-1}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \ln|x+2| + \ln|x-1| + C = \ln|x^2 + x - 2| + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Case 2 - Repeated Linear Factors -->
+                <section class="content-section">
+                    <h2>3. กรณีที่ 2: ตัวประกอบเชิงเส้นซ้ำ (Repeated Linear Factors)</h2>
+
+                    <div class="formula-box">
+                        <h3>รูปแบบ</h3>
+                        <p>ถ้า \(Q(x)\) มีตัวประกอบ \((ax + b)^n\) แล้วต้องใช้:</p>
+                        <div class="math-display">
+                            \[\frac{A_1}{ax + b} + \frac{A_2}{(ax + b)^2} + \cdots + \frac{A_n}{(ax + b)^n}\]
+                        </div>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 3</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{x}{(x-1)^2} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <div class="math-display">
+                                \[\frac{x}{(x-1)^2} = \frac{A}{x-1} + \frac{B}{(x-1)^2}\]
+                            </div>
+                            <div class="math-display">
+                                \[x = A(x-1) + B\]
+                            </div>
+                            <ul>
+                                <li>\(x = 1\): \(1 = B\)</li>
+                                <li>เปรียบเทียบสัมประสิทธิ์ของ \(x\): \(1 = A\)</li>
+                            </ul>
+                            <div class="math-display">
+                                \[\int \frac{x}{(x-1)^2} dx = \int \frac{dx}{x-1} + \int \frac{dx}{(x-1)^2}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \ln|x-1| - \frac{1}{x-1} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 4 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 4</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{x^2 + 1}{x(x-1)^2} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <div class="math-display">
+                                \[\frac{x^2 + 1}{x(x-1)^2} = \frac{A}{x} + \frac{B}{x-1} + \frac{C}{(x-1)^2}\]
+                            </div>
+                            <div class="math-display">
+                                \[x^2 + 1 = A(x-1)^2 + Bx(x-1) + Cx\]
+                            </div>
+                            <ul>
+                                <li>\(x = 0\): \(1 = A\)</li>
+                                <li>\(x = 1\): \(2 = C\)</li>
+                                <li>เปรียบเทียบสัมประสิทธิ์ \(x^2\): \(1 = A + B \Rightarrow B = 0\)</li>
+                            </ul>
+                            <div class="math-display">
+                                \[\int \frac{x^2 + 1}{x(x-1)^2} dx = \int \frac{dx}{x} + \int \frac{2dx}{(x-1)^2}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \ln|x| - \frac{2}{x-1} + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Case 3 - Irreducible Quadratic Factors -->
+                <section class="content-section">
+                    <h2>4. กรณีที่ 3: ตัวประกอบกำลังสองที่แยกไม่ได้</h2>
+
+                    <div class="formula-box">
+                        <h3>รูปแบบ</h3>
+                        <p>ถ้า \(Q(x)\) มีตัวประกอบ \(ax^2 + bx + c\) ที่ \(b^2 - 4ac < 0\):</p>
+                        <div class="math-display">
+                            \[\frac{Ax + B}{ax^2 + bx + c}\]
+                        </div>
+                    </div>
+
+                    <!-- Example 5 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 5</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{x}{x^2 + 4} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(x^2 + 4\) แยกตัวประกอบไม่ได้ (irreducible)</p>
+                            <p>สังเกตว่า \(\frac{d}{dx}(x^2 + 4) = 2x\)</p>
+                            <div class="math-display">
+                                \[\int \frac{x}{x^2 + 4} dx = \frac{1}{2}\int \frac{2x}{x^2 + 4} dx = \frac{1}{2}\ln(x^2 + 4) + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 6 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 6</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{2x + 3}{x^2 + 2x + 5} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>แยกเป็นสองส่วน: \(\frac{d}{dx}(x^2 + 2x + 5) = 2x + 2\)</p>
+                            <div class="math-display">
+                                \[\frac{2x + 3}{x^2 + 2x + 5} = \frac{2x + 2}{x^2 + 2x + 5} + \frac{1}{x^2 + 2x + 5}\]
+                            </div>
+
+                            <p><strong>ส่วนแรก:</strong></p>
+                            <div class="math-display">
+                                \[\int \frac{2x + 2}{x^2 + 2x + 5} dx = \ln(x^2 + 2x + 5)\]
+                            </div>
+
+                            <p><strong>ส่วนที่สอง:</strong> ทำให้เป็นกำลังสองสมบูรณ์</p>
+                            <div class="math-display">
+                                \[x^2 + 2x + 5 = (x + 1)^2 + 4\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \frac{dx}{(x+1)^2 + 4} = \frac{1}{2}\arctan\frac{x+1}{2}\]
+                            </div>
+
+                            <p><strong>คำตอบ:</strong></p>
+                            <div class="math-display">
+                                \[\int \frac{2x + 3}{x^2 + 2x + 5} dx = \ln(x^2 + 2x + 5) + \frac{1}{2}\arctan\frac{x+1}{2} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 7 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 7</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{x + 1}{(x-1)(x^2 + 1)} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <div class="math-display">
+                                \[\frac{x + 1}{(x-1)(x^2 + 1)} = \frac{A}{x-1} + \frac{Bx + C}{x^2 + 1}\]
+                            </div>
+                            <div class="math-display">
+                                \[x + 1 = A(x^2 + 1) + (Bx + C)(x - 1)\]
+                            </div>
+                            <ul>
+                                <li>\(x = 1\): \(2 = 2A \Rightarrow A = 1\)</li>
+                                <li>สัมประสิทธิ์ \(x^2\): \(0 = A + B \Rightarrow B = -1\)</li>
+                                <li>ค่าคงที่: \(1 = A - C \Rightarrow C = 0\)</li>
+                            </ul>
+                            <div class="math-display">
+                                \[\int \frac{x + 1}{(x-1)(x^2 + 1)} dx = \int \frac{dx}{x-1} - \int \frac{x}{x^2 + 1} dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \ln|x-1| - \frac{1}{2}\ln(x^2 + 1) + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Improper Fractions -->
+                <section class="content-section">
+                    <h2>5. กรณี Improper Fraction</h2>
+
+                    <!-- Example 8 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 8</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{x^3 + 2}{x^2 - 1} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> หารยาว (เพราะดีกรีเศษ = 3 > ดีกรีส่วน = 2)</p>
+                            <div class="math-display">
+                                \[\frac{x^3 + 2}{x^2 - 1} = x + \frac{x + 2}{x^2 - 1}\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> แยกเศษส่วนย่อย</p>
+                            <div class="math-display">
+                                \[\frac{x + 2}{(x-1)(x+1)} = \frac{A}{x-1} + \frac{B}{x+1}\]
+                            </div>
+                            <ul>
+                                <li>\(x = 1\): \(3 = 2A \Rightarrow A = \frac{3}{2}\)</li>
+                                <li>\(x = -1\): \(1 = -2B \Rightarrow B = -\frac{1}{2}\)</li>
+                            </ul>
+
+                            <p><strong>ขั้นที่ 3:</strong> อินทิเกรต</p>
+                            <div class="math-display">
+                                \[\int \frac{x^3 + 2}{x^2 - 1} dx = \int x \, dx + \frac{3}{2}\int \frac{dx}{x-1} - \frac{1}{2}\int \frac{dx}{x+1}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{x^2}{2} + \frac{3}{2}\ln|x-1| - \frac{1}{2}\ln|x+1| + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="content-section">
+                    <h2>สรุป</h2>
+                    <div class="summary-box">
+                        <h3>ขั้นตอนการแยกเศษส่วนย่อย</h3>
+                        <ol>
+                            <li>ตรวจสอบว่าเป็น proper fraction หรือไม่ (ถ้าไม่ใช่ ให้หารยาวก่อน)</li>
+                            <li>แยกตัวประกอบของตัวส่วน</li>
+                            <li>เขียนเศษส่วนย่อยตามรูปแบบที่เหมาะสม:
+                                <ul>
+                                    <li>ตัวประกอบเชิงเส้นต่างกัน: \(\frac{A}{ax+b}\)</li>
+                                    <li>ตัวประกอบเชิงเส้นซ้ำ: \(\frac{A_1}{ax+b} + \frac{A_2}{(ax+b)^2} + ...\)</li>
+                                    <li>ตัวประกอบกำลังสองที่แยกไม่ได้: \(\frac{Ax+B}{ax^2+bx+c}\)</li>
+                                </ul>
+                            </li>
+                            <li>หาค่าสัมประสิทธิ์โดยการแทนค่าหรือเปรียบเทียบสัมประสิทธิ์</li>
+                            <li>อินทิเกรตแต่ละเศษส่วนย่อย</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- Exercises -->
+                <section class="content-section exercises-section">
+                    <h2>แบบฝึกหัด</h2>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 1</h3>
+                        <p>จงหา \(\displaystyle\int \frac{5x - 3}{x^2 - 2x - 3} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(x^2 - 2x - 3 = (x-3)(x+1)\)</p>
+                            <div class="math-display">
+                                \[\frac{5x - 3}{(x-3)(x+1)} = \frac{A}{x-3} + \frac{B}{x+1}\]
+                            </div>
+                            <p>\(x = 3\): \(12 = 4A \Rightarrow A = 3\)</p>
+                            <p>\(x = -1\): \(-8 = -4B \Rightarrow B = 2\)</p>
+                            <div class="math-display">
+                                \[\int = 3\ln|x-3| + 2\ln|x+1| + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 2</h3>
+                        <p>จงหา \(\displaystyle\int \frac{3x + 5}{(x+1)^2} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\frac{3x + 5}{(x+1)^2} = \frac{A}{x+1} + \frac{B}{(x+1)^2}\]
+                            </div>
+                            <p>\(3x + 5 = A(x+1) + B\)</p>
+                            <p>\(x = -1\): \(2 = B\)</p>
+                            <p>สัมประสิทธิ์ \(x\): \(A = 3\)</p>
+                            <div class="math-display">
+                                \[\int = 3\ln|x+1| - \frac{2}{x+1} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 3</h3>
+                        <p>จงหา \(\displaystyle\int \frac{1}{x^3 - x} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(x^3 - x = x(x-1)(x+1)\)</p>
+                            <div class="math-display">
+                                \[\frac{1}{x(x-1)(x+1)} = \frac{A}{x} + \frac{B}{x-1} + \frac{C}{x+1}\]
+                            </div>
+                            <p>\(x = 0\): \(1 = -A \Rightarrow A = -1\)</p>
+                            <p>\(x = 1\): \(1 = 2B \Rightarrow B = \frac{1}{2}\)</p>
+                            <p>\(x = -1\): \(1 = -2C \Rightarrow C = \frac{1}{2}\)</p>
+                            <div class="math-display">
+                                \[\int = -\ln|x| + \frac{1}{2}\ln|x-1| + \frac{1}{2}\ln|x+1| + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 4</h3>
+                        <p>จงหา \(\displaystyle\int \frac{x^2}{x^2 + 4} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>หารยาว: \(\frac{x^2}{x^2 + 4} = 1 - \frac{4}{x^2 + 4}\)</p>
+                            <div class="math-display">
+                                \[\int \left(1 - \frac{4}{x^2 + 4}\right) dx = x - 4 \cdot \frac{1}{2}\arctan\frac{x}{2} + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= x - 2\arctan\frac{x}{2} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 5</h3>
+                        <p>จงหา \(\displaystyle\int \frac{x^2 + 2x + 3}{(x-1)(x^2 + 1)} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\frac{x^2 + 2x + 3}{(x-1)(x^2 + 1)} = \frac{A}{x-1} + \frac{Bx + C}{x^2 + 1}\]
+                            </div>
+                            <p>\(x = 1\): \(6 = 2A \Rightarrow A = 3\)</p>
+                            <p>สัมประสิทธิ์ \(x^2\): \(1 = A + B \Rightarrow B = -2\)</p>
+                            <p>ค่าคงที่: \(3 = -A + C \Rightarrow C = 6\)</p>
+                            <div class="math-display">
+                                \[\int = 3\ln|x-1| - \ln(x^2+1) + 6\arctan x + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <nav class="chapter-navigation">
+                    <a href="trigonometric-substitution.html" class="nav-button prev">
+                        <span class="arrow">&larr;</span>
+                        <span class="nav-text">5.3 การแทนค่าตรีโกณมิติ</span>
+                    </a>
+                    <a href="../../index.html" class="nav-button next">
+                        <span class="nav-text">กลับหน้าแรก</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Calculus 1 Online Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

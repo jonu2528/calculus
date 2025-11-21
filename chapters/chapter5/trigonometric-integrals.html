@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.2 อินทิกรัลตรีโกณมิติ | Calculus 1</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="manifest" href="../../manifest.json">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Calculus 1</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">หน้าแรก</a></li>
+                <li><a href="../chapter1/functions.html">บทที่ 1</a></li>
+                <li><a href="../chapter2/derivative-intro.html">บทที่ 2</a></li>
+                <li><a href="../chapter3/geometry-graphs.html">บทที่ 3</a></li>
+                <li><a href="../chapter4/antiderivatives.html">บทที่ 4</a></li>
+                <li><a href="integration-by-parts.html" class="active">บทที่ 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">หน้าแรก</a>
+                <span>&gt;</span>
+                <a href="integration-by-parts.html">บทที่ 5: เทคนิคการอินทิเกรต</a>
+                <span>&gt;</span>
+                <span>5.2 อินทิกรัลตรีโกณมิติ</span>
+            </nav>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav-box">
+                <h4>บทที่ 5: เทคนิคการอินทิเกรต</h4>
+                <ul class="chapter-nav-list">
+                    <li><a href="integration-by-parts.html">5.1 อินทิเกรตทีละส่วน</a></li>
+                    <li class="active"><a href="trigonometric-integrals.html">5.2 อินทิกรัลตรีโกณมิติ</a></li>
+                    <li><a href="trigonometric-substitution.html">5.3 การแทนค่าตรีโกณมิติ</a></li>
+                    <li><a href="partial-fractions.html">5.4 เศษส่วนย่อย</a></li>
+                </ul>
+            </div>
+
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>5.2 อินทิกรัลตรีโกณมิติ (Trigonometric Integrals)</h1>
+                    <p class="article-intro">
+                        ในบทนี้เราจะศึกษาเทคนิคการอินทิเกรตฟังก์ชันที่ประกอบด้วยฟังก์ชันตรีโกณมิติกำลังต่างๆ
+                        โดยใช้เอกลักษณ์ตรีโกณมิติและเทคนิคการแทนค่า
+                    </p>
+                </header>
+
+                <!-- Section 1: Useful Identities -->
+                <section class="content-section">
+                    <h2>1. เอกลักษณ์ตรีโกณมิติที่ใช้บ่อย</h2>
+
+                    <div class="formula-box">
+                        <h3>เอกลักษณ์พื้นฐาน</h3>
+                        <ul>
+                            <li>\(\sin^2 x + \cos^2 x = 1\)</li>
+                            <li>\(1 + \tan^2 x = \sec^2 x\)</li>
+                            <li>\(1 + \cot^2 x = \csc^2 x\)</li>
+                        </ul>
+                    </div>
+
+                    <div class="formula-box">
+                        <h3>เอกลักษณ์ลดกำลัง (Power-Reducing)</h3>
+                        <ul>
+                            <li>\(\sin^2 x = \displaystyle\frac{1 - \cos 2x}{2}\)</li>
+                            <li>\(\cos^2 x = \displaystyle\frac{1 + \cos 2x}{2}\)</li>
+                        </ul>
+                    </div>
+
+                    <div class="formula-box">
+                        <h3>เอกลักษณ์มุมสองเท่า</h3>
+                        <ul>
+                            <li>\(\sin 2x = 2\sin x \cos x\)</li>
+                            <li>\(\cos 2x = \cos^2 x - \sin^2 x = 2\cos^2 x - 1 = 1 - 2\sin^2 x\)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Section 2: Powers of sin and cos -->
+                <section class="content-section">
+                    <h2>2. อินทิกรัลของ \(\sin^m x \cos^n x\)</h2>
+
+                    <div class="concept-box">
+                        <h3>กลยุทธ์</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>กรณี</th>
+                                <th>วิธีการ</th>
+                            </tr>
+                            <tr>
+                                <td>\(m\) หรือ \(n\) เป็นจำนวนคี่</td>
+                                <td>แยกตัวคี่ออกมา 1 ตัว ใช้ \(\sin^2 x + \cos^2 x = 1\) แล้วแทนค่า</td>
+                            </tr>
+                            <tr>
+                                <td>\(m\) และ \(n\) เป็นจำนวนคู่</td>
+                                <td>ใช้เอกลักษณ์ลดกำลัง</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Example 1 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 1</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \sin^3 x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>แยก \(\sin x\) ออก 1 ตัว:</p>
+                            <div class="math-display">
+                                \[\int \sin^3 x \, dx = \int \sin^2 x \cdot \sin x \, dx = \int (1 - \cos^2 x)\sin x \, dx\]
+                            </div>
+                            <p>ให้ \(u = \cos x\), \(du = -\sin x \, dx\)</p>
+                            <div class="math-display">
+                                \[= -\int (1 - u^2) du = -u + \frac{u^3}{3} + C = -\cos x + \frac{\cos^3 x}{3} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 2</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \sin^2 x \cos^3 x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(n = 3\) เป็นคี่ แยก \(\cos x\) ออก:</p>
+                            <div class="math-display">
+                                \[\int \sin^2 x \cos^3 x \, dx = \int \sin^2 x \cos^2 x \cdot \cos x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \int \sin^2 x (1 - \sin^2 x) \cos x \, dx\]
+                            </div>
+                            <p>ให้ \(u = \sin x\), \(du = \cos x \, dx\)</p>
+                            <div class="math-display">
+                                \[= \int u^2(1 - u^2) du = \int (u^2 - u^4) du = \frac{u^3}{3} - \frac{u^5}{5} + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{\sin^3 x}{3} - \frac{\sin^5 x}{5} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 3</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \sin^2 x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้เอกลักษณ์ลดกำลัง:</p>
+                            <div class="math-display">
+                                \[\sin^2 x = \frac{1 - \cos 2x}{2}\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \sin^2 x \, dx = \int \frac{1 - \cos 2x}{2} dx = \frac{1}{2}\int (1 - \cos 2x) dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{2}\left(x - \frac{\sin 2x}{2}\right) + C = \frac{x}{2} - \frac{\sin 2x}{4} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 4 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 4</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \sin^2 x \cos^2 x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ทั้งคู่เป็นกำลังคู่ ใช้เอกลักษณ์:</p>
+                            <div class="math-display">
+                                \[\sin^2 x \cos^2 x = \frac{1}{4}\sin^2 2x = \frac{1}{4} \cdot \frac{1 - \cos 4x}{2} = \frac{1 - \cos 4x}{8}\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \sin^2 x \cos^2 x \, dx = \frac{1}{8}\int (1 - \cos 4x) dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{8}\left(x - \frac{\sin 4x}{4}\right) + C = \frac{x}{8} - \frac{\sin 4x}{32} + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Powers of tan and sec -->
+                <section class="content-section">
+                    <h2>3. อินทิกรัลของ \(\tan^m x \sec^n x\)</h2>
+
+                    <div class="concept-box">
+                        <h3>กลยุทธ์</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>กรณี</th>
+                                <th>วิธีการ</th>
+                            </tr>
+                            <tr>
+                                <td>\(n\) เป็นคู่</td>
+                                <td>แยก \(\sec^2 x\) ใช้ \(\sec^2 x = 1 + \tan^2 x\) แทน \(u = \tan x\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(m\) เป็นคี่</td>
+                                <td>แยก \(\sec x \tan x\) ใช้ \(\tan^2 x = \sec^2 x - 1\) แทน \(u = \sec x\)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Example 5 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 5</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \tan^2 x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้ \(\tan^2 x = \sec^2 x - 1\)</p>
+                            <div class="math-display">
+                                \[\int \tan^2 x \, dx = \int (\sec^2 x - 1) dx = \tan x - x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 6 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 6</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \tan^3 x \sec x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(m = 3\) เป็นคี่ แยก \(\sec x \tan x\):</p>
+                            <div class="math-display">
+                                \[\int \tan^3 x \sec x \, dx = \int \tan^2 x \cdot \sec x \tan x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \int (\sec^2 x - 1) \sec x \tan x \, dx\]
+                            </div>
+                            <p>ให้ \(u = \sec x\), \(du = \sec x \tan x \, dx\)</p>
+                            <div class="math-display">
+                                \[= \int (u^2 - 1) du = \frac{u^3}{3} - u + C = \frac{\sec^3 x}{3} - \sec x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 7 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 7</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \tan^4 x \sec^4 x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(n = 4\) เป็นคู่ แยก \(\sec^2 x\):</p>
+                            <div class="math-display">
+                                \[\int \tan^4 x \sec^4 x \, dx = \int \tan^4 x \sec^2 x \cdot \sec^2 x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \int \tan^4 x (1 + \tan^2 x) \sec^2 x \, dx\]
+                            </div>
+                            <p>ให้ \(u = \tan x\), \(du = \sec^2 x \, dx\)</p>
+                            <div class="math-display">
+                                \[= \int u^4(1 + u^2) du = \int (u^4 + u^6) du\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{u^5}{5} + \frac{u^7}{7} + C = \frac{\tan^5 x}{5} + \frac{\tan^7 x}{7} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 8 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 8</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \sec^3 x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้การอินทิเกรตทีละส่วน:</p>
+                            <p>\(u = \sec x\), \(dv = \sec^2 x \, dx\), \(du = \sec x \tan x \, dx\), \(v = \tan x\)</p>
+                            <div class="math-display">
+                                \[\int \sec^3 x \, dx = \sec x \tan x - \int \sec x \tan^2 x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \sec x \tan x - \int \sec x (\sec^2 x - 1) dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \sec x \tan x - \int \sec^3 x \, dx + \int \sec x \, dx\]
+                            </div>
+                            <p>ให้ \(I = \int \sec^3 x \, dx\):</p>
+                            <div class="math-display">
+                                \[I = \sec x \tan x - I + \ln|\sec x + \tan x|\]
+                            </div>
+                            <div class="math-display">
+                                \[2I = \sec x \tan x + \ln|\sec x + \tan x|\]
+                            </div>
+                            <div class="math-display">
+                                \[I = \frac{1}{2}[\sec x \tan x + \ln|\sec x + \tan x|] + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Product to Sum -->
+                <section class="content-section">
+                    <h2>4. อินทิกรัลของผลคูณ sin และ cos ต่างมุม</h2>
+
+                    <div class="formula-box">
+                        <h3>สูตรผลคูณเป็นผลรวม</h3>
+                        <ul>
+                            <li>\(\sin A \cos B = \displaystyle\frac{1}{2}[\sin(A+B) + \sin(A-B)]\)</li>
+                            <li>\(\sin A \sin B = \displaystyle\frac{1}{2}[\cos(A-B) - \cos(A+B)]\)</li>
+                            <li>\(\cos A \cos B = \displaystyle\frac{1}{2}[\cos(A-B) + \cos(A+B)]\)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Example 9 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 9</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \sin 3x \cos 5x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ใช้สูตร: \(\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]\)</p>
+                            <div class="math-display">
+                                \[\sin 3x \cos 5x = \frac{1}{2}[\sin 8x + \sin(-2x)] = \frac{1}{2}[\sin 8x - \sin 2x]\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \sin 3x \cos 5x \, dx = \frac{1}{2}\int (\sin 8x - \sin 2x) dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{2}\left(-\frac{\cos 8x}{8} + \frac{\cos 2x}{2}\right) + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= -\frac{\cos 8x}{16} + \frac{\cos 2x}{4} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 10 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 10</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \cos 4x \cos 2x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <div class="math-display">
+                                \[\cos 4x \cos 2x = \frac{1}{2}[\cos(4x-2x) + \cos(4x+2x)] = \frac{1}{2}[\cos 2x + \cos 6x]\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \cos 4x \cos 2x \, dx = \frac{1}{2}\int (\cos 2x + \cos 6x) dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{2}\left(\frac{\sin 2x}{2} + \frac{\sin 6x}{6}\right) + C = \frac{\sin 2x}{4} + \frac{\sin 6x}{12} + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="content-section">
+                    <h2>สรุป</h2>
+                    <div class="summary-box">
+                        <h3>กลยุทธ์หลัก</h3>
+                        <ul>
+                            <li>\(\sin^m x \cos^n x\) กำลังคี่: แยก 1 ตัว แปลงที่เหลือ แทนค่า</li>
+                            <li>\(\sin^m x \cos^n x\) กำลังคู่ทั้งคู่: ใช้เอกลักษณ์ลดกำลัง</li>
+                            <li>\(\tan^m x \sec^n x\) กำลังคู่ของ sec: แยก \(\sec^2 x\)</li>
+                            <li>\(\tan^m x \sec^n x\) กำลังคี่ของ tan: แยก \(\sec x \tan x\)</li>
+                            <li>ผลคูณต่างมุม: ใช้สูตรผลคูณเป็นผลรวม</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Exercises -->
+                <section class="content-section exercises-section">
+                    <h2>แบบฝึกหัด</h2>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 1</h3>
+                        <p>จงหา \(\displaystyle\int \cos^3 x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\int \cos^3 x \, dx = \int (1 - \sin^2 x)\cos x \, dx\]
+                            </div>
+                            <p>ให้ \(u = \sin x\)</p>
+                            <div class="math-display">
+                                \[= \int (1 - u^2) du = u - \frac{u^3}{3} + C = \sin x - \frac{\sin^3 x}{3} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 2</h3>
+                        <p>จงหา \(\displaystyle\int \cos^4 x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\cos^4 x = \left(\frac{1 + \cos 2x}{2}\right)^2 = \frac{1 + 2\cos 2x + \cos^2 2x}{4}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{4} + \frac{\cos 2x}{2} + \frac{1 + \cos 4x}{8} = \frac{3}{8} + \frac{\cos 2x}{2} + \frac{\cos 4x}{8}\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \cos^4 x \, dx = \frac{3x}{8} + \frac{\sin 2x}{4} + \frac{\sin 4x}{32} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 3</h3>
+                        <p>จงหา \(\displaystyle\int \tan^3 x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\int \tan^3 x \, dx = \int \tan x \cdot \tan^2 x \, dx = \int \tan x (\sec^2 x - 1) dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \int \tan x \sec^2 x \, dx - \int \tan x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{\tan^2 x}{2} + \ln|\cos x| + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 4</h3>
+                        <p>จงหา \(\displaystyle\int \sin 2x \sin 4x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\sin 2x \sin 4x = \frac{1}{2}[\cos(2x-4x) - \cos(2x+4x)] = \frac{1}{2}[\cos(-2x) - \cos 6x]\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{2}[\cos 2x - \cos 6x]\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \sin 2x \sin 4x \, dx = \frac{1}{2}\left(\frac{\sin 2x}{2} - \frac{\sin 6x}{6}\right) + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{\sin 2x}{4} - \frac{\sin 6x}{12} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 5</h3>
+                        <p>จงหา \(\displaystyle\int_0^{\pi/2} \sin^4 x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <div class="math-display">
+                                \[\sin^4 x = \left(\frac{1 - \cos 2x}{2}\right)^2 = \frac{1 - 2\cos 2x + \cos^2 2x}{4}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{1}{4} - \frac{\cos 2x}{2} + \frac{1 + \cos 4x}{8} = \frac{3}{8} - \frac{\cos 2x}{2} + \frac{\cos 4x}{8}\]
+                            </div>
+                            <div class="math-display">
+                                \[\int_0^{\pi/2} \sin^4 x \, dx = \left[\frac{3x}{8} - \frac{\sin 2x}{4} + \frac{\sin 4x}{32}\right]_0^{\pi/2}\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{3\pi}{16} - 0 + 0 = \frac{3\pi}{16}\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <nav class="chapter-navigation">
+                    <a href="integration-by-parts.html" class="nav-button prev">
+                        <span class="arrow">&larr;</span>
+                        <span class="nav-text">5.1 อินทิเกรตทีละส่วน</span>
+                    </a>
+                    <a href="trigonometric-substitution.html" class="nav-button next">
+                        <span class="nav-text">5.3 การแทนค่าตรีโกณมิติ</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Calculus 1 Online Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.1 อินทิเกรตทีละส่วน | Calculus 1</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="manifest" href="../../manifest.json">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Calculus 1</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">หน้าแรก</a></li>
+                <li><a href="../chapter1/functions.html">บทที่ 1</a></li>
+                <li><a href="../chapter2/derivative-intro.html">บทที่ 2</a></li>
+                <li><a href="../chapter3/geometry-graphs.html">บทที่ 3</a></li>
+                <li><a href="../chapter4/antiderivatives.html">บทที่ 4</a></li>
+                <li><a href="integration-by-parts.html" class="active">บทที่ 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">หน้าแรก</a>
+                <span>&gt;</span>
+                <a href="integration-by-parts.html">บทที่ 5: เทคนิคการอินทิเกรต</a>
+                <span>&gt;</span>
+                <span>5.1 อินทิเกรตทีละส่วน</span>
+            </nav>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav-box">
+                <h4>บทที่ 5: เทคนิคการอินทิเกรต</h4>
+                <ul class="chapter-nav-list">
+                    <li class="active"><a href="integration-by-parts.html">5.1 อินทิเกรตทีละส่วน</a></li>
+                    <li><a href="trigonometric-integrals.html">5.2 อินทิกรัลตรีโกณมิติ</a></li>
+                    <li><a href="trigonometric-substitution.html">5.3 การแทนค่าตรีโกณมิติ</a></li>
+                    <li><a href="partial-fractions.html">5.4 เศษส่วนย่อย</a></li>
+                </ul>
+            </div>
+
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>5.1 อินทิเกรตทีละส่วน (Integration by Parts)</h1>
+                    <p class="article-intro">
+                        การอินทิเกรตทีละส่วนเป็นเทคนิคที่ใช้อินทิเกรตผลคูณของฟังก์ชันสองฟังก์ชัน
+                        โดยใช้หลักการย้อนกลับของกฎผลคูณในการหาอนุพันธ์
+                    </p>
+                </header>
+
+                <!-- Section 1: Formula -->
+                <section class="content-section">
+                    <h2>1. สูตรการอินทิเกรตทีละส่วน</h2>
+
+                    <div class="why-box">
+                        <h3>ที่มาของสูตร</h3>
+                        <p>จากกฎผลคูณ (Product Rule):</p>
+                        <div class="math-display">
+                            \[\frac{d}{dx}[uv] = u\frac{dv}{dx} + v\frac{du}{dx}\]
+                        </div>
+                        <p>อินทิเกรตทั้งสองข้าง:</p>
+                        <div class="math-display">
+                            \[uv = \int u \, dv + \int v \, du\]
+                        </div>
+                        <p>จัดรูปใหม่:</p>
+                        <div class="math-display">
+                            \[\int u \, dv = uv - \int v \, du\]
+                        </div>
+                    </div>
+
+                    <div class="formula-box">
+                        <h3>สูตรการอินทิเกรตทีละส่วน</h3>
+                        <div class="math-display">
+                            \[\int u \, dv = uv - \int v \, du\]
+                        </div>
+                        <p>สำหรับอินทิกรัลจำกัดเขต:</p>
+                        <div class="math-display">
+                            \[\int_a^b u \, dv = \Big[uv\Big]_a^b - \int_a^b v \, du\]
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h3>วิธีเลือก u และ dv: กฎ LIATE</h3>
+                        <p>เลือก \(u\) จากฟังก์ชันที่มาก่อนในลำดับนี้:</p>
+                        <ol>
+                            <li><strong>L</strong> - Logarithmic functions (\(\ln x\), \(\log x\))</li>
+                            <li><strong>I</strong> - Inverse trigonometric functions (\(\arcsin x\), \(\arctan x\))</li>
+                            <li><strong>A</strong> - Algebraic functions (\(x^n\), พหุนาม)</li>
+                            <li><strong>T</strong> - Trigonometric functions (\(\sin x\), \(\cos x\))</li>
+                            <li><strong>E</strong> - Exponential functions (\(e^x\), \(a^x\))</li>
+                        </ol>
+                        <p>ส่วนที่เหลือคือ \(dv\)</p>
+                    </div>
+                </section>
+
+                <!-- Section 2: Basic Examples -->
+                <section class="content-section">
+                    <h2>2. ตัวอย่างพื้นฐาน</h2>
+
+                    <!-- Example 1 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 1</h3>
+                        <p>
+                            จงหา \(\displaystyle\int x e^x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> เลือก \(u\) และ \(dv\)</p>
+                            <p>ใช้ LIATE: \(x\) (Algebraic) มาก่อน \(e^x\) (Exponential)</p>
+                            <ul>
+                                <li>\(u = x\) \(\Rightarrow\) \(du = dx\)</li>
+                                <li>\(dv = e^x \, dx\) \(\Rightarrow\) \(v = e^x\)</li>
+                            </ul>
+
+                            <p><strong>ขั้นที่ 2:</strong> ใช้สูตร</p>
+                            <div class="math-display">
+                                \[\int x e^x \, dx = xe^x - \int e^x \, dx = xe^x - e^x + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= e^x(x - 1) + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 2</h3>
+                        <p>
+                            จงหา \(\displaystyle\int x \cos x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(u = x\), \(dv = \cos x \, dx\)</p>
+                            <p>\(du = dx\), \(v = \sin x\)</p>
+                            <div class="math-display">
+                                \[\int x \cos x \, dx = x\sin x - \int \sin x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= x\sin x + \cos x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 3</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \ln x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>เขียนเป็น \(\int \ln x \cdot 1 \, dx\)</p>
+                            <p>\(u = \ln x\), \(dv = dx\)</p>
+                            <p>\(du = \frac{1}{x}dx\), \(v = x\)</p>
+                            <div class="math-display">
+                                \[\int \ln x \, dx = x\ln x - \int x \cdot \frac{1}{x} \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= x\ln x - \int dx = x\ln x - x + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= x(\ln x - 1) + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 4 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 4</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \arctan x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(u = \arctan x\), \(dv = dx\)</p>
+                            <p>\(du = \frac{1}{1+x^2}dx\), \(v = x\)</p>
+                            <div class="math-display">
+                                \[\int \arctan x \, dx = x\arctan x - \int \frac{x}{1+x^2} \, dx\]
+                            </div>
+                            <p>สำหรับอินทิกรัลที่สอง ให้ \(w = 1 + x^2\), \(dw = 2x \, dx\)</p>
+                            <div class="math-display">
+                                \[\int \frac{x}{1+x^2} \, dx = \frac{1}{2}\ln(1+x^2)\]
+                            </div>
+                            <p>ดังนั้น:</p>
+                            <div class="math-display">
+                                \[\int \arctan x \, dx = x\arctan x - \frac{1}{2}\ln(1+x^2) + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Repeated Integration by Parts -->
+                <section class="content-section">
+                    <h2>3. การอินทิเกรตทีละส่วนซ้ำ</h2>
+
+                    <div class="concept-box">
+                        <h3>เมื่อต้องใช้ซ้ำหลายครั้ง</h3>
+                        <p>
+                            บางอินทิกรัลต้องใช้การอินทิเกรตทีละส่วนมากกว่าหนึ่งครั้ง
+                            โดยเฉพาะเมื่อ \(u\) เป็นพหุนามกำลังสูง
+                        </p>
+                    </div>
+
+                    <!-- Example 5 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 5</h3>
+                        <p>
+                            จงหา \(\displaystyle\int x^2 e^x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>รอบที่ 1:</strong></p>
+                            <p>\(u = x^2\), \(dv = e^x \, dx\)</p>
+                            <p>\(du = 2x \, dx\), \(v = e^x\)</p>
+                            <div class="math-display">
+                                \[\int x^2 e^x \, dx = x^2 e^x - 2\int x e^x \, dx\]
+                            </div>
+
+                            <p><strong>รอบที่ 2:</strong> (จากตัวอย่าง 1)</p>
+                            <div class="math-display">
+                                \[\int x e^x \, dx = e^x(x - 1)\]
+                            </div>
+
+                            <p><strong>รวมผล:</strong></p>
+                            <div class="math-display">
+                                \[\int x^2 e^x \, dx = x^2 e^x - 2e^x(x - 1) + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= e^x(x^2 - 2x + 2) + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 6 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 6</h3>
+                        <p>
+                            จงหา \(\displaystyle\int x^2 \sin x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>รอบที่ 1:</strong></p>
+                            <p>\(u = x^2\), \(dv = \sin x \, dx\), \(du = 2x \, dx\), \(v = -\cos x\)</p>
+                            <div class="math-display">
+                                \[\int x^2 \sin x \, dx = -x^2\cos x + 2\int x\cos x \, dx\]
+                            </div>
+
+                            <p><strong>รอบที่ 2:</strong></p>
+                            <p>\(u = x\), \(dv = \cos x \, dx\), \(du = dx\), \(v = \sin x\)</p>
+                            <div class="math-display">
+                                \[\int x\cos x \, dx = x\sin x - \int \sin x \, dx = x\sin x + \cos x\]
+                            </div>
+
+                            <p><strong>รวมผล:</strong></p>
+                            <div class="math-display">
+                                \[\int x^2 \sin x \, dx = -x^2\cos x + 2(x\sin x + \cos x) + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= -x^2\cos x + 2x\sin x + 2\cos x + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Cyclic Integration by Parts -->
+                <section class="content-section">
+                    <h2>4. การอินทิเกรตทีละส่วนแบบวน (Cyclic)</h2>
+
+                    <div class="concept-box">
+                        <h3>แนวคิด</h3>
+                        <p>
+                            บางครั้งการอินทิเกรตทีละส่วนจะวนกลับมาที่อินทิกรัลเดิม
+                            ในกรณีนี้ให้ตั้งสมการแก้หาอินทิกรัล
+                        </p>
+                    </div>
+
+                    <!-- Example 7 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 7</h3>
+                        <p>
+                            จงหา \(\displaystyle\int e^x \sin x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(I = \int e^x \sin x \, dx\)</p>
+
+                            <p><strong>รอบที่ 1:</strong></p>
+                            <p>\(u = e^x\), \(dv = \sin x \, dx\)</p>
+                            <p>\(du = e^x \, dx\), \(v = -\cos x\)</p>
+                            <div class="math-display">
+                                \[I = -e^x\cos x + \int e^x\cos x \, dx\]
+                            </div>
+
+                            <p><strong>รอบที่ 2:</strong></p>
+                            <p>\(u = e^x\), \(dv = \cos x \, dx\)</p>
+                            <p>\(du = e^x \, dx\), \(v = \sin x\)</p>
+                            <div class="math-display">
+                                \[\int e^x\cos x \, dx = e^x\sin x - \int e^x\sin x \, dx = e^x\sin x - I\]
+                            </div>
+
+                            <p><strong>รวมผล:</strong></p>
+                            <div class="math-display">
+                                \[I = -e^x\cos x + e^x\sin x - I\]
+                            </div>
+                            <div class="math-display">
+                                \[2I = e^x(\sin x - \cos x)\]
+                            </div>
+                            <div class="math-display">
+                                \[I = \frac{e^x(\sin x - \cos x)}{2} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 8 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 8</h3>
+                        <p>
+                            จงหา \(\displaystyle\int e^x \cos x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(I = \int e^x \cos x \, dx\)</p>
+
+                            <p><strong>รอบที่ 1:</strong></p>
+                            <div class="math-display">
+                                \[I = e^x\sin x - \int e^x\sin x \, dx\]
+                            </div>
+
+                            <p><strong>รอบที่ 2:</strong></p>
+                            <div class="math-display">
+                                \[\int e^x\sin x \, dx = -e^x\cos x + \int e^x\cos x \, dx = -e^x\cos x + I\]
+                            </div>
+
+                            <p><strong>รวมผล:</strong></p>
+                            <div class="math-display">
+                                \[I = e^x\sin x - (-e^x\cos x + I)\]
+                            </div>
+                            <div class="math-display">
+                                \[I = e^x\sin x + e^x\cos x - I\]
+                            </div>
+                            <div class="math-display">
+                                \[2I = e^x(\sin x + \cos x)\]
+                            </div>
+                            <div class="math-display">
+                                \[I = \frac{e^x(\sin x + \cos x)}{2} + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Definite Integrals -->
+                <section class="content-section">
+                    <h2>5. อินทิกรัลจำกัดเขต</h2>
+
+                    <!-- Example 9 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 9</h3>
+                        <p>
+                            จงหา \(\displaystyle\int_0^1 xe^{-x} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(u = x\), \(dv = e^{-x} \, dx\)</p>
+                            <p>\(du = dx\), \(v = -e^{-x}\)</p>
+                            <div class="math-display">
+                                \[\int_0^1 xe^{-x} \, dx = \Big[-xe^{-x}\Big]_0^1 + \int_0^1 e^{-x} \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= (-e^{-1} - 0) + \Big[-e^{-x}\Big]_0^1\]
+                            </div>
+                            <div class="math-display">
+                                \[= -e^{-1} + (-e^{-1} + 1) = 1 - 2e^{-1} = 1 - \frac{2}{e}\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 10 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 10</h3>
+                        <p>
+                            จงหา \(\displaystyle\int_1^e x \ln x \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>\(u = \ln x\), \(dv = x \, dx\)</p>
+                            <p>\(du = \frac{1}{x}dx\), \(v = \frac{x^2}{2}\)</p>
+                            <div class="math-display">
+                                \[\int_1^e x\ln x \, dx = \left[\frac{x^2\ln x}{2}\right]_1^e - \int_1^e \frac{x}{2} \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= \left(\frac{e^2 \cdot 1}{2} - 0\right) - \left[\frac{x^2}{4}\right]_1^e\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{e^2}{2} - \frac{e^2 - 1}{4} = \frac{2e^2 - e^2 + 1}{4} = \frac{e^2 + 1}{4}\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="content-section">
+                    <h2>สรุป</h2>
+                    <div class="summary-box">
+                        <h3>ประเด็นสำคัญ</h3>
+                        <ul>
+                            <li>สูตร: \(\displaystyle\int u \, dv = uv - \int v \, du\)</li>
+                            <li>ใช้กฎ LIATE ในการเลือก \(u\): Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential</li>
+                            <li>บางครั้งต้องใช้ซ้ำหลายครั้ง (เมื่อ \(u\) เป็นพหุนามกำลังสูง)</li>
+                            <li>กรณีวน (cyclic): ตั้งสมการแก้หาอินทิกรัล</li>
+                            <li>สำหรับอินทิกรัลจำกัดเขต: แทนค่าขอบเขตที่พจน์ \(uv\)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Exercises -->
+                <section class="content-section exercises-section">
+                    <h2>แบบฝึกหัด</h2>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 1</h3>
+                        <p>จงหา \(\displaystyle\int x e^{2x} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(u = x\), \(dv = e^{2x}dx\), \(du = dx\), \(v = \frac{1}{2}e^{2x}\)</p>
+                            <div class="math-display">
+                                \[\int xe^{2x}dx = \frac{x}{2}e^{2x} - \frac{1}{2}\int e^{2x}dx = \frac{x}{2}e^{2x} - \frac{1}{4}e^{2x} + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{e^{2x}(2x-1)}{4} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 2</h3>
+                        <p>จงหา \(\displaystyle\int x \sin 2x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(u = x\), \(dv = \sin 2x \, dx\), \(v = -\frac{1}{2}\cos 2x\)</p>
+                            <div class="math-display">
+                                \[\int x\sin 2x \, dx = -\frac{x}{2}\cos 2x + \frac{1}{2}\int\cos 2x \, dx\]
+                            </div>
+                            <div class="math-display">
+                                \[= -\frac{x}{2}\cos 2x + \frac{1}{4}\sin 2x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 3</h3>
+                        <p>จงหา \(\displaystyle\int (\ln x)^2 \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(u = (\ln x)^2\), \(dv = dx\), \(du = \frac{2\ln x}{x}dx\), \(v = x\)</p>
+                            <div class="math-display">
+                                \[\int (\ln x)^2 dx = x(\ln x)^2 - 2\int \ln x \, dx\]
+                            </div>
+                            <p>จากตัวอย่าง 3: \(\int \ln x \, dx = x(\ln x - 1)\)</p>
+                            <div class="math-display">
+                                \[= x(\ln x)^2 - 2x(\ln x - 1) + C = x[(\ln x)^2 - 2\ln x + 2] + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 4</h3>
+                        <p>จงหา \(\displaystyle\int \arcsin x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>\(u = \arcsin x\), \(dv = dx\), \(du = \frac{1}{\sqrt{1-x^2}}dx\), \(v = x\)</p>
+                            <div class="math-display">
+                                \[\int \arcsin x \, dx = x\arcsin x - \int \frac{x}{\sqrt{1-x^2}} dx\]
+                            </div>
+                            <p>ให้ \(w = 1-x^2\), \(dw = -2x \, dx\)</p>
+                            <div class="math-display">
+                                \[\int \frac{x}{\sqrt{1-x^2}} dx = -\frac{1}{2}\int w^{-1/2}dw = -\sqrt{w} = -\sqrt{1-x^2}\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \arcsin x \, dx = x\arcsin x + \sqrt{1-x^2} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 5</h3>
+                        <p>จงหา \(\displaystyle\int_0^{\pi} x^2\cos x \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>รอบที่ 1: \(u = x^2\), \(dv = \cos x \, dx\)</p>
+                            <div class="math-display">
+                                \[\int_0^{\pi} x^2\cos x \, dx = [x^2\sin x]_0^{\pi} - 2\int_0^{\pi} x\sin x \, dx = 0 - 2\int_0^{\pi} x\sin x \, dx\]
+                            </div>
+                            <p>รอบที่ 2:</p>
+                            <div class="math-display">
+                                \[\int_0^{\pi} x\sin x \, dx = [-x\cos x]_0^{\pi} + \int_0^{\pi}\cos x \, dx = \pi + [\sin x]_0^{\pi} = \pi\]
+                            </div>
+                            <div class="math-display">
+                                \[\int_0^{\pi} x^2\cos x \, dx = -2\pi\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <nav class="chapter-navigation">
+                    <a href="../chapter4/integral-applications.html" class="nav-button prev">
+                        <span class="arrow">&larr;</span>
+                        <span class="nav-text">4.5 การประยุกต์อินทิกรัล</span>
+                    </a>
+                    <a href="trigonometric-integrals.html" class="nav-button next">
+                        <span class="nav-text">5.2 อินทิกรัลตรีโกณมิติ</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Calculus 1 Online Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

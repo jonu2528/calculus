@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.3 การแทนค่าตรีโกณมิติ | Calculus 1</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="manifest" href="../../manifest.json">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Calculus 1</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../../index.html">หน้าแรก</a></li>
+                <li><a href="../chapter1/functions.html">บทที่ 1</a></li>
+                <li><a href="../chapter2/derivative-intro.html">บทที่ 2</a></li>
+                <li><a href="../chapter3/geometry-graphs.html">บทที่ 3</a></li>
+                <li><a href="../chapter4/antiderivatives.html">บทที่ 4</a></li>
+                <li><a href="integration-by-parts.html" class="active">บทที่ 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../../index.html">หน้าแรก</a>
+                <span>&gt;</span>
+                <a href="integration-by-parts.html">บทที่ 5: เทคนิคการอินทิเกรต</a>
+                <span>&gt;</span>
+                <span>5.3 การแทนค่าตรีโกณมิติ</span>
+            </nav>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav-box">
+                <h4>บทที่ 5: เทคนิคการอินทิเกรต</h4>
+                <ul class="chapter-nav-list">
+                    <li><a href="integration-by-parts.html">5.1 อินทิเกรตทีละส่วน</a></li>
+                    <li><a href="trigonometric-integrals.html">5.2 อินทิกรัลตรีโกณมิติ</a></li>
+                    <li class="active"><a href="trigonometric-substitution.html">5.3 การแทนค่าตรีโกณมิติ</a></li>
+                    <li><a href="partial-fractions.html">5.4 เศษส่วนย่อย</a></li>
+                </ul>
+            </div>
+
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>5.3 การแทนค่าตรีโกณมิติ (Trigonometric Substitution)</h1>
+                    <p class="article-intro">
+                        การแทนค่าตรีโกณมิติเป็นเทคนิคที่ใช้เมื่ออินทิกรัลมีรากที่สองของนิพจน์กำลังสอง
+                        โดยใช้เอกลักษณ์ตรีโกณมิติเพื่อกำจัดรากที่สอง
+                    </p>
+                </header>
+
+                <!-- Section 1: When to Use -->
+                <section class="content-section">
+                    <h2>1. เมื่อไหร่ควรใช้การแทนค่าตรีโกณมิติ</h2>
+
+                    <div class="formula-box">
+                        <h3>ตารางการแทนค่า</h3>
+                        <table class="formula-table">
+                            <tr>
+                                <th>นิพจน์ในอินทิกรัล</th>
+                                <th>การแทนค่า</th>
+                                <th>เอกลักษณ์ที่ใช้</th>
+                            </tr>
+                            <tr>
+                                <td>\(\sqrt{a^2 - x^2}\)</td>
+                                <td>\(x = a\sin\theta\)</td>
+                                <td>\(1 - \sin^2\theta = \cos^2\theta\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\sqrt{a^2 + x^2}\)</td>
+                                <td>\(x = a\tan\theta\)</td>
+                                <td>\(1 + \tan^2\theta = \sec^2\theta\)</td>
+                            </tr>
+                            <tr>
+                                <td>\(\sqrt{x^2 - a^2}\)</td>
+                                <td>\(x = a\sec\theta\)</td>
+                                <td>\(\sec^2\theta - 1 = \tan^2\theta\)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="concept-box">
+                        <h3>ขั้นตอนการทำ</h3>
+                        <ol>
+                            <li>ระบุรูปแบบของนิพจน์และเลือกการแทนค่าที่เหมาะสม</li>
+                            <li>หา \(dx\) จากการแทนค่า</li>
+                            <li>แปลงนิพจน์ทั้งหมดเป็น \(\theta\)</li>
+                            <li>อินทิเกรตในรูป \(\theta\)</li>
+                            <li>แปลงคำตอบกลับเป็น \(x\)</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- Section 2: Case 1 -->
+                <section class="content-section">
+                    <h2>2. กรณี \(\sqrt{a^2 - x^2}\)</h2>
+
+                    <!-- Example 1 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 1</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{dx}{\sqrt{9 - x^2}}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> เลือกการแทนค่า</p>
+                            <p>\(a = 3\), ให้ \(x = 3\sin\theta\), \(dx = 3\cos\theta \, d\theta\)</p>
+
+                            <p><strong>ขั้นที่ 2:</strong> แปลงรากที่สอง</p>
+                            <div class="math-display">
+                                \[\sqrt{9 - x^2} = \sqrt{9 - 9\sin^2\theta} = 3\sqrt{1 - \sin^2\theta} = 3\cos\theta\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> อินทิเกรต</p>
+                            <div class="math-display">
+                                \[\int \frac{dx}{\sqrt{9 - x^2}} = \int \frac{3\cos\theta}{3\cos\theta} d\theta = \int d\theta = \theta + C\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 4:</strong> แปลงกลับ</p>
+                            <p>จาก \(x = 3\sin\theta\) ดังนั้น \(\theta = \arcsin\frac{x}{3}\)</p>
+                            <div class="math-display">
+                                \[\int \frac{dx}{\sqrt{9 - x^2}} = \arcsin\frac{x}{3} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 2</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \sqrt{4 - x^2} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(x = 2\sin\theta\), \(dx = 2\cos\theta \, d\theta\)</p>
+                            <div class="math-display">
+                                \[\sqrt{4 - x^2} = 2\cos\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \sqrt{4 - x^2} \, dx = \int 2\cos\theta \cdot 2\cos\theta \, d\theta = 4\int \cos^2\theta \, d\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[= 4 \cdot \frac{1}{2}\int (1 + \cos 2\theta) d\theta = 2\left(\theta + \frac{\sin 2\theta}{2}\right) + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= 2\theta + \sin 2\theta + C = 2\theta + 2\sin\theta\cos\theta + C\]
+                            </div>
+
+                            <p><strong>แปลงกลับ:</strong></p>
+                            <p>\(\sin\theta = \frac{x}{2}\), \(\cos\theta = \frac{\sqrt{4-x^2}}{2}\), \(\theta = \arcsin\frac{x}{2}\)</p>
+                            <div class="math-display">
+                                \[= 2\arcsin\frac{x}{2} + 2 \cdot \frac{x}{2} \cdot \frac{\sqrt{4-x^2}}{2} + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= 2\arcsin\frac{x}{2} + \frac{x\sqrt{4-x^2}}{2} + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Case 2 -->
+                <section class="content-section">
+                    <h2>3. กรณี \(\sqrt{a^2 + x^2}\)</h2>
+
+                    <!-- Example 3 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 3</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{dx}{\sqrt{x^2 + 4}}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(x = 2\tan\theta\), \(dx = 2\sec^2\theta \, d\theta\)</p>
+                            <div class="math-display">
+                                \[\sqrt{x^2 + 4} = \sqrt{4\tan^2\theta + 4} = 2\sqrt{\tan^2\theta + 1} = 2\sec\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \frac{dx}{\sqrt{x^2 + 4}} = \int \frac{2\sec^2\theta}{2\sec\theta} d\theta = \int \sec\theta \, d\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[= \ln|\sec\theta + \tan\theta| + C\]
+                            </div>
+
+                            <p><strong>แปลงกลับ:</strong></p>
+                            <p>\(\tan\theta = \frac{x}{2}\), \(\sec\theta = \frac{\sqrt{x^2+4}}{2}\)</p>
+                            <div class="math-display">
+                                \[= \ln\left|\frac{\sqrt{x^2+4}}{2} + \frac{x}{2}\right| + C = \ln\left|\frac{\sqrt{x^2+4} + x}{2}\right| + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \ln|\sqrt{x^2+4} + x| - \ln 2 + C = \ln|\sqrt{x^2+4} + x| + C'\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 4 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 4</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{x^2}{\sqrt{x^2 + 9}} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(x = 3\tan\theta\), \(dx = 3\sec^2\theta \, d\theta\)</p>
+                            <div class="math-display">
+                                \[\sqrt{x^2 + 9} = 3\sec\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \frac{x^2}{\sqrt{x^2 + 9}} dx = \int \frac{9\tan^2\theta}{3\sec\theta} \cdot 3\sec^2\theta \, d\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[= 9\int \tan^2\theta \sec\theta \, d\theta = 9\int (\sec^2\theta - 1)\sec\theta \, d\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[= 9\int (\sec^3\theta - \sec\theta) d\theta\]
+                            </div>
+                            <p>ใช้ผลลัพธ์ \(\int \sec^3\theta \, d\theta = \frac{1}{2}[\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|]\)</p>
+                            <div class="math-display">
+                                \[= 9\left[\frac{1}{2}(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|) - \ln|\sec\theta + \tan\theta|\right] + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{9}{2}\sec\theta\tan\theta - \frac{9}{2}\ln|\sec\theta + \tan\theta| + C\]
+                            </div>
+
+                            <p><strong>แปลงกลับ:</strong></p>
+                            <div class="math-display">
+                                \[= \frac{9}{2} \cdot \frac{\sqrt{x^2+9}}{3} \cdot \frac{x}{3} - \frac{9}{2}\ln\left|\frac{\sqrt{x^2+9} + x}{3}\right| + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{x\sqrt{x^2+9}}{2} - \frac{9}{2}\ln|\sqrt{x^2+9} + x| + C'\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Case 3 -->
+                <section class="content-section">
+                    <h2>4. กรณี \(\sqrt{x^2 - a^2}\)</h2>
+
+                    <!-- Example 5 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 5</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{dx}{x\sqrt{x^2 - 4}}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(x = 2\sec\theta\), \(dx = 2\sec\theta\tan\theta \, d\theta\)</p>
+                            <div class="math-display">
+                                \[\sqrt{x^2 - 4} = \sqrt{4\sec^2\theta - 4} = 2\sqrt{\sec^2\theta - 1} = 2\tan\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \frac{dx}{x\sqrt{x^2-4}} = \int \frac{2\sec\theta\tan\theta}{2\sec\theta \cdot 2\tan\theta} d\theta = \frac{1}{2}\int d\theta = \frac{\theta}{2} + C\]
+                            </div>
+
+                            <p><strong>แปลงกลับ:</strong></p>
+                            <p>จาก \(\sec\theta = \frac{x}{2}\) ดังนั้น \(\theta = \sec^{-1}\frac{x}{2}\)</p>
+                            <div class="math-display">
+                                \[\int \frac{dx}{x\sqrt{x^2-4}} = \frac{1}{2}\sec^{-1}\frac{x}{2} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 6 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 6</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \sqrt{x^2 - 9} \, dx\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p>ให้ \(x = 3\sec\theta\), \(dx = 3\sec\theta\tan\theta \, d\theta\)</p>
+                            <div class="math-display">
+                                \[\sqrt{x^2 - 9} = 3\tan\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[\int \sqrt{x^2 - 9} \, dx = \int 3\tan\theta \cdot 3\sec\theta\tan\theta \, d\theta = 9\int \tan^2\theta\sec\theta \, d\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[= 9\int (\sec^2\theta - 1)\sec\theta \, d\theta = 9\int (\sec^3\theta - \sec\theta) d\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[= 9\left[\frac{1}{2}(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|) - \ln|\sec\theta + \tan\theta|\right] + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{9}{2}\sec\theta\tan\theta - \frac{9}{2}\ln|\sec\theta + \tan\theta| + C\]
+                            </div>
+
+                            <p><strong>แปลงกลับ:</strong> \(\sec\theta = \frac{x}{3}\), \(\tan\theta = \frac{\sqrt{x^2-9}}{3}\)</p>
+                            <div class="math-display">
+                                \[= \frac{9}{2} \cdot \frac{x}{3} \cdot \frac{\sqrt{x^2-9}}{3} - \frac{9}{2}\ln\left|\frac{x + \sqrt{x^2-9}}{3}\right| + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{x\sqrt{x^2-9}}{2} - \frac{9}{2}\ln|x + \sqrt{x^2-9}| + C'\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Completing the Square -->
+                <section class="content-section">
+                    <h2>5. การทำให้เป็นกำลังสองสมบูรณ์</h2>
+
+                    <div class="concept-box">
+                        <h3>แนวคิด</h3>
+                        <p>
+                            เมื่อนิพจน์ไม่อยู่ในรูปมาตรฐาน ให้ทำให้เป็นกำลังสองสมบูรณ์ก่อน
+                        </p>
+                    </div>
+
+                    <!-- Example 7 -->
+                    <div class="example-box">
+                        <h3>ตัวอย่าง 7</h3>
+                        <p>
+                            จงหา \(\displaystyle\int \frac{dx}{\sqrt{x^2 + 4x + 8}}\)
+                        </p>
+                        <div class="solution">
+                            <h4>วิธีทำ</h4>
+                            <p><strong>ขั้นที่ 1:</strong> ทำให้เป็นกำลังสองสมบูรณ์</p>
+                            <div class="math-display">
+                                \[x^2 + 4x + 8 = (x^2 + 4x + 4) + 4 = (x + 2)^2 + 4\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 2:</strong> แทนค่า \(u = x + 2\)</p>
+                            <div class="math-display">
+                                \[\int \frac{dx}{\sqrt{(x+2)^2 + 4}} = \int \frac{du}{\sqrt{u^2 + 4}}\]
+                            </div>
+
+                            <p><strong>ขั้นที่ 3:</strong> ใช้การแทนค่าตรีโกณมิติ \(u = 2\tan\theta\)</p>
+                            <div class="math-display">
+                                \[= \ln|u + \sqrt{u^2 + 4}| + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \ln|(x+2) + \sqrt{x^2 + 4x + 8}| + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary -->
+                <section class="content-section">
+                    <h2>สรุป</h2>
+                    <div class="summary-box">
+                        <h3>การเลือกการแทนค่า</h3>
+                        <ul>
+                            <li>\(\sqrt{a^2 - x^2}\) ใช้ \(x = a\sin\theta\)</li>
+                            <li>\(\sqrt{a^2 + x^2}\) ใช้ \(x = a\tan\theta\)</li>
+                            <li>\(\sqrt{x^2 - a^2}\) ใช้ \(x = a\sec\theta\)</li>
+                            <li>ถ้าไม่อยู่ในรูปมาตรฐาน ให้ทำให้เป็นกำลังสองสมบูรณ์ก่อน</li>
+                            <li>อย่าลืมแปลงคำตอบกลับเป็น \(x\)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Exercises -->
+                <section class="content-section exercises-section">
+                    <h2>แบบฝึกหัด</h2>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 1</h3>
+                        <p>จงหา \(\displaystyle\int \frac{dx}{\sqrt{16 - x^2}}\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(x = 4\sin\theta\)</p>
+                            <div class="math-display">
+                                \[\int \frac{dx}{\sqrt{16 - x^2}} = \arcsin\frac{x}{4} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 2</h3>
+                        <p>จงหา \(\displaystyle\int \frac{x^2}{\sqrt{1 - x^2}} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(x = \sin\theta\)</p>
+                            <div class="math-display">
+                                \[\int \frac{\sin^2\theta}{\cos\theta} \cdot \cos\theta \, d\theta = \int \sin^2\theta \, d\theta = \frac{\theta}{2} - \frac{\sin 2\theta}{4} + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \frac{\arcsin x}{2} - \frac{x\sqrt{1-x^2}}{2} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 3</h3>
+                        <p>จงหา \(\displaystyle\int \frac{dx}{x^2\sqrt{x^2 + 1}}\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(x = \tan\theta\), \(dx = \sec^2\theta \, d\theta\), \(\sqrt{x^2+1} = \sec\theta\)</p>
+                            <div class="math-display">
+                                \[\int \frac{\sec^2\theta}{\tan^2\theta \cdot \sec\theta} d\theta = \int \frac{\sec\theta}{\tan^2\theta} d\theta = \int \frac{\cos\theta}{\sin^2\theta} d\theta\]
+                            </div>
+                            <p>ให้ \(u = \sin\theta\)</p>
+                            <div class="math-display">
+                                \[= -\frac{1}{\sin\theta} + C = -\csc\theta + C = -\frac{\sqrt{x^2+1}}{x} + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 4</h3>
+                        <p>จงหา \(\displaystyle\int \frac{\sqrt{x^2 - 1}}{x} \, dx\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ให้ \(x = \sec\theta\)</p>
+                            <div class="math-display">
+                                \[\int \frac{\tan\theta}{\sec\theta} \cdot \sec\theta\tan\theta \, d\theta = \int \tan^2\theta \, d\theta\]
+                            </div>
+                            <div class="math-display">
+                                \[= \tan\theta - \theta + C = \sqrt{x^2-1} - \sec^{-1}x + C\]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h3>แบบฝึกหัดที่ 5</h3>
+                        <p>จงหา \(\displaystyle\int \frac{dx}{\sqrt{x^2 - 6x + 13}}\)</p>
+                        <button class="toggle-solution">แสดงเฉลย</button>
+                        <div class="solution hidden">
+                            <p>ทำให้เป็นกำลังสองสมบูรณ์: \(x^2 - 6x + 13 = (x-3)^2 + 4\)</p>
+                            <p>ให้ \(u = x - 3\)</p>
+                            <div class="math-display">
+                                \[\int \frac{du}{\sqrt{u^2 + 4}} = \ln|u + \sqrt{u^2+4}| + C\]
+                            </div>
+                            <div class="math-display">
+                                \[= \ln|(x-3) + \sqrt{x^2 - 6x + 13}| + C\]
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <nav class="chapter-navigation">
+                    <a href="trigonometric-integrals.html" class="nav-button prev">
+                        <span class="arrow">&larr;</span>
+                        <span class="nav-text">5.2 อินทิกรัลตรีโกณมิติ</span>
+                    </a>
+                    <a href="partial-fractions.html" class="nav-button next">
+                        <span class="nav-text">5.4 เศษส่วนย่อย</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Calculus 1 Online Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>
